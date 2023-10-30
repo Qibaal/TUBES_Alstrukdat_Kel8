@@ -1,5 +1,5 @@
-DRIVERS := $(wildcard modules/*/driver_*.c)
-MODULES := $(filter-out $(DRIVERS), $(wildcard modules/*/*.c))
+DRIVERS := $(wildcard src/ADT/*/driver_*.c)
+MODULES := $(filter-out $(DRIVERS), $(wildcard src/ADT/*/*.c))
 OBJECTS := $(patsubst %.c,%.o, $(MODULES))
 DRIVERS_EXE := $(patsubst %.c, %.exe, $(DRIVERS))
 
