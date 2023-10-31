@@ -17,4 +17,4 @@ main: $(OBJECTS) main.c
  gcc $(OBJECTS) main.c -o $@.exe
 
 clean:
- rm modules/*/*.o *.exe modules/*/*.exe
+ rm src/ADT/*/*.o *.exe src/ADT/*/*.exe
