@@ -1,46 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <time.h>
 
-#define MAX_LINES 100
-#define MAX_LINE_LENGTH 100
+typedef struct {
+    char** song_titles;
+    int num_songs;
+} Album;
 
-int main(){
-    FILE *file;
-    char dump[MAX_LINE_LENGTH];
-    int c_penyanyi,c_album,c_lagu;
+typedef struct {
+    char* name;
+    Album* albums;
+    int num_albums;
+} Artist;
 
-    file = fopen("dummy.txt", "r");
+int main() {
+    FILE* file = fopen("dummy.txt", "r");
     if (file == NULL) {
-        printf("File konfigurasi aplikasi tidak berhasil dibaca.\n");
-        exit(0);
+        printf("Could not open file\n");
+        return 1;
     }
 
-    printf("Isi file:\n");
+    int num_artists;
+    fscanf(file, "%d", &num_artists);
 
-    // fgets(line, MAX_LINE_LENGTH, file) membaca satu baris teks dari file
-    // fgets(buffer, MAX_LINE_LENGTH, file);
-    fscanf(file, "%d", &c_penyanyi);
-    for(int i=0; i<c_penyanyi; i++){
-        fscanf(file, "%d %s", &c_album, dump);
-        printf("%s1\n", dump);
-        for (int j=0; j<c_album; j++){
-            fscanf(file, "%d %s", &c_lagu, dump);
-            printf("%s2\n", dump);
-            for(int k=0; k<c_lagu; k++){
-                fscanf(file, "%s", dump);
-                printf("%s3\n", dump);
+    Artist* artists = malloc(num_artists * sizeof(Artist));
+
+    for (int i = 0; i < num_artists; i++) {
+        artists[i].name = malloc(50 * sizeof(char));
+        fscanf(file, "%d %[^\n]", &artists[i].num_albums, artists[i].name);
+        printf("%d \n", artists[i].num_albums);
+
+        artists[i].albums = malloc(artists[i].num_albums * sizeof(Album));
+
+        for (int j = 0; j < artists[i].num_albums; j++) {
+            artists[i].albums[j].song_titles = malloc(50 * sizeof(char*));
+
+            char* album_name = malloc(50 * sizeof(char));
+            fscanf(file, "%d %[^\n]", &artists[i].albums[j].num_songs, album_name);
+            printf("%d \n", artists[i].albums[j].num_songs);
+
+            for (int k = 0; k < artists[i].albums[j].num_songs; k++) {
+                artists[i].albums[j].song_titles[k] = malloc(50 * sizeof(char));
+                fscanf(file, " %[^\n]", artists[i].albums[j].song_titles[k]);
+                printf("%s \n", artists[i].albums[j].song_titles[k]);
             }
+
+            free(album_name);
         }
     }
-    // sscanf(buffer, "%d %c", &N, &dump);
-    // int i;
-    // while(dump[i]!='\0'){
-    //     printf("%s4\n", dump);
-    //     i++;
-    // }
-    
 
     fclose(file);
     return 0;
