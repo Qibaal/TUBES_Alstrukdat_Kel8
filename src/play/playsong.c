@@ -1,4 +1,4 @@
 #include <stdio.h>
 #include "queue.h"
-// File: play
+// File: play.c
 // KAMUS LOKAL
