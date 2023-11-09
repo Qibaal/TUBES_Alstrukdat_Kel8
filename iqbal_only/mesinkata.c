@@ -93,7 +93,7 @@ void CopyWord()
 
 void CopyGet(int *n) {
     CopyWord();
-    *n = GetVal(&currentWord);
+    *n = GetVal(&currentWord.TabWord);
     currentWord.Length = 0;
     ADV();
 

@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "*.ejs": "html",
-    "mesinkarakter.h": "c"
+    "mesinkarakter.h": "c",
+    "mesinkata.h": "c"
   }
 }
