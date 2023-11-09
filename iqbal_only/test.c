@@ -4,12 +4,16 @@
 #include "mesinkata.h"
 
 int main() {
-    START();
+    // mulai
+    STARTWORD();
+    // ambil jumlah penyanyi -- line paling atas
     int jumlah_penyanyi = GetVal(currentWord.TabWord);
+    printf("jumlah penyanyi: %d\n", jumlah_penyanyi);
+    ADVNEXT();
+    // lanjut pembacaan
     for (int i=0; i<jumlah_penyanyi; i++)
     {
         int jumlah_album;
-        ADVNEXT();
         CopyGet(&jumlah_album);
         PRINTWORD();
         // loop nama album
@@ -21,8 +25,8 @@ int main() {
             PRINTWORD();
             for (int i=0; i<jumlah_lagu; i++)
             {
-                ADVNEXT();
                 PRINTWORD();
+                ADVNEXT();
             }
         }
     }

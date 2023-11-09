@@ -9,7 +9,7 @@ boolean EOL;
 
 static FILE *pita;
 static int retval;
-char path[] = "dummy.txt";
+char path[] = "iqbal_only\\dummy.txt";
 
 void START()
 {

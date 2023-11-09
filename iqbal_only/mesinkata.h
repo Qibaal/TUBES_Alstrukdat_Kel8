@@ -61,7 +61,7 @@ void CopyWord();
 
 void CopyGet(int *n);
 
-int GetVal(char *str[100]);
+int GetVal(char *str);
 
 void PRINTWORD();
 
