@@ -28,6 +28,6 @@ void ADV();
 
 char GetCC();
 
-boolean IsEOP();
+boolean IsEOF();
 
 #endif

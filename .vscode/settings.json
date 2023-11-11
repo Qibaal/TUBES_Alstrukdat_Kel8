@@ -2,6 +2,7 @@
   "files.associations": {
     "*.ejs": "html",
     "mesinkarakter.h": "c",
-    "mesinkata.h": "c"
+    "mesinkata.h": "c",
+    "stdio.h": "c"
   }
 }

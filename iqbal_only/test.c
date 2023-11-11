@@ -13,23 +13,22 @@ int main() {
     // lanjut pembacaan
     for (int i=0; i<jumlah_penyanyi; i++)
     {
-        int jumlah_album;
-        CopyGet(&jumlah_album);
+        int jumlah_album = GetVal(currentWord.TabWord);
         PRINTWORD();
         // loop nama album
         for (int i=0; i<jumlah_album; i++)
         {
-            int jumlah_lagu;
             ADVNEXT();
-            CopyGet(&jumlah_lagu);
+            int jumlah_lagu = GetVal(currentWord.TabWord);
             PRINTWORD();
             for (int i=0; i<jumlah_lagu; i++)
             {
-                PRINTWORD();
                 ADVNEXT();
+                PRINTWORD();
             }
         }
     }
+    
     printf("kelar");
     return 0;
 }

@@ -9,7 +9,7 @@ boolean EOL;
 
 static FILE *pita;
 static int retval;
-char path[] = "iqbal_only\\dummy.txt";
+char path[] = "dummy.txt";
 
 void START()
 {
@@ -50,5 +50,5 @@ char GetCC() {
 }
 
 boolean IsEOF() {
-    return !retval;
+    return feof(pita);
 }
