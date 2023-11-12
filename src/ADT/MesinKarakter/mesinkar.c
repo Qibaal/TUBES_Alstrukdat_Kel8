@@ -8,7 +8,7 @@ char currentChar;
 boolean EOL;
 
 static FILE *pita;
-static int retval;
+int retval = 1;
 char path[] = "dummy.txt";
 
 void START()
@@ -45,10 +45,6 @@ void ADV()
        }
 }
 
-char GetCC() {
-    return currentChar;
-}
-
 boolean IsEOF() {
-    return !retval;
+    return feof(pita);
 }

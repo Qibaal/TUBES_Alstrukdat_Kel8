@@ -17,7 +17,7 @@ void IgnoreBlanks()
 
 void IgnoreNewLines()
 {
-    while (currentChar == Newline)
+    while((!IsEOF()) && (currentChar == Newline))
     {
         ADV();
     }
@@ -57,17 +57,7 @@ void ADVWORD()
 void ADVNEXT() {
     IgnoreBlanks();
     IgnoreNewLines();
-    if (currentChar == Newline)
-    {
-        EndWord = true;
-    }
-    else
-    {
-        EndWord = false;
-        CopyWord();
-        IgnoreBlanks();
-        IgnoreNewLines();
-    }
+    CopyWord();
 }
 
 void CopyWord()

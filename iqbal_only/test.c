@@ -7,28 +7,35 @@ int main() {
     // mulai
     STARTWORD();
     // ambil jumlah penyanyi -- line paling atas
-    int jumlah_penyanyi = GetVal(currentWord.TabWord);
+    ADVNEXT(true);
+    int jumlah_penyanyi = val;
     printf("jumlah penyanyi: %d\n", jumlah_penyanyi);
-    ADVNEXT();
     // lanjut pembacaan
     for (int i=0; i<jumlah_penyanyi; i++)
     {
-        int jumlah_album = GetVal(currentWord.TabWord);
+        // maju ke line album
+        ADVNEXT(true);
+        // ngambil jumlah album dan print nama penyanyi
+        int jumlah_album = val;
+        printf("---------------------\n");
+        printf("jumlah album: %d\n", jumlah_album);
         PRINTWORD();
         // loop nama album
         for (int i=0; i<jumlah_album; i++)
         {
-            ADVNEXT();
-            int jumlah_lagu = GetVal(currentWord.TabWord);
+            // ngambil jumlah lagu yang ada di album dan print nama album
+            ADVNEXT(true);
+            int jumlah_lagu = val;
+             printf("---------------------\n");
+            printf("jumlah lagu: %d\n", jumlah_lagu);
             PRINTWORD();
             for (int i=0; i<jumlah_lagu; i++)
             {
-                ADVNEXT();
+                ADVNEXT(false);
                 PRINTWORD();
             }
         }
     }
-    
     printf("kelar");
     return 0;
 }

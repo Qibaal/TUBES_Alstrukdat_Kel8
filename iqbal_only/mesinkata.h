@@ -20,6 +20,7 @@ typedef struct
 /* State Mesin Word */
 extern boolean EndWord;
 extern Word currentWord;
+extern int val;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
@@ -37,14 +38,7 @@ void STARTWORD();
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void ADVWORD();
-/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
-   Proses : Akuisisi kata menggunakan procedure SalinWord */
-
-void ADVNEXT();
+void ADVNEXT(boolean readDigit);
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
           currentChar adalah karakter pertama dari kata berikutnya, mungkin Newline
@@ -59,10 +53,11 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
-void CopyGet(int *n);
+void CopyGet(boolean readDigit);
 
-int GetVal(char *str);
+int stringToInt(char *str);
 
 void PRINTWORD();
+
 
 #endif

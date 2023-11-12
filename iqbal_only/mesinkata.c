@@ -3,6 +3,7 @@
 
 boolean EndWord;
 Word currentWord;
+int val;
 
 void IgnoreBlanks()
 {
@@ -17,7 +18,7 @@ void IgnoreBlanks()
 
 void IgnoreNewLines()
 {
-    while (currentChar == Newline)
+    while ((currentChar == Newline) && (!IsEOF()))
     {
         ADV();
     }
@@ -31,40 +32,20 @@ void STARTWORD()
               currentChar karakter pertama sesudah karakter terakhir kata */
     START();
     IgnoreNewLines();
-    ADVNEXT();
 }
 
-void ADVWORD()
-{
-    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-              Jika currentChar = MARK, EndWord = true.
-       Proses : Akuisisi kata menggunakan procedure CopyWord */
-    IgnoreBlanks();
-    if (currentChar == MARK)
-    {
-        EndWord = true;
-    }
-    else
-    {
-        EndWord = false;
-        CopyWord();
-        IgnoreBlanks();
-    }
-}
-
-void ADVNEXT() {
+void ADVNEXT(boolean readDigit) {
     IgnoreBlanks();
     IgnoreNewLines();
     if (currentChar == Newline)
     {
         EndWord = true;
+        IgnoreNewLines();
     }
     else
     {
         EndWord = false;
-        CopyWord();
+        CopyGet(readDigit);
         IgnoreBlanks();
         IgnoreNewLines();
     }
@@ -79,7 +60,7 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    while (currentChar != Newline)
+    while ((currentChar != Newline) && (!IsEOF()))
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -91,26 +72,41 @@ void CopyWord()
     }
 }
 
-void CopyGet(int *n) {
-    CopyWord();
-    *n = GetVal(currentWord.TabWord);
+void CopyGet(boolean readDigit)
+{
+    /* Mengakuisisi kata, menyimpan dalam currentWord
+       I.S. : currentChar adalah karakter pertama dari kata
+       F.S. : currentWord berisi kata yang sudah diakuisisi;
+              currentChar = BLANK atau currentChar = MARK;
+              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    ADV();
+    if (readDigit)
+    {
+        while(currentChar != BLANK && currentChar != Newline && !IsEOF())
+        {
+            currentWord.TabWord[currentWord.Length] = currentChar;
+            currentWord.Length++;
+            ADV();
+        }
+        val = stringToInt(currentWord.TabWord);
+        currentWord.Length = 0;
+    }
+    while(currentChar == BLANK) ADV();
 
-    while(currentChar != Newline)
+    while(currentChar != Newline && !IsEOF())
     {
         currentWord.TabWord[currentWord.Length] = currentChar;
         currentWord.Length++;
         ADV();
     }
+    currentWord.TabWord[currentWord.Length] = '\0';
 }
 
-int GetVal(char *str) {
-    int i = 0, res = 0;
-    while (str[i] != '\0')
-    {
+int stringToInt(char* str){
+    int res = 0;
+    for (int i = 0; i < currentWord.Length; ++i){
         res = res * 10 + (str[i] - '0');
-        i++;
     }
     return res;
 }
