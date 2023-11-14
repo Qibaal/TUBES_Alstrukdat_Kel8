@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "set.h"
 
 /* *** Konstruktor/Kreator *** */
@@ -7,7 +6,7 @@ void CreateEmptySet(Set *S)
 /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
 /* Ciri Set kosong : count bernilai Nil */
 {
-    S->Count_Lagu = Nil;
+    S->Count = Nil;
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
@@ -15,14 +14,14 @@ boolean IsEmptySet(Set S)
 /* Mengirim true jika Set S kosong*/
 /* Ciri Set kosong : count bernilai Nil */
 {
-    return S.Count_Lagu == Nil;
+    return S.Count == Nil;
 }
 
 boolean IsFullSet(Set S)
 /* Mengirim true jika Set S penuh */
 /* Ciri Set penuh : count bernilai MaxEl */
 {
-    return S.Count_Lagu == MaxEl;
+    return S.Count == MaxEl;
 }
 
 /* ********** Operator Dasar Set ********* */
@@ -32,52 +31,56 @@ void InsertSet(Set *S, char* Elmt)
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 {
-    if (IsMember(*S, Elmt))
+    if (IsMemberSet(*S, Elmt))
     {
         return;
     }
-    S->Penyanyi[S->Count_Lagu] = Elmt;
-    S->Count_Lagu++;
+    int n = StrLen(Elmt);
+    for (int i=0; i<n; i++)
+    {
+        S->Elements[S->Count][i] = Elmt[i];
+    }
+    S->Count++;
 }
 
-void DeleteSet(Set *S, char* Elmt)
-/* Menghapus Elmt dari Set S. */
-/* I.S. S tidak kosong
-        Elmt mungkin anggota / bukan anggota dari S */
-/* F.S. Elmt bukan anggota dari S */
-{
-    boolean found = false;
-    address idx = 0, iterator;
-    if (!IsMember(*S, Elmt))
-    {
-        return;
-    }
-    while (!found && idx < S->Count_Lagu)
-    {
-        if (S->Penyanyi[idx] == Elmt)
-        {
-            found = true;
-        }
-        else
-        {
-            idx++;
-        }
-    }
-    for (iterator = idx + 1; iterator < S->Count_Lagu; iterator++)
-    {
-        S->Penyanyi[iterator - 1] = S->Penyanyi[iterator];
-    }
-    S->Count_Lagu--;
-}
+// void Delete(Set *S, infotype Elmt)
+// /* Menghapus Elmt dari Set S. */
+// /* I.S. S tidak kosong
+//         Elmt mungkin anggota / bukan anggota dari S */
+// /* F.S. Elmt bukan anggota dari S */
+// {
+//     boolean found = false;
+//     address idx = 0, iterator;
+//     if (!IsMember(*S, Elmt))
+//     {
+//         return;
+//     }
+//     while (!found && idx < S->Count)
+//     {
+//         if (S->Elements[idx] == Elmt)
+//         {
+//             found = true;
+//         }
+//         else
+//         {
+//             idx++;
+//         }
+//     }
+//     for (iterator = idx + 1; iterator < S->Count; iterator++)
+//     {
+//         S->Elements[iterator - 1] = S->Elements[iterator];
+//     }
+//     S->Count--;
+// }
 
-boolean IsMemberSet(Set S, char* Elmt)
+boolean IsMemberSet(Set S, infotype Elmt)
 /* Mengembalikan true jika Elmt adalah member dari S */
 {
     boolean found = false;
     address idx = 0, iterator;
-    while (!found && idx < S.Count_Lagu)
+    while (!found && idx < S.Count)
     {
-        if (S.Penyanyi[idx] == Elmt)
+        if (isSame(S.Elements[idx], Elmt))
         {
             found = true;
         }
@@ -89,19 +92,44 @@ boolean IsMemberSet(Set S, char* Elmt)
     return found;
 }
 
-void PrintSet(Set s) {
-    for (int i=0; i<s.Count_Lagu; i++)
+boolean isSame(char* s1, char* s2) {
+    boolean IsSame = true;
+    int n1 = StrLen(s1), n2 = StrLen(s2);
+    if (n1 != n2) {
+        IsSame = false;
+    }
+    else {
+        int i = 0;
+        while (IsSame && i < n1) {
+            if (s1[i] != s2[i]) {
+                IsSame = false;
+            }
+            i++;
+        }
+    }
+    return IsSame;
+}
+
+int StrLen(char* s) {
+    int i;
+    for (i=0; s[i] != '\0'; ++i);
+    return i;
+}
+
+void PrintSet(Set S) {
+    for (int i=0; i<S.Count; i++)
     {
-        printf("%s\n", s.Penyanyi[i]);
+        printf("%s\n", S.Elements[i]);
     }
 }
 
 // int main() {
 //     Set s;
-//     CreateEmpty(&s);
-//     Insert(&s, "abcd");
-//     Insert(&s, "abcde");
-//     Insert(&s, "abcdef");
+//     CreateEmptySet(&s);
+//     InsertSet(&s, "iqbal");
+//     InsertSet(&s, "favian");
+//     InsertSet(&s, "favian");
+//     InsertSet(&s, "iqbal");
 //     PrintSet(s);
 //     return 0;
 // }

@@ -10,12 +10,13 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define Nil 0
 #define MaxEl 100
 
+typedef char* infotype;
 typedef int address;
 
 typedef struct
 {
-    char*   Penyanyi[MaxEl];
-    address Count_Lagu;
+    char Elements[MaxEl][MaxEl];
+    address Count;
 } Set;
 
 /* Definisi Set S kosong : S.Count = Nil */
@@ -46,16 +47,19 @@ void InsertSet(Set *S, char* Elmt);
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void DeleteSet(Set *S, char* Elmt);
+void DeleteSet(Set *S, infotype Elmt);
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
-boolean IsMemberSet(Set S, char* Elmt);
+boolean IsMemberSet(Set S, infotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
-void PrintSet(Set s);
-/* Print value Set */
+boolean isSame(char* s1, char* s2);
 
-#endif 
+int StrLen(char* s);
+
+void PrintSet(Set S);
+
+#endif

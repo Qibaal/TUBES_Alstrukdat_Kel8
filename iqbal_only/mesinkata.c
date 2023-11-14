@@ -112,8 +112,5 @@ int stringToInt(char* str){
 }
 
 void PRINTWORD() {
-    for (int i = 0; i < currentWord.Length; i++) {
-        printf("%c", currentWord.TabWord[i]);
-    }
-    printf("\n");
+    printf("%s\n", currentWord.TabWord);
 }

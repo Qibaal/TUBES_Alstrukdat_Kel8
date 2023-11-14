@@ -2,12 +2,12 @@
 #include "map.h"
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmptyMap(Map *M)
+void CreateEmpty(Map *M)
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
 {
-    (*M).Count = Nil;
+	M->Count_Album = Nil;
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
@@ -15,14 +15,14 @@ boolean IsEmptyMap(Map M)
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 {
-    return M.Count == Nil;
+    return M.Count_Album == Nil;
 }
 
 boolean IsFullMap(Map M)
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
 {
-    return M.Count == MaxEl;
+    return M.Count_Album == MaxEl;
 }
 
 /* ********** Operator Dasar Map ********* */
