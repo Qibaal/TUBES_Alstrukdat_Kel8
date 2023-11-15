@@ -13,12 +13,14 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define Undefined ""
 
 // typedef int bool;
+typedef int idxtype;
 typedef char* keytype;
 typedef char* valuetype;
 
 typedef struct {
+	idxtype		 Idx_Penyanyi;
 	keytype 	 Nama_Album;
-	Set			 Lagu;    ;
+	Set			 Lagu;
 } Lagu;
 
 typedef struct {
@@ -35,5 +37,9 @@ void CreateEmptyMap(Map *M);
 boolean IsEmptyMap(Map M);
 
 void InsertMap(Map *M, keytype Nama_Album, char* Nama_lagu);
+
+boolean IsMemberMap(Map M, keytype album);
+
+void PrintMap(Map M);
 
 #endif
