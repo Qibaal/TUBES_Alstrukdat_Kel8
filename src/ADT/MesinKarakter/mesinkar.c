@@ -1,15 +1,16 @@
 /* File: mesinkar.c */
 /* Implementasi Mesin Karakter */
 
-#include "mesinkar.h"
+#include "..\header\mesinkar.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 char currentChar;
 boolean EOL;
 
 static FILE *pita;
 int retval = 1;
-char path[] = "dummy.txt";
+char path[] = "ADT/MesinKarakter/dummy.txt";
 
 void START()
 {
@@ -46,5 +47,5 @@ void ADV()
 }
 
 boolean IsEOF() {
-    return feof(pita);
+       return feof(pita);
 }

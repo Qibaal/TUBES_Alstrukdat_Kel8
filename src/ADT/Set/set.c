@@ -1,4 +1,4 @@
-#include "set.h"
+#include "..\header\set.h"
 
 /* *** Konstruktor/Kreator *** */
 void CreateEmptySet(Set *S)

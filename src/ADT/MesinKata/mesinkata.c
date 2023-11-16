@@ -1,8 +1,9 @@
 #include <stdio.h>
-#include "mesinkata.h"
+#include "..\header\mesinkata.h"
 
 boolean EndWord;
 Word currentWord;
+int val;
 
 void IgnoreBlanks()
 {
@@ -17,7 +18,7 @@ void IgnoreBlanks()
 
 void IgnoreNewLines()
 {
-    while((!IsEOF()) && (currentChar == Newline))
+    while ((currentChar == Newline) && (!IsEOF()))
     {
         ADV();
     }
@@ -31,33 +32,24 @@ void STARTWORD()
               currentChar karakter pertama sesudah karakter terakhir kata */
     START();
     IgnoreNewLines();
-    ADVNEXT();
 }
 
-void ADVWORD()
-{
-    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-              Jika currentChar = MARK, EndWord = true.
-       Proses : Akuisisi kata menggunakan procedure CopyWord */
+void ADVNEXT(boolean readDigit) {
     IgnoreBlanks();
-    if (currentChar == MARK)
+    IgnoreNewLines();
+    if (currentChar == Newline)
     {
         EndWord = true;
+        IgnoreNewLines();
     }
     else
     {
         EndWord = false;
-        CopyWord();
+        CopyGet(readDigit);
+        // printf("mashok\n");
         IgnoreBlanks();
+        IgnoreNewLines();
     }
-}
-
-void ADVNEXT() {
-    IgnoreBlanks();
-    IgnoreNewLines();
-    CopyWord();
 }
 
 void CopyWord()
@@ -69,7 +61,7 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    while (currentChar != Newline)
+    while ((currentChar != Newline) && (!IsEOF()))
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -81,33 +73,74 @@ void CopyWord()
     }
 }
 
-void CopyGet(int *n) {
-    CopyWord();
-    *n = GetVal(&currentWord);
+void CopyGet(boolean readDigit)
+{
+    /* Mengakuisisi kata, menyimpan dalam currentWord
+       I.S. : currentChar adalah karakter pertama dari kata
+       F.S. : currentWord berisi kata yang sudah diakuisisi;
+              currentChar = BLANK atau currentChar = MARK;
+              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    ADV();
+    if (readDigit)
+    {
+        while(currentChar != BLANK && currentChar != Newline && !IsEOF())
+        {
+            currentWord.TabWord[currentWord.Length] = currentChar;
+            currentWord.Length++;
+            ADV();
+        }
+        val = stringToInt(currentWord.TabWord);
+        currentWord.Length = 0;
+    }
+    while(currentChar == BLANK) ADV();
 
-    while(currentChar != Newline)
+    while(currentChar != Newline && !IsEOF())
     {
         currentWord.TabWord[currentWord.Length] = currentChar;
         currentWord.Length++;
         ADV();
     }
+    currentWord.TabWord[currentWord.Length] = '\0';
 }
 
-int GetVal(char *str) {
-    int i = 0, res = 0;
-    while (str[i] != '\0')
-    {
+int stringToInt(char* str) {
+    int res = 0;
+    for (int i = 0; i < currentWord.Length; ++i){
         res = res * 10 + (str[i] - '0');
-        i++;
     }
     return res;
 }
 
-void PRINTWORD() {
-    for (int i = 0; i < currentWord.Length; i++) {
-        printf("%c", currentWord.TabWord[i]);
+void ParsePlaylist(char* penyanyi, char* album, char* lagu)
+{
+    ADVNEXT(false);
+    int i=0;
+    int idx[3];
+    int next = 0;
+    while (currentWord.TabWord[i] != Newline)
+    {
+        if (currentWord.TabWord[i] == ';')
+        {
+            idx[next] = i;
+            next++;
+        }
+        i++;
     }
-    printf("\n");
+    for (int j=0; j<idx[0]; j++)
+    {
+        penyanyi[j] = currentWord.TabWord[j];
+    }
+    for (int j=idx[0]+1; j<idx[1]; j++)
+    {
+        album[j-idx[0]-1] = currentWord.TabWord[j];
+    }
+    for (int j=idx[1]+1; j<currentWord.Length; j++)
+    {
+        lagu[j-idx[1]-1] = currentWord.TabWord[j];
+    }
+}
+
+void PRINTWORD() {
+    printf("%s\n", currentWord.TabWord);
 }

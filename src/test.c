@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "boolean.h"
-#include "mesinkar.h"
-#include "mesinkata.h"
-#include "..\src\ADT\Set\set.h"
+#include "ADT\header\mesinkar.h"
+#include "ADT\header\mesinkata.h"
+#include "ADT\header\set.h"
 
 int main() {
     Set Penyanyi, Album, Lagu;
@@ -12,7 +12,7 @@ int main() {
     // ambil jumlah penyanyi -- line paling atas
     ADVNEXT(true);
     int jumlah_penyanyi = val;
-    printf("jumlah penyanyi: %d\n", jumlah_penyanyi);
+    // printf("jumlah penyanyi: %d\n", jumlah_penyanyi);
     // lanjut pembacaan
     for (int i=0; i<jumlah_penyanyi; i++)
     {
@@ -20,7 +20,7 @@ int main() {
         ADVNEXT(true);
         // ngambil jumlah album dan print nama penyanyi
         int jumlah_album = val;
-        printf("jumlah album: %d\n", jumlah_album);
+        // printf("jumlah album: %d\n", jumlah_album);
         // masukin nama penyanyi
         InsertSet(&Penyanyi, currentWord.TabWord);
         // PRINTWORD();
@@ -30,7 +30,7 @@ int main() {
             // ngambil jumlah lagu yang ada di album dan print nama album
             ADVNEXT(true);
             int jumlah_lagu = val;
-            printf("jumlah lagu: %d\n", jumlah_lagu);
+            // printf("jumlah lagu: %d\n", jumlah_lagu);
             // masukin nama album
             InsertSet(&Album, currentWord.TabWord);
             // PRINTWORD();
@@ -43,12 +43,23 @@ int main() {
             }
         }
     }
-    PrintSet(Penyanyi);
-    printf("-----\n");
-    PrintSet(Album);
-    printf("-----\n");
-    PrintSet(Lagu);
-    printf("-----\n");
-    printf("kelar");
+    // PrintSet(Penyanyi);
+    // printf("-----\n");
+    // PrintSet(Album);
+    // printf("-----\n");
+    // PrintSet(Lagu);
+    // printf("-----\n");
+    // printf("kelar load lagu");
+
+    char penyanyi[MaxEl];
+    char album[MaxEl];
+    char lagu[MaxEl];
+    while (!IsEOF())
+    {
+        ParsePlaylist(penyanyi, album, lagu);
+    }
+    printf("%s\n", penyanyi);
+    printf("%s\n", album);
+    printf("%s\n", lagu);
     return 0;
 }
