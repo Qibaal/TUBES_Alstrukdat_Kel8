@@ -1,8 +1,8 @@
 #ifndef map_H
 #define map_H
 #include <stdio.h>
-#include "boolean.h"
-#include "..\src\ADT\Set\set.h"
+#include "..\..\boolean.h"
+#include "set.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -18,9 +18,9 @@ typedef char* keytype;
 typedef char* valuetype;
 
 typedef struct {
-	idxtype		 Idx_Penyanyi;
-	keytype 	 Nama_Album;
-	Set			 Lagu;
+	keytype		 Nama_Penyanyi;
+	valuetype    Nama_Album;
+	Set			 Info_Lagu;
 } Lagu;
 
 typedef struct {
@@ -36,7 +36,9 @@ void CreateEmptyMap(Map *M);
 
 boolean IsEmptyMap(Map M);
 
-void InsertMap(Map *M, keytype Nama_Album, char* Nama_lagu);
+void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album);
+
+void InsertLagu(Map *M, keytype nama_penyanyi, valuetype nama_album, keytype nama_lagu);
 
 boolean IsMemberMap(Map M, keytype album);
 

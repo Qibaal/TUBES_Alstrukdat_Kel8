@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "map.h"
+#include "..\header\map.h"
 
 /* *** Konstruktor/Kreator *** */
 void CreateEmpty(Map *M)
@@ -19,22 +19,27 @@ boolean IsEmptyMap(Map M)
 }
 /* ********** Operator Dasar Map ********* */
 
-void InsertMap(Map *M, keytype Nama_Album, char* Nama_lagu);
+void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album)
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 {
-    if (!IsMember ((*M), k))
-    {
-        (*M).Elements[(*M).Count].Key = k;
-        (*M).Elements[(*M).Count].Value = v;
-        (*M).Count++;
-    }
+    CreateEmpty(M);
+    M->Elements[M->Count_Album].Nama_Penyanyi = nama_penyanyi;
+    M->Elements[M->Count_Album].Nama_Album = nama_album;
+    M->Count_Album++;
+    // saat mau masukin lagu gausah create empty lagi
+    CreateEmpty(&M->Elements[M->Count_Album].Info_Lagu);
+}
+
+void InsertLagu(Map *M, infotype lagu)
+{
+    
 }
 
 boolean IsMemberMap(Map M, keytype k)
-/* Mengembalikan true jika k adalah member dari M */
+/* Mengembalikan true jika penyanyi dan adalah member dari M */
 {
     boolean found = false;
     int i = 0;
@@ -54,6 +59,19 @@ boolean IsMemberMap(Map M, keytype k)
     return found;
 }
 
+void PrintMap(Map M)
+// print nama penyanyi, album, dan lagu-lagu
+{
+    for (int i=0; i<M.Count_Album; i++)
+    {
+        printf("%s\n---------------\n", M.Elements[i].Nama_Penyanyi);
+        printf("%s\n---------------\n", M.Elements[i].Nama_Album);
+        for (int j=0; j<M.Elements[i].Info_Lagu.Count_Lagu; j++)
+        {
+            printf("%s\n", M.Elements[i].Info_Lagu.Elements[j]);
+        }
+    }
+}
 int main() {
     Map m; CreateEmpty(&m);
     Insert(&m, "iqbal", "ganteng");
