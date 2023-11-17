@@ -1,35 +1,48 @@
-#ifndef MESIN_KATA_H
-#define MESIN_KATA_H
+/* File: mesinkata.h */
+/* Definisi Mesin Word: Model Akuisisi Versi I */
 
-#include "mesinkarakter.h"
+#ifndef __MESINKATA_H__
+#define __MESINKATA_H__
 
-#define MaxChar 100
-#define Blank ' '
+#include "..\..\boolean.h"
+#include "mesinkar.h"
 
-typedef struct {
-   char Content[MaxChar];
+#define NMax 100
+#define BLANK ' '
+#define Newline '\n'
+
+typedef struct
+{
+   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
    int Length;
 } Word;
 
+/* State Mesin Word */
 extern boolean EndWord;
-extern Word CurrentWord;
+extern Word currentWord;
+extern int val;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void StartWord();
+void IgnoreNewLines();
+/* Mengabaikan satu atau beberapa Newline
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ Newline*/
+
+void STARTWORD();
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void AdvWord();
+void ADVNEXT(boolean readDigit);
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika currentChar = MARK, EndWord = true.
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin Newline
+          Jika currentChar = Newline, EndWord = true.
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 
 void CopyWord();
@@ -40,6 +53,13 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
-void PrintWord();
+void CopyGet(boolean readDigit);
+
+void ParsePlaylist(char* penyanyi, char* album, char* lagu);
+
+int stringToInt(char *str);
+
+void PRINTWORD();
+
 
 #endif
