@@ -2,7 +2,7 @@
 #include "..\header\map.h"
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmpty(Map *M)
+void CreateEmptyMap(Map *M)
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
@@ -25,28 +25,32 @@ void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album)
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 {
-    CreateEmpty(M);
+
     M->Elements[M->Count_Album].Nama_Penyanyi = nama_penyanyi;
     M->Elements[M->Count_Album].Nama_Album = nama_album;
-    M->Count_Album++;
-    // saat mau masukin lagu gausah create empty lagi
-    CreateEmpty(&M->Elements[M->Count_Album].Info_Lagu);
-}
-
-void InsertLagu(Map *M, infotype lagu)
-{
+    // M->Count_Album++;
     
+    // saat mau masukin lagu gausah create empty lagi
+    // CreateEmptySet(M->Elements[M->Count_Album].Info_Lagu);
 }
 
-boolean IsMemberMap(Map M, keytype k)
-/* Mengembalikan true jika penyanyi dan adalah member dari M */
+// void InsertLagu(Map *M, infotype lagu)
+// {
+//     int len = M->Elements[M->Count_Album-1].Info_Lagu.Count_Lagu;
+//     int jumlah_lagu = M->Elements[M->Count_Album].Info_Lagu.Count_Lagu;
+//     // InsertSet(M->Elements[M->Count_Album]->Info_Lagu, lagu);
+//     // tiap insert tambahin jumlah lagu
+//     M->Elements[M->Count_Album].Info_Lagu.Count_Lagu++;
+// }
+
+boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album)
+/* Mengembalikan true jika penyanyi dan album adalah member dari M */
 {
     boolean found = false;
     int i = 0;
-
-    while (i < M.Count && !found)
+    while (i < M.Count_Album && !found)
     {
-        if (M.Elements[i].Key == k)
+        if (isSame(M.Elements[i].Nama_Penyanyi, nama_penyanyi) && isSame(M.Elements[i].Nama_Album, nama_album))
         {
             found = true;
         }
@@ -55,7 +59,6 @@ boolean IsMemberMap(Map M, keytype k)
             i++;
         }
     }
-    
     return found;
 }
 
@@ -70,13 +73,28 @@ void PrintMap(Map M)
         {
             printf("%s\n", M.Elements[i].Info_Lagu.Elements[j]);
         }
+        printf("///////////////////\n");
     }
 }
-int main() {
-    Map m; CreateEmpty(&m);
-    Insert(&m, "iqbal", "ganteng");
-    Insert(&m, "adli", "jelek");
-    PrintMap(m);
+// int main() {
+//     Map m; CreateEmpty(&m);
+//     InsertAlbum(&m, "Adli", "Apres");
+//     InsertAlbum(&m, "Iqbal", "gokil");
+//     // InsertAlbum(&m, "Radya", "Daffa");
+//     // InsertAlbum(&m, "Farras", "Razin");
+//     // InsertAlbum(&m, "Raihan", "Razin");
+//     printf("%d\n", m.Count_Album);
+//     // int n = m.Elements[m.Count_Album-1].Info_Lagu.Count_Lagu;
+//     // CreateEmptySet(&m.Elements[m.Count_Album].Info_Lagu);
+//     // InsertSet(&m.Elements[m.Count_Album-1].Info_Lagu, "lagu keren");
+//     // InsertSet(&m.Elements[m.Count_Album-1].Info_Lagu, "lagu keren2");
+//     // for (int i=0; i<3; i++)
+//     // {
+//     //     InsertLagu(&m, "lagu1", n);
+//     //     InsertLagu(&m, "lagu2", n);
+//     //     InsertLagu(&m, "lagu3", n);
+//     // }
+//     PrintMap(m);
 
-    return 0;
-}
+//     return 0;
+// }

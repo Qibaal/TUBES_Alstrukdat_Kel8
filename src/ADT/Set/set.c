@@ -6,7 +6,7 @@ void CreateEmptySet(Set *S)
 /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
 /* Ciri Set kosong : count bernilai Nil */
 {
-    S->Count = Nil;
+    S->Count_Lagu = Nil;
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
@@ -14,14 +14,14 @@ boolean IsEmptySet(Set S)
 /* Mengirim true jika Set S kosong*/
 /* Ciri Set kosong : count bernilai Nil */
 {
-    return S.Count == Nil;
+    return S.Count_Lagu == Nil;
 }
 
 boolean IsFullSet(Set S)
 /* Mengirim true jika Set S penuh */
 /* Ciri Set penuh : count bernilai MaxEl */
 {
-    return S.Count == MaxEl;
+    return S.Count_Lagu == MaxEl;
 }
 
 /* ********** Operator Dasar Set ********* */
@@ -38,9 +38,9 @@ void InsertSet(Set *S, char* Elmt)
     int n = StrLen(Elmt);
     for (int i=0; i<n; i++)
     {
-        S->Elements[S->Count][i] = Elmt[i];
+        S->Elements[S->Count_Lagu][i] = Elmt[i];
     }
-    S->Count++;
+    S->Count_Lagu++;
 }
 
 // void Delete(Set *S, infotype Elmt)
@@ -78,7 +78,7 @@ boolean IsMemberSet(Set S, infotype Elmt)
 {
     boolean found = false;
     address idx = 0, iterator;
-    while (!found && idx < S.Count)
+    while (!found && idx < S.Count_Lagu)
     {
         if (isSame(S.Elements[idx], Elmt))
         {
@@ -117,7 +117,7 @@ int StrLen(char* s) {
 }
 
 void PrintSet(Set S) {
-    for (int i=0; i<S.Count; i++)
+    for (int i=0; i<S.Count_Lagu; i++)
     {
         printf("%s\n", S.Elements[i]);
     }
