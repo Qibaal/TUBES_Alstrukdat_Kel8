@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "queue.h"
+#include "..\header\queue.h"
 
 void CreateQueue(Queue *q) {
     q->idxHead = IDX_UNDEF;
