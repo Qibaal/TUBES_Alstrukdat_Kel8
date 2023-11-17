@@ -11,8 +11,8 @@
 
 /* Definisi elemen dan address */
 typedef int ElType;
-typedef struct {
-	ElType buffer[CAPACITY]; 
+typedef struct { 
+        ElType buffer[CAPACITY];
 	int idxHead;
 	int idxTail;
 } Queue;

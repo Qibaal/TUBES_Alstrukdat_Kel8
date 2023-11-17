@@ -1,9 +1,6 @@
-/* File: playPlayList.c */
+/* File: playSong.c */
 
-// Deskripsi: Play Playlist digunakan untuk memainkan lagu berdasarkan id playlist. 
-// Ketika command ini berhasil dieksekusi, queue akan berisi semua lagu yang ada dalma playlist yang dimainkan 
-// dan isi riwayat lagu sama dengan queue, tetapi dengan urutan yang di-reverse
-
+/*Fungsi command Play Song digunakan untuk memainkan lagu berdasarkan masukan nama penyanyi, nama album, dan id lagu.*/
 #include "play.h"
 #include "queue.h"
 #include "boolean.h"
