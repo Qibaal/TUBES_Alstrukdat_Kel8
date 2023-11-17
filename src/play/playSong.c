@@ -4,9 +4,14 @@
 // Ketika command ini berhasil dieksekusi, queue akan berisi semua lagu yang ada dalma playlist yang dimainkan 
 // dan isi riwayat lagu sama dengan queue, tetapi dengan urutan yang di-reverse
 
-#include <stdio.h>
 #include "play.h"
+#include "queue.h"
 #include "boolean.h"
 
+int main () {
+    Queue Q;
+    CreateEmpty(Q);
+    
+}
 
 
