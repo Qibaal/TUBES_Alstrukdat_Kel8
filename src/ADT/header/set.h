@@ -16,7 +16,7 @@ typedef int address;
 typedef struct
 {
     char Elements[MaxEl][MaxEl];
-    address Count;
+    address Count_Lagu;
 } Set;
 
 /* Definisi Set S kosong : S.Count = Nil */
