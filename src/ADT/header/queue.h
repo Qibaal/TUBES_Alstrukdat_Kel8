@@ -10,13 +10,12 @@
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef int ElType;
+typedef Word ElType;
 typedef struct { 
         ElType buffer[CAPACITY];
 	int idxHead;
 	int idxTail;
 } Queue;
-
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
