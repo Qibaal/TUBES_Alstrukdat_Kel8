@@ -144,3 +144,15 @@ void ParsePlaylist(char* penyanyi, char* album, char* lagu)
 void PRINTWORD() {
     printf("%s\n", currentWord.TabWord);
 }
+
+int WordToInt(Word currentWord) {
+/* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
+    int kata = 0;
+    int result = 0;
+    while (kata < currentWord.Length)
+    {
+        result = result * 10 + (currentWord.TabWord[kata] - '0');
+        kata += 1;
+    }
+    return result;
+}
