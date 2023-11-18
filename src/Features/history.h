@@ -4,6 +4,8 @@
 #ifndef HISTORY_H
 #define HISTORY_H
 
+#define Newline '\n'
+
 #include <stdio.h>
 #include "ADT/header/stack.h"
 #include "ADT/header/mesinkata.h"

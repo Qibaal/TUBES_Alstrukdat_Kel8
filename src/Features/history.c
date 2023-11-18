@@ -8,5 +8,7 @@ void history (Stack historySong, Word Command)
     I.S. sembarang
     F.S. menampilkan seluruh current song yang sudah dimainkan. History mungkun kosong */
 {
-    
+    // KAMUS LOKAL
+    int currentSong;
+    InfoStack
 }
