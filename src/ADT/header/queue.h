@@ -12,9 +12,15 @@
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef char ElType;
+typdef struct
+{
+        Word lagu;
+        Word Artist;
+} InfoQueue;
+
+typedef Word ElType;
 typedef struct { 
-        char buffer[CAPACITY];
+        ElType buffer[CAPACITY];
 	int idxHead;
 	int idxTail;
 } Queue;
