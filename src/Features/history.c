@@ -2,8 +2,9 @@
 
 #include <stdio.h>
 #include "history.h"
+#include "mesinkata.h"
 
-void history (Stack historySong, Word Command)
+void history(Stack historySong, Word Command)
 /* Menampilkan seluruh riwayat lagu yang telah diputar oleh user 
     I.S. sembarang
     F.S. menampilkan seluruh current song yang sudah dimainkan. History mungkun kosong */
@@ -24,7 +25,7 @@ void history (Stack historySong, Word Command)
             printf("Daftar lagu yang telah diputar\n");
             while (!IsEmpty(historySong) && currentSong > 0) {
                 printf("  %d. ", count);
-                PRINTWORD(InfoTop(historySong));
+                PrintStack(InfoTop(historySong));
                 Pop(&historySong, &x);
                 count++;
                 currentSong--;

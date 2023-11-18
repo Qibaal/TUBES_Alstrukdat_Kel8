@@ -7,8 +7,9 @@
 #define Newline '\n'
 
 #include <stdio.h>
-#include "ADT/header/stack.h"
-#include "ADT/header/mesinkata.h"
+#include "stack.h"
+#include "mesinkata.h"
+#include "queue.h"
 
 void history (Stack historySong, Word Command);
 /* Menampilkan seluruh riwayat lagu yang telah diputar oleh user 
