@@ -47,8 +47,8 @@ address Search (List L, Info X)
     if (!IsEmpty(L)){
         while (!found && P != Nill)
         {
-            if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
-                isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord))
+            if (isSame(X.Penyanyi, P->InfoPlay.Penyanyi) &&
+                isSame(X.Lagu, P->InfoPlay.Lagu))
             {
                 found = true;
             }
@@ -142,8 +142,8 @@ void DelP (List *L, Info X)
     if (!IsEmpty(*L)) 
     {
         P = First(*L);
-        if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
-            isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord)) 
+        if (isSame(X.Penyanyi, P->InfoPlay.Penyanyi) &&
+            isSame(X.Lagu, P->InfoPlay.Lagu)) 
         {
             DelFirst(L, &P);
             Dealokasi(&P);
@@ -153,8 +153,8 @@ void DelP (List *L, Info X)
             P = First(*L);
             while (!bFound && P != Nill) 
             {
-                if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
-                    isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord)) 
+                if (isSame(X.Penyanyi, P->InfoPlay.Penyanyi) &&
+                    isSame(X.Lagu, P->InfoPlay.Lagu))
                 {
                     bFound = true;
                 } 
@@ -184,7 +184,7 @@ void DelAfter (List *L, address *Pdel, address Prec)
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List L)
+void DisplayPlaylist (List L)
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
@@ -224,29 +224,36 @@ int NbElmt (List L)
     return cnt;
 }
 
-// int main() 
-// {
-//     List L;
-//     CreateEmptyList(&L);
-//     Info I, I2;
-//     Word p, a, l, p2, a2, l2;
-//     p.Length = 5; a.Length = 5; l.Length = 5;
-//     p2.Length = 5; a2.Length = 5; l2.Length = 5;
-//     scanf("%s", &p.TabWord);
-//     scanf("%s", &a.TabWord);
-//     scanf("%s", &l.TabWord);
-//     scanf("%s", &p2.TabWord);
-//     scanf("%s", &a2.TabWord);
-//     scanf("%s", &l2.TabWord);
-//     CreateInfo(&I, p, a, l);
-//     CreateInfo(&I2, p2, a2, l2);
-//     // InsVLast(&L, I);
-//     // InsVLast(&L, I2);
-//     // PrintInfo(L);
-//     // printf("--------------------\n");
-//     // DelP(&L, I2);
-//     // PrintInfo(L);
-//     address P = Search(L, I2);
-//     if (P == Nill) printf("ada");
-//     else printf("gaada\n");
-// }
+int main() 
+{
+    List L;
+    CreateEmptyList(&L);
+    Info I, I2, I3;
+    Word w1, w2, w3;
+    w1.Length = 5; w2.Length = 5; w3.Length = 5;
+    w1.TabWord[0] = 'i';
+    w1.TabWord[1] = 'q';
+    w1.TabWord[2] = 'b';
+    w1.TabWord[3] = 'a';
+    w1.TabWord[4] = 'l';
+    w2.TabWord[0] = 'f';
+    w2.TabWord[1] = 'a';
+    w2.TabWord[2] = 'r';
+    w2.TabWord[3] = 'e';
+    w2.TabWord[4] = 'l';
+    w3.TabWord[0] = 'f';
+    w3.TabWord[1] = 'a';
+    w3.TabWord[2] = 'r';
+    w3.TabWord[3] = 'e';
+    w3.TabWord[4] = 'i';
+    CreateInfo(&I, w1, w2, w3);
+    CreateInfo(&I2, w1, w2, w3);
+    CreateInfo(&I3, w1, w2, w3);
+    InsVLast(&L, I);
+    InsVLast(&L, I2);
+    InsVLast(&L, I3);
+    DelP(&L, I2);
+    DisplayPlaylist(L);
+
+    return 0;
+}
