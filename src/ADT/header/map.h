@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "..\..\boolean.h"
 #include "set.h"
+#include "info.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -14,8 +15,8 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // typedef int bool;
 typedef int idxtype;
-typedef char* keytype;
-typedef char* valuetype;
+typedef Word keytype;
+typedef Word valuetype;
 
 typedef struct {
 	keytype		 Nama_Penyanyi;

@@ -224,29 +224,29 @@ int NbElmt (List L)
     return cnt;
 }
 
-int main() 
-{
-    List L;
-    CreateEmptyList(&L);
-    Info I, I2;
-    Word p, a, l, p2, a2, l2;
-    p.Length = 5; a.Length = 5; l.Length = 5;
-    p2.Length = 5; a2.Length = 5; l2.Length = 5;
-    scanf("%s", &p.TabWord);
-    scanf("%s", &a.TabWord);
-    scanf("%s", &l.TabWord);
-    scanf("%s", &p2.TabWord);
-    scanf("%s", &a2.TabWord);
-    scanf("%s", &l2.TabWord);
-    CreateInfo(&I, p, a, l);
-    CreateInfo(&I2, p2, a2, l2);
-    // InsVLast(&L, I);
-    // InsVLast(&L, I2);
-    // PrintInfo(L);
-    // printf("--------------------\n");
-    // DelP(&L, I2);
-    // PrintInfo(L);
-    address P = Search(L, I2);
-    if (P == Nill) printf("ada");
-    else printf("gaada\n");
-}
+// int main() 
+// {
+//     List L;
+//     CreateEmptyList(&L);
+//     Info I, I2;
+//     Word p, a, l, p2, a2, l2;
+//     p.Length = 5; a.Length = 5; l.Length = 5;
+//     p2.Length = 5; a2.Length = 5; l2.Length = 5;
+//     scanf("%s", &p.TabWord);
+//     scanf("%s", &a.TabWord);
+//     scanf("%s", &l.TabWord);
+//     scanf("%s", &p2.TabWord);
+//     scanf("%s", &a2.TabWord);
+//     scanf("%s", &l2.TabWord);
+//     CreateInfo(&I, p, a, l);
+//     CreateInfo(&I2, p2, a2, l2);
+//     // InsVLast(&L, I);
+//     // InsVLast(&L, I2);
+//     // PrintInfo(L);
+//     // printf("--------------------\n");
+//     // DelP(&L, I2);
+//     // PrintInfo(L);
+//     address P = Search(L, I2);
+//     if (P == Nill) printf("ada");
+//     else printf("gaada\n");
+// }

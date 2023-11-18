@@ -25,9 +25,16 @@ void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album)
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 {
-
-    M->Elements[M->Count_Album].Nama_Penyanyi = nama_penyanyi;
-    M->Elements[M->Count_Album].Nama_Album = nama_album;
+    M->Elements[M->Count_Album].Nama_Penyanyi.Length = nama_penyanyi.Length;
+    M->Elements[M->Count_Album].Nama_Album.Length = nama_album.Length;
+    for (int i=0; i<nama_penyanyi.Length; i++)
+    {
+        M->Elements[M->Count_Album].Nama_Penyanyi.TabWord[i] = nama_penyanyi.TabWord[i];
+    }
+    for (int i=0; i<nama_album.Length; i++)
+    {
+        M->Elements[M->Count_Album].Nama_Album.TabWord[i] = nama_album.TabWord[i];
+    }
     // M->Count_Album++;
     
     // saat mau masukin lagu gausah create empty lagi
@@ -50,7 +57,7 @@ boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album)
     int i = 0;
     while (i < M.Count_Album && !found)
     {
-        if (isSame(M.Elements[i].Nama_Penyanyi, nama_penyanyi) && isSame(M.Elements[i].Nama_Album, nama_album))
+        if (isSame(M.Elements[i].Nama_Penyanyi.TabWord, nama_penyanyi.TabWord) && isSame(M.Elements[i].Nama_Album.TabWord, nama_album.TabWord))
         {
             found = true;
         }
@@ -67,8 +74,10 @@ void PrintMap(Map M)
 {
     for (int i=0; i<M.Count_Album; i++)
     {
-        printf("%s\n---------------\n", M.Elements[i].Nama_Penyanyi);
-        printf("%s\n---------------\n", M.Elements[i].Nama_Album);
+        PRINTWORD(M.Elements[i].Nama_Penyanyi);
+        printf("------------\n");
+        PRINTWORD(M.Elements[i].Nama_Album);
+        printf("------------\n");
         for (int j=0; j<M.Elements[i].Info_Lagu.Count_Lagu; j++)
         {
             printf("%s\n", M.Elements[i].Info_Lagu.Elements[j]);

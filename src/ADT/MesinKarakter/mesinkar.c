@@ -10,7 +10,7 @@ boolean EOL;
 
 static FILE *pita;
 int retval = 1;
-char path[] = "ADT/MesinKarakter/dummy.txt";
+char path[] = "ADT/MesinKarakter/dummy2.txt";
 
 void START()
 {

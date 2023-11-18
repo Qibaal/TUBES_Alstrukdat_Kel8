@@ -4,11 +4,12 @@
 #include "ADT\header\mesinkata.h"
 #include "ADT\header\map.h"
 
-void InsertWord(char* s, Word w)
+void InsertWord(Word *t, Word w)
 {
+    t->Length = w.Length;
     for (int i=0; i<w.Length; i++)
     {
-        s[i] = w.TabWord[i];
+        t->TabWord[i] = w.TabWord[i];
     }
 }
 
@@ -35,17 +36,18 @@ int main() {
         jumlah_album = val; // ngambil jumlah album
         InsertSet(&Penyanyi, currentWord.TabWord); // masukin nama penyanyi
         
-        char name[MaxEl];
-        InsertWord(name, currentWord);
+        Word artist;
+        InsertWord(&artist, currentWord);
         for (int i=0; i<jumlah_album; i++) // loop nama album
         {
             // ngambil jumlah lagu yang ada di album dan print nama album
             ADVNEXT(true);
             jumlah_lagu = val;
             
-            char album_name[MaxEl];
-            InsertWord(album_name, currentWord);
-            InsertAlbum(&Data, name, album_name);
+            Word album_name;
+            InsertWord(&album_name, currentWord);
+
+            InsertAlbum(&Data, artist, album_name); // masukin nama penyanyi dan album ke ADT
             CreateEmptySet(&Data.Elements[Data.Count_Album].Info_Lagu);
             for (int i=0; i<jumlah_lagu; i++)
             {
@@ -60,17 +62,13 @@ int main() {
 
 
 
-
-
-
-
-    char penyanyi[MaxEl];
-    char album[MaxEl];
-    char lagu[MaxEl];
-    while (!IsEOF())
-    {
-        ParsePlaylist(penyanyi, album, lagu);
-    }
+    // char penyanyi[MaxEl];
+    // char album[MaxEl];
+    // char lagu[MaxEl];
+    // while (!IsEOF())
+    // {
+    //     ParsePlaylist(penyanyi, album, lagu);
+    // }
     // printf("%s\n", penyanyi);
     // printf("%s\n", album);
     // printf("%s\n", lagu);
