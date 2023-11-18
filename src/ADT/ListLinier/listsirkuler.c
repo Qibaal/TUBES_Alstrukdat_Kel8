@@ -232,7 +232,6 @@ int main()
     Word p, a, l, p2, a2, l2;
     p.Length = 5; a.Length = 5; l.Length = 5;
     p2.Length = 5; a2.Length = 5; l2.Length = 5;
-    p.TabWord = "iqbal"; 
     scanf("%s", &p.TabWord);
     scanf("%s", &a.TabWord);
     scanf("%s", &l.TabWord);
