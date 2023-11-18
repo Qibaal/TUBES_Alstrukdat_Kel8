@@ -6,18 +6,20 @@
 #ifndef listsirkuler_H
 #define listsirkuler_H
 
-#include "boolean.h"
+#include "..\..\boolean.h"
+#include "info.h"
 #include "map.h"
 
 #define Nil NULL
 
-typedef Lagu infotype;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
-	infotype info;
+	Info   InfoPlay;
 	address next;
 } ElmtList;
+
 typedef struct {
+	Word    Nama;
 	address First;
 } List;
 
@@ -27,8 +29,8 @@ typedef struct {
 /* Elemen terakhir list: jika addressnya Last, maka Next(Last)=First(L) */
 
 /* Notasi Akses */
-#define Info(P) (P)->info
-#define Next(P) (P)->next
+#define InfoPlaylist(P) (P)->InfoPlay
+#define Next(P)  (P)->next
 #define First(L) ((L).First)
 
 /* PROTOTYPE */
@@ -37,34 +39,30 @@ boolean IsEmpty (List L);
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L);
+void CreateEmptyList (List *L);
 /* I.S. L sembarang             */
 /* F.S. Terbentuk list kosong. Lihat definisi di atas. */
 
 /****************** Manajemen Memori ******************/
-address Alokasi (infotype X);
+address Alokasi (Info X);
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (address P);
+void Dealokasi (address *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address Search (List L, infotype X);
+address Search (List L, Info X);
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, infotype X);
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast (List *L, infotype X);
+void InsVLast (List *L, Info X);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -99,17 +97,11 @@ void DelFirst (List *L, address *P);
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelLast (List *L, address *P);
-/* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* Last element baru adalah predesesor elemen pertama yg lama, */
-/* jika ada */
 void DelAfter (List *L, address *Pdel, address Prec);
 /* I.S. List tidak kosong. Prec adalah anggota list  */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
-void DelP (List *L, infotype X);
+void DelP (List *L, Info X);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -123,5 +115,7 @@ void PrintInfo (List L);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+
+int NbElmt (List L);
 
 #endif
