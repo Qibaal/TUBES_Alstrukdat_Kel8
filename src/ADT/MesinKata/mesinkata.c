@@ -146,8 +146,9 @@ void ParsePlaylist(Word penyanyi, Word album, Word lagu)
     }
 }
 
-void PRINTWORD() {
-    printf("%s\n", currentWord.TabWord);
+void PRINTWORD(Word w) 
+{
+    printf("%s\n", w.TabWord);
 }
 
 int WordToInt(Word currentWord) {

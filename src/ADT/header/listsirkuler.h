@@ -10,7 +10,7 @@
 #include "info.h"
 #include "map.h"
 
-#define Nil NULL
+#define Nill NULL
 
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 

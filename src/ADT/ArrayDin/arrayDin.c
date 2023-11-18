@@ -9,7 +9,7 @@
 ArrayDin MakeArrayDin()
 {
     ArrayDin arr;
-    arr.A = (ElType*) malloc(InitialSize* sizeof(char));
+    arr.A = (ElType*) malloc(InitialSize* sizeof(Word));
     arr.Capacity = InitialSize;
     arr.Neff = 0;
     return arr;

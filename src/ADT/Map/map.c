@@ -7,7 +7,7 @@ void CreateEmptyMap(Map *M)
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
 {
-	M->Count_Album = Nil;
+	M->Count_Album = NilMap;
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
@@ -15,7 +15,7 @@ boolean IsEmptyMap(Map M)
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 {
-    return M.Count_Album == Nil;
+    return M.Count_Album == NilMap;
 }
 /* ********** Operator Dasar Map ********* */
 

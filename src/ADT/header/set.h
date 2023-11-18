@@ -11,12 +11,11 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define MaxEl 100
 
 typedef char* infotype;
-typedef int address;
 
 typedef struct
 {
     char Elements[MaxEl][MaxEl];
-    address Count_Lagu;
+    int Count_Lagu;
 } Set;
 
 /* Definisi Set S kosong : S.Count = Nil */

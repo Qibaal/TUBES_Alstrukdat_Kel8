@@ -77,7 +77,7 @@ boolean IsMemberSet(Set S, infotype Elmt)
 /* Mengembalikan true jika Elmt adalah member dari S */
 {
     boolean found = false;
-    address idx = 0, iterator;
+    int idx = 0, iterator;
     while (!found && idx < S.Count_Lagu)
     {
         if (isSame(S.Elements[idx], Elmt))

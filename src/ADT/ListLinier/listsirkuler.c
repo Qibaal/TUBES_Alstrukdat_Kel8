@@ -5,13 +5,13 @@
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmpty (List L){
-    return First(L) == Nil;
+    return First(L) == Nill;
 }
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L){
-    First(*L) = Nil;
+void CreateEmptyList (List *L){
+    First(*L) = Nill;
 }
 /* I.S. L sembarang             */
 /* F.S. Terbentuk list kosong. Lihat definisi di atas. */
@@ -20,9 +20,9 @@ void CreateEmpty (List *L){
 address Alokasi (Info X)
 {
     address p = (address) malloc(sizeof(ElmtList));
-    if (p != NULL) {
+    if (p != Nill) {
         CreateInfo(&(*p).InfoPlay, X.Penyanyi, X.Album, X.Lagu);
-        Next(p) = Nil;
+        Next(p) = Nill;
     }
     return p;
 }
@@ -45,7 +45,7 @@ address Search (List L, Info X)
     boolean found = false;
 
     if (!IsEmpty(L)){
-        while (!found && P != Nil)
+        while (!found && P != Nill)
         {
             if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
                 isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord))
@@ -59,7 +59,7 @@ address Search (List L, Info X)
         }
     }
     if (!found){
-        P = Nil;
+        P = Nill;
     } 
     return P;
 }
@@ -76,7 +76,7 @@ void InsVLast (List *L, Info X)
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
   address P = Alokasi(X);
-  if (P != Nil) {
+  if (P != Nill) {
     InsertLast(L, P);
   }
 }
@@ -110,7 +110,7 @@ void InsertLast (List *L, address P)
     InsertFirst(L, P);
   } else {
     Last = First(*L);
-    while (Next(Last) != Nil) {
+    while (Next(Last) != Nill) {
       Last = Next(Last);
     }
     InsertAfter(L, P, Last);
@@ -126,7 +126,7 @@ void DelFirst (List *L, address *P)
 {
   *P = First(*L);
   First(*L) = Next(First(*L));
-  Next(*P) = Nil;
+  Next(*P) = Nill;
 }
 
 void DelP (List *L, Info X)
@@ -151,7 +151,7 @@ void DelP (List *L, Info X)
         else 
         {
             P = First(*L);
-            while (!bFound && P != Nil) 
+            while (!bFound && P != Nill) 
             {
                 if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
                     isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord)) 
@@ -180,7 +180,7 @@ void DelAfter (List *L, address *Pdel, address Prec)
 {
   *Pdel = Next(Prec);
   Next(Prec) = Next(Next(Prec));
-  Next(*Pdel) = Nil;
+  Next(*Pdel) = Nill;
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
@@ -191,10 +191,18 @@ void PrintInfo (List L)
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah terkecuali untuk newline di akhir output */
 {
-    address P = First(L);
-    while (P != Nil)
+    if (IsEmpty(L))
     {
-        DisplayInfo(P->InfoPlay);
+        printf("playlist kosong\n");
+    }
+    else
+    {
+        address P = First(L);
+        while (P != Nill)
+        {
+            DisplayInfo(P->InfoPlay);
+            P = Next(P);
+        }
     }
 }
 
@@ -207,7 +215,7 @@ int NbElmt (List L)
     if (!IsEmpty(L)) 
     {
         P = First(L);
-        while (P != Nil) 
+        while (P != Nill) 
         {
             cnt++;
             P = Next(P);
@@ -216,9 +224,30 @@ int NbElmt (List L)
     return cnt;
 }
 
-// int main() 
-// {
-//     List l;
-//     CreateEmptyList(&l);
-//     InsVLast(&l, )
-// }
+int main() 
+{
+    List L;
+    CreateEmptyList(&L);
+    Info I, I2;
+    Word p, a, l, p2, a2, l2;
+    p.Length = 5; a.Length = 5; l.Length = 5;
+    p2.Length = 5; a2.Length = 5; l2.Length = 5;
+    p.TabWord = "iqbal"; 
+    scanf("%s", &p.TabWord);
+    scanf("%s", &a.TabWord);
+    scanf("%s", &l.TabWord);
+    scanf("%s", &p2.TabWord);
+    scanf("%s", &a2.TabWord);
+    scanf("%s", &l2.TabWord);
+    CreateInfo(&I, p, a, l);
+    CreateInfo(&I2, p2, a2, l2);
+    // InsVLast(&L, I);
+    // InsVLast(&L, I2);
+    // PrintInfo(L);
+    // printf("--------------------\n");
+    // DelP(&L, I2);
+    // PrintInfo(L);
+    address P = Search(L, I2);
+    if (P == Nill) printf("ada");
+    else printf("gaada\n");
+}

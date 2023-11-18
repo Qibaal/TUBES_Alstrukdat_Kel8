@@ -59,7 +59,7 @@ void ParsePlaylist(Word penyanyi, Word album, Word lagu);
 
 int stringToInt(char *str);
 
-void PRINTWORD();
+void PRINTWORD(Word w);
 
 int WordToInt(Word currentWord);
 /* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
