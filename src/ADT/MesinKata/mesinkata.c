@@ -112,12 +112,11 @@ int stringToInt(char* str) {
     return res;
 }
 
-void ParsePlaylist(char* penyanyi, char* album, char* lagu)
+void ParsePlaylist(Word penyanyi, Word album, Word lagu)
 {
     ADVNEXT(false);
-    int i=0;
+    int i=0, next = 0;
     int idx[3];
-    int next = 0;
     while (currentWord.TabWord[i] != Newline)
     {
         if (currentWord.TabWord[i] == ';')
@@ -127,20 +126,26 @@ void ParsePlaylist(char* penyanyi, char* album, char* lagu)
         }
         i++;
     }
+    penyanyi.Length = 0;
     for (int j=0; j<idx[0]; j++)
     {
-        penyanyi[j] = currentWord.TabWord[j];
+        penyanyi.TabWord[j] = currentWord.TabWord[j];
+        penyanyi.Length++;
     }
+    album.Length = 0;
     for (int j=idx[0]+1; j<idx[1]; j++)
     {
-        album[j-idx[0]-1] = currentWord.TabWord[j];
+        album.TabWord[j-idx[0]-1] = currentWord.TabWord[j];
+        album.Length++;
     }
+    lagu.Length = 0;
     for (int j=idx[1]+1; j<currentWord.Length; j++)
     {
-        lagu[j-idx[1]-1] = currentWord.TabWord[j];
+        lagu.TabWord[j-idx[1]-1] = currentWord.TabWord[j];
+        lagu.Length++;
     }
 }
 
-void PRINTWORD() {
-    printf("%s\n", currentWord.TabWord);
+void PRINTWORD(Word W) {
+    printf("%s\n", W.TabWord);
 }
