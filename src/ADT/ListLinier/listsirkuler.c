@@ -5,13 +5,13 @@
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmpty (List L){
-    return First(L) == Nil;
+    return First(L) == Nill;
 }
 /* Mengirim true jika list kosong. Lihat definisi di atas. */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L){
-    First(*L) = Nil;
+void CreateEmptyList (List *L){
+    First(*L) = Nill;
 }
 /* I.S. L sembarang             */
 /* F.S. Terbentuk list kosong. Lihat definisi di atas. */
@@ -20,9 +20,9 @@ void CreateEmpty (List *L){
 address Alokasi (Info X)
 {
     address p = (address) malloc(sizeof(ElmtList));
-    if (p != NULL) {
+    if (p != Nill) {
         CreateInfo(&(*p).InfoPlay, X.Penyanyi, X.Album, X.Lagu);
-        Next(p) = Nil;
+        Next(p) = Nill;
     }
     return p;
 }
@@ -45,10 +45,10 @@ address Search (List L, Info X)
     boolean found = false;
 
     if (!IsEmpty(L)){
-        while (!found && P != Nil)
+        while (!found && P != Nill)
         {
-            if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
-                isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord))
+            if (isSame(X.Penyanyi, P->InfoPlay.Penyanyi) &&
+                isSame(X.Lagu, P->InfoPlay.Lagu))
             {
                 found = true;
             }
@@ -59,7 +59,7 @@ address Search (List L, Info X)
         }
     }
     if (!found){
-        P = Nil;
+        P = Nill;
     } 
     return P;
 }
@@ -76,7 +76,7 @@ void InsVLast (List *L, Info X)
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
   address P = Alokasi(X);
-  if (P != Nil) {
+  if (P != Nill) {
     InsertLast(L, P);
   }
 }
@@ -110,7 +110,7 @@ void InsertLast (List *L, address P)
     InsertFirst(L, P);
   } else {
     Last = First(*L);
-    while (Next(Last) != Nil) {
+    while (Next(Last) != Nill) {
       Last = Next(Last);
     }
     InsertAfter(L, P, Last);
@@ -126,7 +126,7 @@ void DelFirst (List *L, address *P)
 {
   *P = First(*L);
   First(*L) = Next(First(*L));
-  Next(*P) = Nil;
+  Next(*P) = Nill;
 }
 
 void DelP (List *L, Info X)
@@ -142,8 +142,8 @@ void DelP (List *L, Info X)
     if (!IsEmpty(*L)) 
     {
         P = First(*L);
-        if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
-            isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord)) 
+        if (isSame(X.Penyanyi, P->InfoPlay.Penyanyi) &&
+            isSame(X.Lagu, P->InfoPlay.Lagu)) 
         {
             DelFirst(L, &P);
             Dealokasi(&P);
@@ -151,10 +151,10 @@ void DelP (List *L, Info X)
         else 
         {
             P = First(*L);
-            while (!bFound && P != Nil) 
+            while (!bFound && P != Nill) 
             {
-                if (isSame(X.Penyanyi.TabWord, P->InfoPlay.Penyanyi.TabWord) &&
-                    isSame(X.Lagu.TabWord, P->InfoPlay.Lagu.TabWord)) 
+                if (isSame(X.Penyanyi, P->InfoPlay.Penyanyi) &&
+                    isSame(X.Lagu, P->InfoPlay.Lagu))
                 {
                     bFound = true;
                 } 
@@ -180,21 +180,29 @@ void DelAfter (List *L, address *Pdel, address Prec)
 {
   *Pdel = Next(Prec);
   Next(Prec) = Next(Next(Prec));
-  Next(*Pdel) = Nil;
+  Next(*Pdel) = Nill;
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List L)
+void DisplayPlaylist (List L)
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah terkecuali untuk newline di akhir output */
 {
-    address P = First(L);
-    while (P != Nil)
+    if (IsEmpty(L))
     {
-        DisplayInfo(P->InfoPlay);
+        printf("playlist kosong\n");
+    }
+    else
+    {
+        address P = First(L);
+        while (P != Nill)
+        {
+            DisplayInfo(P->InfoPlay);
+            P = Next(P);
+        }
     }
 }
 
@@ -207,7 +215,7 @@ int NbElmt (List L)
     if (!IsEmpty(L)) 
     {
         P = First(L);
-        while (P != Nil) 
+        while (P != Nill) 
         {
             cnt++;
             P = Next(P);
@@ -216,9 +224,36 @@ int NbElmt (List L)
     return cnt;
 }
 
-// int main() 
-// {
-//     List l;
-//     CreateEmptyList(&l);
-//     InsVLast(&l, )
-// }
+int main() 
+{
+    List L;
+    CreateEmptyList(&L);
+    Info I, I2, I3;
+    Word w1, w2, w3;
+    w1.Length = 5; w2.Length = 5; w3.Length = 5;
+    w1.TabWord[0] = 'i';
+    w1.TabWord[1] = 'q';
+    w1.TabWord[2] = 'b';
+    w1.TabWord[3] = 'a';
+    w1.TabWord[4] = 'l';
+    w2.TabWord[0] = 'f';
+    w2.TabWord[1] = 'a';
+    w2.TabWord[2] = 'r';
+    w2.TabWord[3] = 'e';
+    w2.TabWord[4] = 'l';
+    w3.TabWord[0] = 'f';
+    w3.TabWord[1] = 'a';
+    w3.TabWord[2] = 'r';
+    w3.TabWord[3] = 'e';
+    w3.TabWord[4] = 'i';
+    CreateInfo(&I, w1, w2, w3);
+    CreateInfo(&I2, w1, w2, w3);
+    CreateInfo(&I3, w1, w2, w3);
+    InsVLast(&L, I);
+    InsVLast(&L, I2);
+    InsVLast(&L, I3);
+    DelP(&L, I2);
+    DisplayPlaylist(L);
+
+    return 0;
+}

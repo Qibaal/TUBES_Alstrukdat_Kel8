@@ -2,6 +2,7 @@
 #define set_H
 #include <stdio.h>
 #include "..\..\boolean.h"
+#include "mesinkata.h"
 
 /* MODUL Set
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -10,13 +11,10 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define Nil 0
 #define MaxEl 100
 
-typedef char* infotype;
-typedef int address;
-
 typedef struct
 {
-    char Elements[MaxEl][MaxEl];
-    address Count_Lagu;
+    Word Elements[MaxEl];
+    int Count_Lagu;
 } Set;
 
 /* Definisi Set S kosong : S.Count = Nil */
@@ -41,24 +39,22 @@ boolean IsFullSet(Set S);
 /* Ciri Set penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Set ********* */
-void InsertSet(Set *S, char* Elmt);
+void InsertSet(Set *S, Word Elmt);
 /* Menambahkan Elmt sebagai elemen Set S. */
 /* I.S. S mungkin kosong, S tidak penuh
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void DeleteSet(Set *S, infotype Elmt);
+void DeleteSet(Set *S, Word Elmt);
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
-boolean IsMemberSet(Set S, infotype Elmt);
+boolean IsMemberSet(Set S, Word Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
-boolean isSame(char* s1, char* s2);
-
-int StrLen(char* s);
+boolean isSame(Word w1, Word w2);
 
 void PrintSet(Set S);
 

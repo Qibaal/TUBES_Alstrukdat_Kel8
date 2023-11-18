@@ -31,7 +31,6 @@ void DisplayInfo (Info I)
     PRINTWORD(I.Album);
     printf("Lagu: ");
     PRINTWORD(I.Lagu);
-    // printf("-----------------");
 }
 
 // int main() 

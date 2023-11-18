@@ -8,12 +8,15 @@
 #define true 1
 #define false 0
 
+#include "..\..\boolean.h"
+#include "info.h" 
+
 #define InitialSize 10
 
 typedef int IdxType;
 typedef char ElType;
 typedef struct {
-    ElType *A;
+    Word *A;
     int Capacity;
     int Neff;
 } ArrayDin;

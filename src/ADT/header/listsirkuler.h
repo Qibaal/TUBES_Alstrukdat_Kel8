@@ -8,9 +8,9 @@
 
 #include "..\..\boolean.h"
 #include "info.h"
-#include "map.h"
+#include "set.h"
 
-#define Nil NULL
+#define Nill NULL
 
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
@@ -69,11 +69,11 @@ void InsVLast (List *L, Info X);
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, infotype * X);
+void DelVFirst (List *L, Word *X);
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
-void DelVLast (List *L, infotype * X);
+void DelVLast (List *L, Word * X);
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -109,7 +109,7 @@ void DelP (List *L, Info X);
 /* List mungkin menjadi kosong karena penghapusan */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List L);
+void DisplayPlaylist (List L);
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */

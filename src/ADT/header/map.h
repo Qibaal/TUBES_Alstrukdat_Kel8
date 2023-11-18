@@ -3,19 +3,20 @@
 #include <stdio.h>
 #include "..\..\boolean.h"
 #include "set.h"
+#include "info.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 */
 
-#define Nil 0
+#define NilMap 0
 #define MaxEl 100
 #define Undefined ""
 
 // typedef int bool;
 typedef int idxtype;
-typedef char* keytype;
-typedef char* valuetype;
+typedef Word keytype;
+typedef Word valuetype;
 
 typedef struct {
 	keytype		 Nama_Penyanyi;

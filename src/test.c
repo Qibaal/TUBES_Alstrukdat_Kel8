@@ -4,19 +4,21 @@
 #include "ADT\header\mesinkata.h"
 #include "ADT\header\map.h"
 
-void InsertWord(char* s, Word w)
+void InsertWord(Word *t, Word w)
 {
+    t->Length = w.Length;
     for (int i=0; i<w.Length; i++)
     {
-        s[i] = w.TabWord[i];
+        t->TabWord[i] = w.TabWord[i];
     }
 }
 
 int main() {
-    // inisialisasi ADT
+    // LOAD ke ADT
     Map Data;
     Set Penyanyi;
     int jumlah_penyanyi, jumlah_album, jumlah_lagu;
+    Word p, a, l;
 
     // create empty untuk setiap ADT
     CreateEmptyMap(&Data);
@@ -27,7 +29,6 @@ int main() {
     // ambil jumlah penyanyi -- line paling atas
     ADVNEXT(true);
     jumlah_penyanyi = val;
-    // printf("jumlah penyanyi: %d\n", jumlah_penyanyi);
     // lanjut pembacaan
     for (int i=0; i<jumlah_penyanyi; i++)
     {
@@ -35,17 +36,18 @@ int main() {
         jumlah_album = val; // ngambil jumlah album
         InsertSet(&Penyanyi, currentWord.TabWord); // masukin nama penyanyi
         
-        char name[MaxEl];
-        InsertWord(name, currentWord);
+        Word artist;
+        InsertWord(&artist, currentWord);
         for (int i=0; i<jumlah_album; i++) // loop nama album
         {
             // ngambil jumlah lagu yang ada di album dan print nama album
             ADVNEXT(true);
             jumlah_lagu = val;
             
-            char album_name[MaxEl];
-            InsertWord(album_name, currentWord);
-            InsertAlbum(&Data, name, album_name);
+            Word album_name;
+            InsertWord(&album_name, currentWord);
+
+            InsertAlbum(&Data, artist, album_name); // masukin nama penyanyi dan album ke ADT
             CreateEmptySet(&Data.Elements[Data.Count_Album].Info_Lagu);
             for (int i=0; i<jumlah_lagu; i++)
             {
@@ -55,24 +57,52 @@ int main() {
             Data.Count_Album++;
         }
     }
-    PrintMap(Data);
+    // PrintMap(Data);
 
+    // LOAD lagu yg sedang dimainin
+    ParsePlaylist(&p, &a, &l);
+    PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
 
-
-
-
-
-
-
-    char penyanyi[MaxEl];
-    char album[MaxEl];
-    char lagu[MaxEl];
-    while (!IsEOF())
+    //LOAD ke queue
+    ADVNEXT(true);
+    int jumlah_queue = val;
+    printf("-----------Queue----------\n");
+    printf("%d\n", jumlah_queue);
+    for (int i=0; i<jumlah_queue; i++)
     {
-        ParsePlaylist(penyanyi, album, lagu);
+        ParsePlaylist(&p, &a, &l);
+        PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
     }
-    // printf("%s\n", penyanyi);
-    // printf("%s\n", album);
-    // printf("%s\n", lagu);
+
+    // LOAD ke history (stack)
+    ADVNEXT(true);
+    int jumlah_stack = val;
+    printf("%d\n", jumlah_stack);
+    printf("-----------Stack----------\n");
+    for (int i=0; i<jumlah_stack; i++)
+    {
+        ParsePlaylist(&p, &a, &l);
+        PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+    }
+
+    // LOAD KE PLAYLIST
+    ADVNEXT(true);
+    int jumlah_playlist = val;
+    printf("%d\n", jumlah_playlist);
+    printf("-----------Playlist----------\n");
+    for (int i=0; i<jumlah_playlist; i++)
+    {
+        ADVNEXT(true);
+        jumlah_lagu = val;
+        printf("%d\n", jumlah_lagu);
+        printf("nama album: ");
+        PRINTWORD(currentWord);
+        for (int j=0; j<jumlah_lagu; j++)
+        {
+            ParsePlaylist(&p, &a, &l);
+            PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+        }
+        printf("-----------\n");
+    }
     return 0;
 }
