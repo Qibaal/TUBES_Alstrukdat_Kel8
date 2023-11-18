@@ -61,5 +61,6 @@ int stringToInt(char *str);
 
 void PRINTWORD();
 
-
+int WordToInt(Word currentWord);
+/* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
 #endif

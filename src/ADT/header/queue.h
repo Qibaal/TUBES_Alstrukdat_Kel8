@@ -4,6 +4,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "boolean.h"
 #include "..\..\boolean.h"
 #include "mesinkata.h"
 
@@ -11,9 +12,9 @@
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typedef Word ElType;
+typedef char ElType;
 typedef struct { 
-        ElType buffer[CAPACITY];
+        char buffer[CAPACITY];
 	int idxHead;
 	int idxTail;
 } Queue;
