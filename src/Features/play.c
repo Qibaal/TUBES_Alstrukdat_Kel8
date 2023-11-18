@@ -1,4 +1,6 @@
+/* File: play.c */
 #include <stdio.h>
+#include <stdlib.h>
 #include "play.h"
 
 int songCount = sizeof(songs) / sizeof(Song);

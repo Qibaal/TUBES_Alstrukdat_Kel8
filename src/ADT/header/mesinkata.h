@@ -66,4 +66,7 @@ void PRINTWORD(Word w);
 int WordToInt(Word currentWord);
 /* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
 
+boolean WordCompare(Word currentWord, Word inputWord);
+/* Menerima dua input berupa tipe Word dan mengembalikan sebuah boolean yang menyatakan apakah kedua Word tersebut sama atau tidak */
+
 #endif

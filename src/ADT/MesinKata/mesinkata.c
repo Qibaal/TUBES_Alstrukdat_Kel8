@@ -166,12 +166,35 @@ void PRINTWORD(Word w)
 
 int WordToInt(Word currentWord) {
 /* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
-    int kata = 0;
-    int result = 0;
+    // KAMUS LOKAL
+    int kata = 0, result = 0;
+
+    // ALGORITMA
     while (kata < currentWord.Length)
     {
         result = result * 10 + (currentWord.TabWord[kata] - '0');
         kata += 1;
     }
     return result;
+}
+
+boolean WordCompare(Word currentWord, Word newWord)
+/* Menerima dua input berupa tipe Word dan mengembalikan sebuah boolean yang menyatakan apakah kedua Word tersebut sama atau tidak */
+{
+    // KAMUS LOKAL
+    boolean found = false;
+    int i = 0;
+
+    // ALGORITMA
+    if (currentWord.Length != newWord.Length) {
+        return found;
+    } else {
+        while (!found && i < currentWord.Length) {
+            if (currentWord.TabWord[i] != newWord.TabWord[i]) {
+                return found;
+            }
+            i++;
+        }
+        return !found;
+    }
 }

@@ -1,6 +1,12 @@
 #ifndef __ARRAY_DINAMIK__
 #define __ARRAY_DINAMIK__
 
+#include <stdio.h>
+#include <stdlib.h>
+// Boolean
+#define boolean unsigned char
+#define true 1
+#define false 0
 
 #include "..\..\boolean.h"
 #include "info.h" 

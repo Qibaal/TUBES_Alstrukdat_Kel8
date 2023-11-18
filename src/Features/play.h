@@ -1,12 +1,19 @@
+/* File: play.h */
 #ifndef PLAY_H
 #define PLAY_H
 
 #include <stdio.h>
-/* DEFINISI INSTRUKTOR SONG*/
+#include "boolean.h"
+#include "mesinkata.h"
+#include "stack.h"
+#include "queue.h"
+#include "arrayDin.h"
+
+/* DEFINISI KONSTRUKTOR SONG*/
 typedef struct {
-    char artist[50];
-    char album[50];
-    char songTitle[50];
+    char artist[100];
+    char album[100];
+    char songTitle[100];
 } Song;
 
 Song songs[] = {
@@ -24,7 +31,7 @@ Song songs[] = {
     {"Rich Brian", "Rich Album", "Rich Song"},
     {"Denny Caknan", "Denny Album", "Denny Song"},
     {"Via Vallen", "Via Album", "Via Song"}
-};
+}
 
 int compareStrings(char *s1, char *s2);
 /*Fungsi untuk membandingkan dua string*/
@@ -34,5 +41,9 @@ void displayAlbumsByArtist(char *artist);
 // Fungsi untuk menampilkan daftar album berdasarkan penyanyi
 void displaySongsByAlbum(char *artist, char *album);
 // Fungsi untuk menampilkan daftar lagu berdasarkan penyanyi dan album
+int playSong(Queue *queueSong, Stack *historySong);
+/* Memutar lagu yang diinginkan user berdasarkan nama penyanyi, album, dan Lid lagu
+I.S. queueSong terdefinisi, mungkin kosong
+F.S. Lagu diputar*/
 
 #endif
