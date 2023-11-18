@@ -55,7 +55,7 @@ void CopyWord();
 
 void CopyGet(boolean readDigit);
 
-void ParsePlaylist(Word penyanyi, Word album, Word lagu);
+void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu);
 
 int stringToInt(char *str);
 

@@ -14,10 +14,11 @@ void InsertWord(Word *t, Word w)
 }
 
 int main() {
-    // inisialisasi ADT
+    // LOAD ke ADT
     Map Data;
     Set Penyanyi;
     int jumlah_penyanyi, jumlah_album, jumlah_lagu;
+    Word p, a, l;
 
     // create empty untuk setiap ADT
     CreateEmptyMap(&Data);
@@ -28,7 +29,6 @@ int main() {
     // ambil jumlah penyanyi -- line paling atas
     ADVNEXT(true);
     jumlah_penyanyi = val;
-    // printf("jumlah penyanyi: %d\n", jumlah_penyanyi);
     // lanjut pembacaan
     for (int i=0; i<jumlah_penyanyi; i++)
     {
@@ -57,20 +57,52 @@ int main() {
             Data.Count_Album++;
         }
     }
-    PrintMap(Data);
+    // PrintMap(Data);
 
+    // LOAD lagu yg sedang dimainin
+    ParsePlaylist(&p, &a, &l);
+    PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
 
+    //LOAD ke queue
+    ADVNEXT(true);
+    int jumlah_queue = val;
+    printf("-----------Queue----------\n");
+    printf("%d\n", jumlah_queue);
+    for (int i=0; i<jumlah_queue; i++)
+    {
+        ParsePlaylist(&p, &a, &l);
+        PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+    }
 
+    // LOAD ke history (stack)
+    ADVNEXT(true);
+    int jumlah_stack = val;
+    printf("%d\n", jumlah_stack);
+    printf("-----------Stack----------\n");
+    for (int i=0; i<jumlah_stack; i++)
+    {
+        ParsePlaylist(&p, &a, &l);
+        PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+    }
 
-    // char penyanyi[MaxEl];
-    // char album[MaxEl];
-    // char lagu[MaxEl];
-    // while (!IsEOF())
-    // {
-    //     ParsePlaylist(penyanyi, album, lagu);
-    // }
-    // printf("%s\n", penyanyi);
-    // printf("%s\n", album);
-    // printf("%s\n", lagu);
+    // LOAD KE PLAYLIST
+    ADVNEXT(true);
+    int jumlah_playlist = val;
+    printf("%d\n", jumlah_playlist);
+    printf("-----------Playlist----------\n");
+    for (int i=0; i<jumlah_playlist; i++)
+    {
+        ADVNEXT(true);
+        jumlah_lagu = val;
+        printf("%d\n", jumlah_lagu);
+        printf("nama album: ");
+        PRINTWORD(currentWord);
+        for (int j=0; j<jumlah_lagu; j++)
+        {
+            ParsePlaylist(&p, &a, &l);
+            PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+        }
+        printf("-----------\n");
+    }
     return 0;
 }
