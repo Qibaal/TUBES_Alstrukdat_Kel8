@@ -1,136 +1,121 @@
 #include <stdio.h>
 #include "..\header\queue.h"
 
-void CreateQueue(Queue *q) {
-    q->idxHead = IDX_UNDEF;
-    q->idxTail = IDX_UNDEF;
+/* *** Kreator *** */
+void CreateQueue(Queue *q)
+/* I.S. sembarang */
+/* F.S. Sebuah q kosong terbentuk dengan kondisi sbb: */
+/* - Index head bernilai IDX_UNDEF */
+/* - Index tail bernilai IDX_UNDEF */
+/* Proses : Melakukan alokasi, membuat sebuah q kosong */
+{
+    IDX_HEAD(*q) = IDX_UNDEF;
+    IDX_TAIL(*q) = IDX_UNDEF;
 }
 
-boolean isEmpty(Queue q) {
-    return (IDX_HEAD(q) == IDX_UNDEF && q.idxTail == IDX_UNDEF);
+/* ********* Prototype ********* */
+boolean isEmpty(Queue q)
+{
+    return ((IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF));
+}
+boolean isFull(Queue q)
+{
+    return (IDX_TAIL(q) - IDX_HEAD(q) + 1 == CAPACITY);
 }
 
-boolean isFull(Queue q) {
-    return q.idxTail == CAPACITY - 1;
-}
-
-int length(Queue q) {
-    return (q.idxTail-q.idxHead) + 1;
-}
-
-void enqueue(Queue *q, ElType val) {
-    if (isEmpty(*q)) {
-        q->idxHead = 0;
-        q->idxTail = 0;
-    } else 
-    {
-        if (q->idxTail == CAPACITY-1) { 
-            for (int i=q->idxHead; i<=q->idxTail; i++) {
-                q->buffer[i-q->idxHead] = q->buffer[i];
-            }
-            q->idxTail -= q->idxHead;
-            q->idxHead = 0;
-        }
-        q->idxTail++;
-    }
-    TAIL(*q) = val;
-    
-}
-
-void dequeue(Queue *q, ElType *val) {
-    *val = HEAD(*q);
-    if (q->idxHead == q->idxTail) {
-        q->idxHead = IDX_UNDEF;
-        q->idxTail = IDX_UNDEF;
-    } else {
-        q->idxHead++;
-    }
-}
-
-void displayQueue(Queue q) {
-    for (int i=q.idxHead; i<=q.idxTail; i++) {
-        q.buffer[i-q.idxHead] = q.buffer[i];
-    }
-    q.idxTail -= q.idxHead;
-    q.idxHead = 0;
+int length(Queue q)
+{
     if (isEmpty(q)) 
     {
-        printf("[]\n");
-    } else
+        return 0;
+    }
+    else
     {
-        printf("[");
-        for (int i=0; i<length(q)-1; i++) 
+        if (IDX_TAIL(q) >= IDX_HEAD(q))
         {
-            printf("%d,", q.buffer[i]);
+            return (IDX_TAIL(q) - IDX_HEAD(q) + 1);
         }
-        printf("%d]\n", TAIL(q));
-    }
-}
-
-Queue tanpaBomb(Queue queue, ElType bomb) {
-    Queue q;
-    CreateQueue(&q);
-    int i, len = length(queue);
-    ElType temp;
-    int nums[len];
-    i=0;
-    while (i<len) 
-    {
-        temp = 0;
-        dequeue(&queue, &temp);
-        if (temp == bomb) nums[i] = -9999;
-        else nums[i] = temp;
-        i++;
-    }
-    i=0;
-    while (i<len)
-    { 
-        if (nums[i] != -9999) enqueue(&q, nums[i]);
-        i++;
-    }
-    return q;
-}
-
-void copyQueue(Queue *queueInput, Queue *queueOutput) {
-    ElType temp;
-    int len = length(*queueInput);
-    if (!isEmpty(*queueInput))
-    {
-        int i=0;
-        while (i<len)
-        {   
-            dequeue(queueInput, &temp);
-            enqueue(queueOutput, temp);
-            enqueue(queueInput, temp);
-            i++;
+        else
+        {
+            return (IDX_TAIL(q) - IDX_HEAD(q) + 1 + CAPACITY);
         }
     }
 }
 
-ElType minValue(Queue q) {
-    ElType min = 0;
-    int temp, len = length(q);
-    int nums[len];
-    for (int i=0; i<len; i++)
+/* *** Primitif Add/Delete *** */
+void enqueue(Queue *q, ElType val)
+{
+    if (isEmpty(*q))
     {
-        dequeue(&q, &temp);
-        nums[i] = temp;
-        if (min == 0 || min > temp) min = temp;
-        enqueue(&q, temp);
+        IDX_HEAD(*q) = 0;
+        IDX_TAIL(*q) = 0;
     }
-    return min;
+    else
+    {
+        if (IDX_TAIL(*q) == CAPACITY - 1)
+        {
+            IDX_TAIL(*q) = 0;
+        }
+        else
+        {
+            IDX_TAIL(*q) += 1;
+        }
+    }
+    TAIL(*q) = val;
 }
 
-ElType maxValue(Queue q) {
-    ElType max = 0;
-    int temp, len = length(q);
-    int nums[len];
-    for (int i=0; i<len; i++)
+void dequeue(Queue *q, ElType *val)
+{
+    *val = HEAD(*q);
+    if (IDX_HEAD(*q) == IDX_TAIL(*q))
     {
-        dequeue(&q, &temp);
-        nums[i] = temp;
-        if (max == 0 || max < temp) max = temp;
-        enqueue(&q, temp);
+        IDX_HEAD(*q) = IDX_UNDEF;
+        IDX_TAIL(*q) = IDX_UNDEF;
     }
-    return max;
+    else
+    {
+        if (IDX_HEAD(*q) == CAPACITY - 1) 
+        {
+            IDX_HEAD(*q) = 0;
+        }
+        else
+        {
+            IDX_HEAD(*q) += 1;
+        }
+    }
+}
+
+/* *** Display Queue *** */
+void displayQueue(Queue q)
+{
+    if (isEmpty(q))
+    {
+        printf("[]\n");
+    }
+    else
+    {
+        int i;
+        printf("[");
+
+        if (IDX_TAIL(q) - IDX_HEAD(q) < 0)
+        {
+            for (i = IDX_HEAD(q); i <= CAPACITY - 1; i++)
+            {
+                printf("%c,", q.buffer[i]);
+            }
+            for (i = 0; i < IDX_TAIL(q); i++)
+            {
+                printf("%c,", q.buffer[i]);
+            }
+        }
+
+        else 
+        {
+            for (i = IDX_HEAD(q); i < IDX_TAIL(q); i++)
+            {
+                printf("%c,", q.buffer[i]);
+            }
+        }
+    }
+    printf("%c]\n", TAIL(q));
 }
