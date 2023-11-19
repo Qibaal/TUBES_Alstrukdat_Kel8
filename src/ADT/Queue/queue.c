@@ -9,50 +9,46 @@ void CreateQueue(Queue *q)
 /* - Index tail bernilai IDX_UNDEF */
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
 {
-    IDX_HEAD(*q) = IDX_UNDEF;
-    IDX_TAIL(*q) = IDX_UNDEF;
+    IDX_HEAD(*q) = IDX_UNDEF;  IDX_TAIL(*q) = IDX_UNDEF;
 }
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q)
+boolean isEmptyQ(Queue q)
 {
     return ((IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF));
 }
+
 boolean isFull(Queue q)
 {
-    return (IDX_TAIL(q) - IDX_HEAD(q) + 1 == CAPACITY);
+    if (IDX_HEAD(q) > IDX_TAIL(q)) {
+        return IDX_HEAD(q) - IDX_TAIL(q) == 1;
+    } else {
+        return IDX_HEAD(q) == 0 && IDX_TAIL(q) == IDX_MAX; 
+    }
 }
 
 int length(Queue q)
 {
-    if (isEmpty(q)) 
-    {
+    if (isEmptyQ(q)) {
         return 0;
-    }
-    else
-    {
-        if (IDX_TAIL(q) >= IDX_HEAD(q))
-        {
-            return (IDX_TAIL(q) - IDX_HEAD(q) + 1);
-        }
-        else
-        {
-            return (IDX_TAIL(q) - IDX_HEAD(q) + 1 + CAPACITY);
-        }
+    } else if (IDX_HEAD(q) > IDX_TAIL(q)) {
+        return IDX_MAX - IDX_HEAD(q) + IDX_TAIL(q) + 2;
+    } else {
+        return IDX_TAIL(q) - IDX_HEAD(q) + 1;
     }
 }
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val)
+void enqueue(Queue *q, Info val)
 {
-    if (isEmpty(*q))
+    if (isEmptyQ(*q))
     {
         IDX_HEAD(*q) = 0;
         IDX_TAIL(*q) = 0;
     }
     else
     {
-        if (IDX_TAIL(*q) == CAPACITY - 1)
+        if (IDX_TAIL(*q) == IDX_MAX)
         {
             IDX_TAIL(*q) = 0;
         }
@@ -61,12 +57,12 @@ void enqueue(Queue *q, ElType val)
             IDX_TAIL(*q) += 1;
         }
     }
-    TAIL(*q) = val;
+    CreateInfo(&TAIL(*q), val.Penyanyi, val.Album, val.Lagu);
 }
 
-void dequeue(Queue *q, ElType *val)
+void dequeue(Queue *q, Info *val)
 {
-    *val = HEAD(*q);
+    CreateInfo(val, HEAD(*q).Penyanyi, HEAD(*q).Album, HEAD(*q).Lagu);
     if (IDX_HEAD(*q) == IDX_TAIL(*q))
     {
         IDX_HEAD(*q) = IDX_UNDEF;
@@ -74,7 +70,7 @@ void dequeue(Queue *q, ElType *val)
     }
     else
     {
-        if (IDX_HEAD(*q) == CAPACITY - 1) 
+        if (IDX_HEAD(*q) == IDX_MAX) 
         {
             IDX_HEAD(*q) = 0;
         }
@@ -85,37 +81,155 @@ void dequeue(Queue *q, ElType *val)
     }
 }
 
+void RemoveQueue(Queue *q, Info *del, int idx)
+{
+    Queue temp; CreateQueue(&temp);
+    Info iTemp;
+    if (idx <= 0 || idx > length(*q))
+    {
+        printf("Lagu dengan urutan ke %d tidak ada.\n", idx);
+        return;
+    }
+    int ctr = 0;
+    while (!isEmptyQ(*q))
+    {
+        if (ctr == idx - 1)
+        {
+            dequeue(q, del);
+        }
+        else
+        {
+            dequeue(q, &iTemp);
+            enqueue(&temp, iTemp);
+        }
+        ctr++;
+    }
+    if (!isEmptyQ(*q)) printf("gagal\n");
+    else
+    {
+        while (!isEmptyQ(temp))
+        {
+            dequeue(&temp, &iTemp);
+            enqueue(q, iTemp);
+        }
+    }
+}
+
+void SwapQueue(Queue *q, int x, int y)
+{
+    Queue temp; CreateQueue(&temp);
+    Info iTemp, xTemp, yTemp;
+    int ctr;
+    if (x > y)
+    {
+        int temp = x;
+        x = y;
+        y = temp;
+    }
+    if (x <= 0 || x > length(*q))
+    {
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
+        return;
+    }
+    else if (y <= 0 || y > length(*q))
+    {
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+        return;
+    }
+    RemoveQueue(q, &xTemp, x);
+    RemoveQueue(q, &yTemp, y-1);
+    // masukin balik lagi
+    ctr = 0;
+    if (!isEmptyQ(*q)) printf("gagal\n");
+    else
+    {
+        while (!isEmptyQ(temp))
+        {
+            if (ctr + 1 == x)
+            {
+                enqueue(q, yTemp);
+            }
+            else if (ctr + 1 == y)
+            {
+                enqueue(q, xTemp);
+            }
+            else
+            {
+                dequeue(&temp, &iTemp);
+                enqueue(q, iTemp);
+            }
+            ctr++;
+        }
+    }
+}
+
+void ClearQueue(Queue *q)
+{
+    Info temp;
+    while (!isEmptyQ(*q)) dequeue(q, &temp);
+}
+
 /* *** Display Queue *** */
 void displayQueue(Queue q)
 {
-    if (isEmpty(q))
-    {
-        printf("[]\n");
-    }
+    if (isEmptyQ(q)) printf("kosong\n");
     else
     {
-        int i;
-        printf("[");
-
-        if (IDX_TAIL(q) - IDX_HEAD(q) < 0)
+        int i = IDX_HEAD(q);
+        while (i != IDX_TAIL(q)+1)
         {
-            for (i = IDX_HEAD(q); i <= CAPACITY - 1; i++)
-            {
-                printf("%c,", q.buffer[i]);
-            }
-            for (i = 0; i < IDX_TAIL(q); i++)
-            {
-                printf("%c,", q.buffer[i]);
-            }
-        }
-
-        else 
-        {
-            for (i = IDX_HEAD(q); i < IDX_TAIL(q); i++)
-            {
-                printf("%c,", q.buffer[i]);
-            }
+            DisplayInfo(q.buffer[i]);
+            i = (i+1) % (IDX_MAX);
         }
     }
-    printf("%c]\n", TAIL(q));
+}
+
+int main()
+{
+    Queue Q; CreateQueue(&Q);
+    
+    Info I, I2, I3, Temp;
+    Word w1, w2, w3, w4, w5, w6, w7, w8, w9;
+    w1.Length = 5; w2.Length = 5; w3.Length = 5;
+    w4.Length = 3; w5.Length = 3; w6.Length = 3;
+    w7.Length = 1; w8.Length = 1; w9.Length = 1;
+
+    w1.TabWord[0] = 'i';
+    w1.TabWord[1] = 'q';
+    w1.TabWord[2] = 'b';
+    w1.TabWord[3] = 'a';
+    w1.TabWord[4] = 'l';
+    w2.TabWord[0] = 'f';
+    w2.TabWord[1] = 'a';
+    w2.TabWord[2] = 'r';
+    w2.TabWord[3] = 'e';
+    w2.TabWord[4] = 'l';
+    w3.TabWord[0] = 'z';
+    w3.TabWord[1] = 'a';
+    w3.TabWord[2] = 'r';
+    w3.TabWord[3] = 'e';
+    w3.TabWord[4] = 'i';
+    w4.TabWord[0] = 'a';
+    w4.TabWord[1] = 'b';
+    w4.TabWord[2] = 'c';
+    w5.TabWord[0] = 'd';
+    w5.TabWord[1] = 'e';
+    w5.TabWord[2] = 'f';
+    w6.TabWord[0] = 'x';
+    w6.TabWord[1] = 'y';
+    w6.TabWord[2] = 'z';
+    w7.TabWord[0] = 'q';
+    w8.TabWord[0] = 'w';
+    w9.TabWord[0] = 'e';
+
+    CreateInfo(&I, w1, w2, w3);
+    CreateInfo(&I2, w4, w5, w6);
+    CreateInfo(&I3, w7, w8, w9);
+
+    enqueue(&Q, I); enqueue(&Q, I2); enqueue(&Q, I3);
+    displayQueue(Q);
+    SwapQueue(&Q, 1, 2);
+    printf("--------------------\n");
+    displayQueue(Q);
+    return 0;
 }

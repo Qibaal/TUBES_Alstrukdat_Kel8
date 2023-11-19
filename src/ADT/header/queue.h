@@ -4,23 +4,15 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-
 #include "..\..\boolean.h"
-#include "mesinkata.h"
+#include "info.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define IDX_MAX 99
 
 /* Definisi elemen dan address */
-typedef struct {
-        Word lagu;
-        Word Artist;
-        Word Album;
-} InfoQueue;
-
-typedef Word ElType;
 typedef struct { 
-        ElType buffer[CAPACITY];
+        Info buffer[IDX_MAX+1];
 	int idxHead;
 	int idxTail;
 } Queue;
@@ -41,7 +33,7 @@ void CreateQueue(Queue *q);
 /* Proses : Melakukan alokasi, membuat sebuah q kosong */
 
 /* ********* Prototype ********* */
-boolean isEmpty(Queue q);
+boolean isEmptyQ(Queue q);
 /* Mengirim true jika q kosong: lihat definisi di atas */
 boolean isFull(Queue q);
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
@@ -50,14 +42,31 @@ boolean isFull(Queue q);
 int length(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
+void SwapQueue(Queue *q, int x, int y);
+/* Proses: Menukar 2 Info pada q dengan aturan FIFO */
+/* I.S. q tidak mungkin kosong, x dan y valid (tidak kurang dari 0 dan tidak lebih sama dengan capacity) */
+/* F.S. Info x menjadi y dan sebaliknya */
+
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val);
+void enqueue(Queue *q, Info val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
 
-void dequeue(Queue *q, ElType *val);
+void dequeue(Queue *q, Info *val);
 /* Proses: Menghapus val pada q dengan aturan FIFO */
+/* I.S. q tidak mungkin kosong */
+/* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
+        q mungkin kosong */
+
+void RemoveQueue(Queue *q, Info *del, int idx);
+/* Proses: Menghapus Info pada q dengan index i */
+/* I.S. q tidak mungkin kosong */
+/* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
+        q mungkin kosong */
+
+void ClearQueue(Queue *q);
+/* Proses: Menghapus seluruh isi Queue */
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
         q mungkin kosong */
