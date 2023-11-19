@@ -4,7 +4,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "boolean.h"
+
 #include "..\..\boolean.h"
 #include "mesinkata.h"
 
@@ -12,10 +12,10 @@
 #define CAPACITY 100
 
 /* Definisi elemen dan address */
-typdef struct
-{
+typedef struct {
         Word lagu;
         Word Artist;
+        Word Album;
 } InfoQueue;
 
 typedef Word ElType;

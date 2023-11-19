@@ -12,13 +12,15 @@
 #define MaxEl 100
 /* Nil adalah stack dengan elemen kosong . */
 
+static const int size = 10;
 typedef struct
 {
   Word lagu;
   Word Artist;
 } InfoStack;
 
-typedef int address;   /* indeks tabel */
+typedef int address;
+/* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/

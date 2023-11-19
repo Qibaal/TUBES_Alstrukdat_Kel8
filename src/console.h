@@ -7,6 +7,7 @@
 #include "ADT\header\map.h"
 #include "ADT\header\queue.h"
 #include "ADT\header\stack.h"
+#include "ADT\header\circular_queue.h"
 
 void START();
 void LOAD();
