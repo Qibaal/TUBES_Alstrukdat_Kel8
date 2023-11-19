@@ -5,6 +5,8 @@
 #include "ADT\header\map.h"
 #include "ADT\header\listsirkuler.h"
 
+char s[] = "ADT/MesinKarakter/dummy.txt";
+
 int main() {
     // LOAD ke ADT
     Map Data;
@@ -19,7 +21,11 @@ int main() {
     CreateEmptySet(&Penyanyi);
     CreateEmptyList(&PlayList);
 
-    STARTWORD(); // mulai
+    STARTINPUT();
+    CopyWord();
+    PRINTWORD(currentWord);
+
+    STARTWORD(s); // mulai
 
     // ambil jumlah penyanyi -- line paling atas
     ADVNEXT(true);

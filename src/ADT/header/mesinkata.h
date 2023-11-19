@@ -32,7 +32,7 @@ void IgnoreNewLines();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ Newline*/
 
-void STARTWORD();
+void STARTWORD(char* path);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -63,8 +63,7 @@ void InsertWord(Word *t, Word w);
 
 void PRINTWORD(Word w);
 
-int WordToInt(Word currentWord);
-/* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
+void ConcatString(char* res, char* a, char* b);
 
 boolean WordCompare(Word currentWord, Word inputWord);
 /* Menerima dua input berupa tipe Word dan mengembalikan sebuah boolean yang menyatakan apakah kedua Word tersebut sama atau tidak */

@@ -22,11 +22,12 @@ extern Map Data;
 extern Queue QOSongs; // queue of songs
 extern Stack SongHistory; // history of played songs
 extern Set Artists;
+extern Info CurrSong;
 extern int jumlah_penyanyi, jumlah_album, jumlah_lagu; 
 
 
 
-void START();
+void START(Map* D, Set* A, char* file);
 void LOAD();
 void LISTDEFAULT();
 void LISTPLAYLIST();

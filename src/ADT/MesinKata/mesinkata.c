@@ -24,13 +24,13 @@ void IgnoreNewLines()
     }
 }
 
-void STARTWORD()
+void STARTWORD(char* path)
 {
     /* I.S. : currentChar sembarang
        F.S. : EndWord = true, dan currentChar = MARK;
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
+    START(path);
     IgnoreNewLines();
 }
 
@@ -164,18 +164,19 @@ void PRINTWORD(Word w)
     printf("\n");
 }
 
-int WordToInt(Word currentWord) {
-/* Menerima input berupa string dan mengembalikannya dalam bentuk integer*/
-    // KAMUS LOKAL
-    int kata = 0, result = 0;
-
-    // ALGORITMA
-    while (kata < currentWord.Length)
+void ConcatString(char* res, char* a, char* b)
+{
+    int i;
+    for (i = 0; a[i] != '\0'; ++i)
     {
-        result = result * 10 + (currentWord.TabWord[kata] - '0');
-        kata += 1;
+        res[i] = a[i];
     }
-    return result;
+    for (int j = 0; b[j] != '\0'; ++j)
+    {
+        res[i] = b[j];
+        i++;
+    }
+    res[i] = '\0';
 }
 
 boolean WordCompare(Word currentWord, Word newWord)

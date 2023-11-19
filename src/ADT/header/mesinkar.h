@@ -11,7 +11,7 @@ extern char currentChar;
 extern boolean EOP;
 extern int retval;
 
-void START();
+void START(char* path);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -25,6 +25,8 @@ void ADV();
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+void STARTINPUT();
 
 boolean IsEOF();
 
