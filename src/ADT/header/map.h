@@ -13,8 +13,6 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define MaxEl 100
 #define Undefined ""
 
-// typedef int bool;
-typedef int idxtype;
 typedef Word keytype;
 typedef Word valuetype;
 
@@ -38,8 +36,6 @@ void CreateEmptyMap(Map *M);
 boolean IsEmptyMap(Map M);
 
 void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album);
-
-void InsertLagu(Map *M, infotype lagu);
 
 boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album);
 

@@ -59,6 +59,8 @@ void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu);
 
 int stringToInt(char *str);
 
+void InsertWord(Word *t, Word w);
+
 void PRINTWORD(Word w);
 
 int WordToInt(Word currentWord);

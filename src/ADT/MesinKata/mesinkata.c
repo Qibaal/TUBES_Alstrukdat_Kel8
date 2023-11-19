@@ -146,6 +146,15 @@ void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu)
     }
 }
 
+void InsertWord(Word *t, Word w)
+{
+    t->Length = w.Length;
+    for (int i=0; i<w.Length; i++)
+    {
+        t->TabWord[i] = w.TabWord[i];
+    }
+}
+
 void PRINTWORD(Word w) 
 {
     for (int i=0; i<w.Length; i++)

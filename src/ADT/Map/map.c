@@ -25,30 +25,9 @@ void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album)
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 {
-    M->Elements[M->Count_Album].Nama_Penyanyi.Length = nama_penyanyi.Length;
-    M->Elements[M->Count_Album].Nama_Album.Length = nama_album.Length;
-    for (int i=0; i<nama_penyanyi.Length; i++)
-    {
-        M->Elements[M->Count_Album].Nama_Penyanyi.TabWord[i] = nama_penyanyi.TabWord[i];
-    }
-    for (int i=0; i<nama_album.Length; i++)
-    {
-        M->Elements[M->Count_Album].Nama_Album.TabWord[i] = nama_album.TabWord[i];
-    }
-    // M->Count_Album++;
-    
-    // saat mau masukin lagu gausah create empty lagi
-    // CreateEmptySet(M->Elements[M->Count_Album].Info_Lagu);
+    InsertWord(&(*M).Elements[M->Count_Album].Nama_Penyanyi, nama_penyanyi);
+    InsertWord(&(*M).Elements[M->Count_Album].Nama_Album, nama_album);
 }
-
-// void InsertLagu(Map *M, infotype lagu)
-// {
-//     int len = M->Elements[M->Count_Album-1].Info_Lagu.Count_Lagu;
-//     int jumlah_lagu = M->Elements[M->Count_Album].Info_Lagu.Count_Lagu;
-//     // InsertSet(M->Elements[M->Count_Album]->Info_Lagu, lagu);
-//     // tiap insert tambahin jumlah lagu
-//     M->Elements[M->Count_Album].Info_Lagu.Count_Lagu++;
-// }
 
 boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album)
 /* Mengembalikan true jika penyanyi dan album adalah member dari M */
@@ -57,7 +36,8 @@ boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album)
     int i = 0;
     while (i < M.Count_Album && !found)
     {
-        if (isSame(M.Elements[i].Nama_Penyanyi.TabWord, nama_penyanyi.TabWord) && isSame(M.Elements[i].Nama_Album.TabWord, nama_album.TabWord))
+        if (isSame(M.Elements[i].Nama_Penyanyi, nama_penyanyi) && 
+            isSame(M.Elements[i].Nama_Album, nama_album))
         {
             found = true;
         }
@@ -78,10 +58,7 @@ void PrintMap(Map M)
         printf("------------\n");
         PRINTWORD(M.Elements[i].Nama_Album);
         printf("------------\n");
-        for (int j=0; j<M.Elements[i].Info_Lagu.Count_Lagu; j++)
-        {
-            printf("%s\n", M.Elements[i].Info_Lagu.Elements[j]);
-        }
+        PrintSet(M.Elements[i].Info_Lagu);
         printf("///////////////////\n");
     }
 }
