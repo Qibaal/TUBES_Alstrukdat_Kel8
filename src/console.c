@@ -9,7 +9,7 @@ Set Artists;
 Info CurrSong;
 int jumlah_penyanyi, jumlah_album, jumlah_lagu;
 
-void START(Map* D, Set* A, char* file)
+void STARTCONSOLE(Map* D, Set* A, char* file)
 {
     CreateEmptyMap(D);
     CreateEmptySet(A);
@@ -40,11 +40,11 @@ void START(Map* D, Set* A, char* file)
             Word album_name;
             InsertWord(&album_name, currentWord);
             InsertAlbum(D, artist, album_name); // masukin nama penyanyi dan album ke ADT
-            CreateEmptySet(&(*D).Elements[Data.Count_Album].Info_Lagu);
+            CreateEmptySet(&(*D).Elements[D->Count_Album].Info_Lagu);
             for (int i=0; i<jumlah_lagu; i++)
             {
                 ADVNEXT(false);
-                InsertSet(&(*D).Elements[Data.Count_Album].Info_Lagu, currentWord);
+                InsertSet(&(*D).Elements[D->Count_Album].Info_Lagu, currentWord);
             }
             D->Count_Album++;
         }
@@ -155,8 +155,3 @@ void LOAD();
 //     }
 //     printf("Queue berhasil dikosongkan.\n");
 // }
-
-int main()
-{
-    
-}

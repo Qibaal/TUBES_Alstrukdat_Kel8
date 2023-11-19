@@ -11,14 +11,14 @@
 #include "ADT\header\mesinkata.h"
 #include "ADT\header\listsirkuler.h"
 #include "ADT\header\map.h"
+#include "ADT\header\set.h"
 #include "ADT\header\queue.h"
 #include "ADT\header\stack.h"
 #include "ADT\header\info.h"
-#include "ADT\header\set.h"
 
 extern ArrayDin LOPlaylist; // list of playlists
 extern List PlayList;
-extern Map Data;
+extern Map DATA;
 extern Queue QOSongs; // queue of songs
 extern Stack SongHistory; // history of played songs
 extern Set Artists;
@@ -27,7 +27,7 @@ extern int jumlah_penyanyi, jumlah_album, jumlah_lagu;
 
 
 
-void START(Map* D, Set* A, char* file);
+void STARTCONSOLE(Map* D, Set* A, char* file);
 void LOAD();
 void LISTDEFAULT();
 void LISTPLAYLIST();

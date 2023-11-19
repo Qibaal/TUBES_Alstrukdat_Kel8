@@ -1,11 +1,14 @@
-#include <stdio.h>
-#include "boolean.h"
-#include "ADT\header\mesinkar.h"
-#include "ADT\header\mesinkata.h"
-#include "ADT\header\map.h"
-#include "ADT\header\listsirkuler.h"
+// #include <stdio.h>
+// #include "boolean.h"
+// #include "ADT\header\mesinkar.h"
+// #include "ADT\header\mesinkata.h"
+// #include "ADT\header\map.h"
+// #include "ADT\header\listsirkuler.h"
 
-char s[] = "ADT/MesinKarakter/dummy.txt";
+#include "console.h"
+
+// char s[] = "ADT/MesinKarakter/dummy.txt";
+char s[] = "dummy.txt";
 
 int main() {
     // LOAD ke ADT
@@ -17,94 +20,95 @@ int main() {
     Info temp;
 
     // create empty untuk setiap ADT
-    CreateEmptyMap(&Data);
-    CreateEmptySet(&Penyanyi);
+    // CreateEmptyMap(&Data);
+    // CreateEmptySet(&Penyanyi);
     CreateEmptyList(&PlayList);
 
-    STARTINPUT();
-    CopyWord();
-    PRINTWORD(currentWord);
+    // STARTINPUT();
+    // CopyWord();
+    // PRINTWORD(currentWord);
 
-    STARTWORD(s); // mulai
+    // STARTWORD(s); // mulai
 
-    // ambil jumlah penyanyi -- line paling atas
-    ADVNEXT(true);
-    jumlah_penyanyi = val;
-    // lanjut pembacaan
-    for (int i=0; i<jumlah_penyanyi; i++)
-    {
-        ADVNEXT(true); // maju ke line album
-        jumlah_album = val; // ngambil jumlah album
-        InsertSet(&Penyanyi, currentWord); // masukin nama penyanyi
+    // // ambil jumlah penyanyi -- line paling atas
+    // ADVNEXT(true);
+    // jumlah_penyanyi = val;
+    // // lanjut pembacaan
+    // for (int i=0; i<jumlah_penyanyi; i++)
+    // {
+    //     ADVNEXT(true); // maju ke line album
+    //     jumlah_album = val; // ngambil jumlah album
+    //     InsertSet(&Penyanyi, currentWord); // masukin nama penyanyi
         
-        Word artist;
-        InsertWord(&artist, currentWord);
+    //     Word artist;
+    //     InsertWord(&artist, currentWord);
 
-        for (int i=0; i<jumlah_album; i++) // loop nama album
-        {
-            // ngambil jumlah lagu yang ada di album dan print nama album
-            ADVNEXT(true);
-            jumlah_lagu = val;
+    //     for (int i=0; i<jumlah_album; i++) // loop nama album
+    //     {
+    //         // ngambil jumlah lagu yang ada di album dan print nama album
+    //         ADVNEXT(true);
+    //         jumlah_lagu = val;
             
-            Word album_name;
-            InsertWord(&album_name, currentWord);
-            InsertAlbum(&Data, artist, album_name); // masukin nama penyanyi dan album ke ADT
-            CreateEmptySet(&Data.Elements[Data.Count_Album].Info_Lagu);
-            for (int i=0; i<jumlah_lagu; i++)
-            {
-                ADVNEXT(false);
-                InsertSet(&Data.Elements[Data.Count_Album].Info_Lagu, currentWord);
-            }
-            Data.Count_Album++;
-        }
-    }
+    //         Word album_name;
+    //         InsertWord(&album_name, currentWord);
+    //         InsertAlbum(&Data, artist, album_name); // masukin nama penyanyi dan album ke ADT
+    //         CreateEmptySet(&Data.Elements[Data.Count_Album].Info_Lagu);
+    //         for (int i=0; i<jumlah_lagu; i++)
+    //         {
+    //             ADVNEXT(false);
+    //             InsertSet(&Data.Elements[Data.Count_Album].Info_Lagu, currentWord);
+    //         }
+    //         Data.Count_Album++;
+    //     }
+    // }
+    STARTCONSOLE(&Data, &Penyanyi, s);
     // PrintMap(Data);
-    // PRINTWORD(Data.Elements[6].Nama_Penyanyi);
-    // PRINTWORD(Data.Elements[5].Nama_Album);
-    // PrintSet(Data.Elements[5].Info_Lagu);
+    PRINTWORD(Data.Elements[3].Nama_Penyanyi);
+    PRINTWORD(Data.Elements[3].Nama_Album);
+    PrintSet(Data.Elements[3].Info_Lagu);
 
     // LOAD lagu yg sedang dimainin
-    ParsePlaylist(&p, &a, &l);
-    PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+    // ParsePlaylist(&p, &a, &l);
+    // PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
 
-    //LOAD ke queue
-    ADVNEXT(true);
-    int jumlah_queue = val;
-    printf("-----------Queue----------\n");
-    printf("%d\n", jumlah_queue);
-    for (int i=0; i<jumlah_queue; i++)
-    {
-        ParsePlaylist(&p, &a, &l);
-        PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
-    }
+    // //LOAD ke queue
+    // ADVNEXT(true);
+    // int jumlah_queue = val;
+    // printf("-----------Queue----------\n");
+    // printf("%d\n", jumlah_queue);
+    // for (int i=0; i<jumlah_queue; i++)
+    // {
+    //     ParsePlaylist(&p, &a, &l);
+    //     PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+    // }
 
-    // LOAD ke history (stack)
-    ADVNEXT(true);
-    int jumlah_stack = val;
-    printf("%d\n", jumlah_stack);
-    printf("-----------Stack----------\n");
-    for (int i=0; i<jumlah_stack; i++)
-    {
-        ParsePlaylist(&p, &a, &l);
-        PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
-    }
+    // // LOAD ke history (stack)
+    // ADVNEXT(true);
+    // int jumlah_stack = val;
+    // printf("%d\n", jumlah_stack);
+    // printf("-----------Stack----------\n");
+    // for (int i=0; i<jumlah_stack; i++)
+    // {
+    //     ParsePlaylist(&p, &a, &l);
+    //     PRINTWORD(p); PRINTWORD(a); PRINTWORD(l);
+    // }
 
-    // LOAD KE PLAYLIST
-    ADVNEXT(true);
-    int jumlah_playlist = val;
-    for (int i=0; i<jumlah_playlist; i++)
-    {
-        ADVNEXT(true);
-        jumlah_lagu = val;
-        InsertWord(&PlayList.Nama, currentWord);
-        PRINTWORD(currentWord);
-        for (int j=0; j<jumlah_lagu; j++)
-        {
-            ParsePlaylist(&p, &a, &l);
-            CreateInfo(&temp, p, a, l);
-            InsVLast(&PlayList, temp);
-        }
-        DisplayPlaylist(PlayList);
-    }
+    // // LOAD KE PLAYLIST
+    // ADVNEXT(true);
+    // int jumlah_playlist = val;
+    // for (int i=0; i<jumlah_playlist; i++)
+    // {
+    //     ADVNEXT(true);
+    //     jumlah_lagu = val;
+    //     InsertWord(&PlayList.Nama, currentWord);
+    //     PRINTWORD(currentWord);
+    //     for (int j=0; j<jumlah_lagu; j++)
+    //     {
+    //         ParsePlaylist(&p, &a, &l);
+    //         CreateInfo(&temp, p, a, l);
+    //         InsVLast(&PlayList, temp);
+    //     }
+    //     DisplayPlaylist(PlayList);
+    // }
     return 0;
 }
