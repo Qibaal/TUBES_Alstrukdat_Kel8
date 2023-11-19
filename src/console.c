@@ -156,3 +156,7 @@ void LOAD();
 //     printf("Queue berhasil dikosongkan.\n");
 // }
 
+int main()
+{
+    
+}
