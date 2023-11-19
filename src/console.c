@@ -1,5 +1,12 @@
-#include <stdio.h>
 #include "console.h"
+
+ArrayDin LOPlaylist;
+List PlayList;
+Map Data;
+Queue QOSongs;
+Stack SongHistory;
+Set Artists;
+int jumlah_penyanyi, jumlah_album, jumlah_lagu;
 
 void PLAYSONG() {
     // KAMUS LOKAL
