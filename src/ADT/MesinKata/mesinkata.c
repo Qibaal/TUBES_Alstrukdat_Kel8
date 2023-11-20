@@ -3,6 +3,7 @@
 
 boolean EndWord;
 Word currentWord;
+char currentInput;
 int val;
 
 void IgnoreBlanks()
@@ -102,6 +103,17 @@ void CopyGet(boolean readDigit)
         ADV();
     }
     currentWord.TabWord[currentWord.Length] = '\0';
+}
+
+void GetInput()
+{
+    currentWord.Length = 0;
+    currentInput = getc(stdin);
+    while (currentInput != EOI)
+    {
+        currentWord.TabWord[currentWord.Length++] = currentInput;
+        currentInput = getc(stdin);
+    }
 }
 
 int stringToInt(char* str) {

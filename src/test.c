@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include "console.h"
 
-#include "console.h"
-
 // char s[] = "ADT/MesinKarakter/dummy.txt";
 char s[] = "dummy.txt";
 
 int main() {
-    // LOAD ke ADT
+    // Kamus Lokal
     Map Data;
     Set Penyanyi;
     ArrayDin PLAYLISTS = MakeAD();
@@ -128,7 +126,7 @@ int main() {
     // }
 
     // test list default
-    LISTDEFAULT(Data, Penyanyi);
+    // LISTDEFAULT(Data, Penyanyi);
 
     // test listplaylist
     LISTPLAYLIST(PLAYLISTS);

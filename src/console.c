@@ -112,14 +112,12 @@ void LISTDEFAULT(Map D, Set P)
     }
     printf("Ingin melihat album yang ada?(Y/N): ");
     /*pilih ingin melihat atau tidak*/
-    STARTINPUT();
-    CopyWord();
+    GetInput();
     if (WordCompare(Y, currentWord))
     {
         printf("Pilih penyanyi untuk melihat album mereka: ");
         /*pilih nama penyanyi*/
-        STARTINPUT();
-        CopyWord();
+        GetInput();
         /*Pemrosesan jika ada penyanyi yang sesuai di Set*/
         if (IsMemberSet(P, currentWord))
         {
@@ -134,14 +132,12 @@ void LISTDEFAULT(Map D, Set P)
             }
             /*pilih nama Album*/
             printf("Ingin melihat lagu yang ada?(Y/N): ");
-            STARTINPUT();
-            CopyWord();
+            GetInput();
             if (WordCompare(Y, currentWord))
             {
                 printf("Pilih album untuk melihat lagu yang ada di album : ");
                 /*pilih nama Album*/
-                STARTINPUT();
-                CopyWord();
+                GetInput();
                 boolean found = false; int idx = 0;
                 while (idx < D.Count_Album && !found)
                 {

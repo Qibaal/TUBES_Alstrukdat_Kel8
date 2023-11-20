@@ -24,9 +24,7 @@ void ADV();
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
           currentChar mungkin = MARK
-          Jika  currentChar = MARK maka EOP akan menyala (true) */
-
-void STARTINPUT();
+          Jika  currentChar = MARK maka EOP akan menyala (true) */;
 
 boolean IsEOF();
 

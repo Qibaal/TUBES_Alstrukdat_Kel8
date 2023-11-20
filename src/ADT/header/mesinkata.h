@@ -10,6 +10,7 @@
 #define NMax 100
 #define BLANK ' '
 #define Newline '\n'
+#define EOI ';'
 
 typedef struct
 {
@@ -20,6 +21,7 @@ typedef struct
 /* State Mesin Word */
 extern boolean EndWord;
 extern Word currentWord;
+extern char currentInput;
 extern int val;
 
 void IgnoreBlanks();
@@ -31,6 +33,7 @@ void IgnoreNewLines();
 /* Mengabaikan satu atau beberapa Newline
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ Newline*/
+
 
 void STARTWORD(char* path);
 /* I.S. : currentChar sembarang
@@ -54,6 +57,8 @@ void CopyWord();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void CopyGet(boolean readDigit);
+
+void GetInput();
 
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu);
 

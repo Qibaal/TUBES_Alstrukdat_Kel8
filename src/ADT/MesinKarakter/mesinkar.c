@@ -47,12 +47,6 @@ void ADV()
        }
 }
 
-void STARTINPUT()
-{
-       pita = stdin;
-       ADV();
-}
-
 boolean IsEOF() {
        return feof(pita);
 }
