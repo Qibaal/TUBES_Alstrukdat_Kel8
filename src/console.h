@@ -49,7 +49,7 @@ void PLAYLISTDELETE();
 void STATUS();
 void SAVE();
 void QUIT();
-void HELP();
+void HELP(boolean inSesh);
 void INVALIDCOMMAND();
 void DISPLAY();
 

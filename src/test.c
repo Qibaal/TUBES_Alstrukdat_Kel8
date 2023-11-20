@@ -126,10 +126,19 @@ int main() {
     // }
 
     // test list default
-    LISTDEFAULT(Data, Penyanyi);
+    // LISTDEFAULT(Data, Penyanyi);
 
     // test listplaylist
     LISTPLAYLIST(PLAYLISTS);
+    // PLAYSONG(&CURRSONG, Penyanyi, Data, &SONGQUEUE, &HISTORY);
+
+    // test help
+    Word h; h.Length = 4;
+    h.TabWord[0] = 'H'; h.TabWord[1] = 'E'; h.TabWord[2] = 'L'; h.TabWord[3] = 'P';
+    printf(">> ");
+    GetInput();
+    if (WordCompare(h,currentWord))
+        HELP(false);
 
     return 0;
 }

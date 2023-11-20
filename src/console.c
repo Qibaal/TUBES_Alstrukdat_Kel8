@@ -203,82 +203,75 @@ void PLAYSONG(Info *CURR, Set A, Map D, Queue *QS, Stack *hist)
 {
     // masukin currentsong ke dalam history
     Push(hist, *CURR);
+    /*pemilihan Lagu*/
+    printf("Daftar Penyanyi :\n");
+    for (int i=0; i<A.Count_Lagu; i++)
+    {
+        printf("    %d. ", i+1);
+        PRINTWORD(A.Elements[i]);
+    }
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    GetInput();
+    printf("Daftar Album oleh %s:\n", currentWord.TabWord);
+    for (int i=0; i<D.Count_Album; i++)
+    {
+        if (WordCompare(D.Elements[i].Nama_Penyanyi, currentWord))
+        {
+            printf("    %d. ", i+1);
+            PRINTWORD(D.Elements[i].Nama_Album);
+        }
+    }
+    /*Ambil nama album*/
+    printf("Masukkan Nama Album yang dipilih : ");
+    GetInput();
+    int i = 0;
+    for (i=0; i<D.Count_Album; i++)
+    {
+        if (WordCompare(D.Elements[i].Nama_Album, currentWord))
+            break;
+    }
+    printf("Daftar Lagu Album %s oleh %s :\n", D.Elements[i].Nama_Album, D.Elements[i].Nama_Penyanyi);
+    for (int j=0; j<D.Elements[i].Info_Lagu.Count_Lagu; j++)
+    {
+        printf("    %d. ", j+1);
+        PRINTWORD(D.Elements[i].Info_Lagu.Elements[j]);
+    }
+    /*Ambil lagu untuk dimasukin*/
+    printf("Masukkan ID Lagu yang dipilih :\n");
+    GetInput();
+    printf("Memutar lagu “%s” oleh “%s”.", D.Elements[i].Info_Lagu.Elements[stringToInt(currentWord.TabWord)-1],
+            D.Elements[i].Nama_Penyanyi);
     
+    /*Update ke currentsong*/
+    CreateInfo(CURR,  D.Elements[i].Nama_Penyanyi,  D.Elements[i].Nama_Album, D.Elements[i].Info_Lagu.Elements[stringToInt(currentWord.TabWord)-1]);
+
+    /*pengosongan queue dan stack riwayat lagu*/
+    ClearQueue(QS); 
+    while (!IsEmptyStack(*hist))
+    {
+        Info temp;
+        Pop(hist, &temp);
+    }
 }
 
-// void QUEUESONG() {
-//     // KAMUS LOKAL
-//     Queue queue;
-//     List Artist, Album, Songs;
-//     int songID;
-
-//     // ALGORITMA
-//     CreateQueue(&queue);
-//     if (isFull(queue)) {
-//         printf("Queue penuh\n");
-//     } else {
-//         printf("Masukkan Nama Penyanyi: %c;\n", Artist);
-//         DisplayPlaylist(Album);
-//         printf("Masukkan Nama Album yang dipilih : %c;\n", Album);
-//         DisplayPlaylist(Songs);
-//         printf("Masukkan ID Lagu yang dipilih: %d;\n", songID);
-//         enqueue(&queue, songID);
-//         printf("Berhasil menambahkan lagu %c oleh %c ke queue\n", Songs, Artist);
-//     }
-// }
-
-// void QUEUEPLAYLIST() {
-//     // KAMUS LOKAL
-//     Queue queue;
-//     int playlistID;
-//     int m;
-//     int song[m][3]; /* Matriks playlist */
-
-//     // ALGORITMA
-//     CreateQueue(&queue);
-//     printf("Masukkan ID Playlist: %d;\n",playlistID);
-//     for (int i = 0; i < 3; i++) {
-//         Queue q;
-//         if (isFull(queue)) {
-//             printf("Queue penuh\n");
-//             break;
-//         } enqueue(&q, song[playlistID][i]);
-//         printf("Berhasil menambahkan playlist %c ke queue.\n");
-//     } 
-// }
-// void QUEUESWAP();
-// void QUEUEREMOVE() {
-//     // KAMUS LOKAL
-//     Queue queue;
-//     Word Artist;
-//     Word Songs;
-//     boolean found = true;
-//     int id = 0; /*ID lagu yang dimasukkan*/
-//     int i;
-    
-//     // ALGORITMA
-//     CreateQueue(&queue);
-//     while (!isEmpty(queue)) {
-//         for (i = 0; i < length(queue); i++) {
-//             while (id != HEAD(queue) & !found) {
-//                 found = false;
-//             }
-//             printf("Lagu dengan urutan ke %d tidak ada.\n", id);
-//         }
-//         if (found) {
-//             printf("Lagu %c oleh %c telah dihapus dari queue!\n", Songs, Artist);
-//         } else {
-//             printf("Lagu dengan urutan ke %d tidak ada.\n", id);
-//         }
-//     }
-// }
-// void QUEUECLEAR() {
-//     // KAMUS LOKAL
-//     Queue queue;
-
-//     // ALGORITMA
-//     while (!isEmpty(queue)) {
-//         CreateQueue(&queue);
-//     }
-//     printf("Queue berhasil dikosongkan.\n");
-// }
+void HELP(boolean inSesh)
+{
+    printf("=====[ Menu Help WayangWave ]=====\n");
+    if (!inSesh)
+    {
+        printf("1. LIST -> Untuk menampilkandaftar lagu, playlist, daftar penyanyi, album, dan daftar lagu yang ada di album.\n");
+        printf("2. PLAY -> Untuk memutar lagu atau playlist yang dipilih.\n");
+        printf("3. QUEUE -> Untuk memanipulasi queue lagu.\n");
+        printf("4. SONG -> Untuk navigasi lagu yang ada pada queue lagu saat ini.\n");
+        printf("5. PLAYLIST -> Untuk melakukan basic command untuk playlist yaitu CREATE, ADD, SWAP, REMOVE, dan DELETE.\n");
+        printf("6. STATUS -> Untuk menampilkan lagu yang sedang dimainkan beserta Queue song yang ada dan dari playlist mana lagu itu diputar.\n");
+        printf("7. SAVE -> Untuk menyimpan state aplikasi terbaru ke dalam suatu file.\n");
+        printf("8. QUIT -> Untuk keluar dari sesi aplikasi WayangWave.\n");
+        printf("9. HELP -> Untuk menampilkan daftar command yang ingin dieksekusi beserta deskripsinya.\n");
+    }
+    else
+    {
+        printf("1. START -> Untuk masuk sesi baru\n");
+        printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi\n");
+    }
+}
