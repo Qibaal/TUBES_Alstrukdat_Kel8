@@ -63,9 +63,9 @@ int main() {
     // }
     STARTCONSOLE(&Data, &Penyanyi, s);
     // PrintMap(Data);
-    PRINTWORD(Data.Elements[3].Nama_Penyanyi);
-    PRINTWORD(Data.Elements[3].Nama_Album);
-    PrintSet(Data.Elements[3].Info_Lagu);
+    // PRINTWORD(Data.Elements[3].Nama_Penyanyi);
+    // PRINTWORD(Data.Elements[3].Nama_Album);
+    // PrintSet(Data.Elements[3].Info_Lagu);
 
     // LOAD lagu yg sedang dimainin
     // ParsePlaylist(&p, &a, &l);

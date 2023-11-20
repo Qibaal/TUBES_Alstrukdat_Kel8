@@ -49,9 +49,46 @@ void STARTCONSOLE(Map* D, Set* A, char* file)
             D->Count_Album++;
         }
     }
+    printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
 }
 
-void LOAD();
+void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
+{
+    Info tmp; List tmpL;
+    // LOAD lagu yg sedang dimainin
+    ParsePlaylist(&(*curr).Penyanyi, &(*curr).Album, &(*curr).Lagu);
+    //LOAD ke queue
+    ADVNEXT(true);
+    int jumlah_queue = val;
+    for (int i=0; i<jumlah_queue; i++)
+    {
+        ParsePlaylist(&tmp.Penyanyi, &tmp.Album, &tmp.Lagu);
+        enqueue(QS, tmp);
+    }
+    // LOAD ke history (stack)
+    ADVNEXT(true);
+    int jumlah_stack = val;
+    for (int i=0; i<jumlah_stack; i++)
+    {
+        ParsePlaylist(&tmp.Penyanyi, &tmp.Album, &tmp.Lagu);
+        Push(hist, tmp);
+    }
+    // LOAD KE PLAYLIST
+    ADVNEXT(true);
+    int jumlah_playlist = val;
+    for (int i=0; i<jumlah_playlist; i++)
+    {
+        ADVNEXT(true);
+        jumlah_lagu = val;
+        InsertWord(&tmpL.Nama, currentWord);
+        for (int j=0; j<jumlah_lagu; j++)
+        {
+            ParsePlaylist(&tmp.Penyanyi, &tmp.Album, &tmp.Lagu);
+            InsVLast(&tmpL, tmp);
+        }
+        InsertAD(LOP, tmpL);
+    }
+}
 
 // void PLAYSONG() {
 //     // KAMUS LOKAL
