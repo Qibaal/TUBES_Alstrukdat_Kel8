@@ -27,12 +27,11 @@ extern Info CurrSong;
 extern int jumlah_penyanyi, jumlah_album, jumlah_lagu; 
 
 
-
 void STARTCONSOLE(Map* D, Set* A, char* file);
 void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS);
 void LISTDEFAULT(Map D, Set P);
 void LISTPLAYLIST(ArrayDin PL);
-void PLAYSONG(Info *CURR, Set A, Map D, Queue *QS);
+void PLAYSONG(Info *CURR, Set A, Map D, Queue *QS, Stack *hist);
 void PLAYPLAYLIST();
 void QUEUESONG();
 void QUEUEPLAYLIST();

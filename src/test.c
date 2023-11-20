@@ -126,7 +126,7 @@ int main() {
     // }
 
     // test list default
-    // LISTDEFAULT(Data, Penyanyi);
+    LISTDEFAULT(Data, Penyanyi);
 
     // test listplaylist
     LISTPLAYLIST(PLAYLISTS);

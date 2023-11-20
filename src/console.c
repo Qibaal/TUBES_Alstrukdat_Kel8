@@ -107,7 +107,7 @@ void LISTDEFAULT(Map D, Set P)
     printf("Daftar Penyanyi :\n");
     for (int i=0; i<P.Count_Lagu; i++)
     {
-        printf("%d. ", i+1);
+        printf("    %d. ", i+1);
         PRINTWORD(P.Elements[i]);
     }
     printf("Ingin melihat album yang ada?(Y/N): ");
@@ -199,32 +199,12 @@ void LISTPLAYLIST(ArrayDin PL)
     }    
 }
 
-// void PLAYSONG() 
-// {
-//     // KAMUS LOKAL
-//     Queue queue;
-//     List Artist, Album, Songs;
-//     int currentSong, loop; // inisiasi fitur loop
-//     int songID;
-//     // ALGORITMA
-//     CreateQueue(&queue);
-//     if (isEmpty(queue)) {
-//         printf("Tidak ada lagu yang diputar\n");
-//     } else {
-//         currentSong = dequeue(&queue);
-//         if (loop) {
-//             printf("Masukkan Nama Penyanyi yang dipilih : %c;\n", Artist);
-//             DisplayPlaylist(Album);
-//             printf("Masukkan Nama Album yang dipilih : %c;\n", Album);
-//             DisplayPlaylist(Songs);
-//             printf("Masukkan ID Lagu yang dipilih: %d;\n", songID);
-//             enqueue(&queue, currentSong);
-//             printf("Memutar lagu %c oleh %c.\n", currentSong, Artist);
-//         } else {
-//             printf("Memutar lagu %c oleh %c.\n", currentSong, Artist);
-//         }
-//     }
-// }
+void PLAYSONG(Info *CURR, Set A, Map D, Queue *QS, Stack *hist)
+{
+    // masukin currentsong ke dalam history
+    Push(hist, *CURR);
+    
+}
 
 // void QUEUESONG() {
 //     // KAMUS LOKAL
