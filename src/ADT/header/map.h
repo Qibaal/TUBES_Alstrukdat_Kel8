@@ -37,7 +37,7 @@ boolean IsEmptyMap(Map M);
 
 void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album);
 
-boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album);
+boolean IsMemberMap(Map M, valuetype nama_album);
 
 void PrintMap(Map M);
 

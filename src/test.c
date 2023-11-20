@@ -70,17 +70,17 @@ int main() {
 
     //test load
     LOAD(&PLAYLISTS, &CURRSONG, &HISTORY, &SONGQUEUE);
-    printf("lagu yg sedang dimainkan: \n");
-    DisplayInfo(CURRSONG);
-    printf("-------------------------\n");
-    printf("lagu-lagu yg telah dimainkan - paling atas lagu terakhir: \n");
-    DisplayStack(HISTORY);
-    printf("-------------------------\n");
-    printf("lagu-lagu dalam queue: \n");
-    displayQueue(SONGQUEUE);
-    printf("-------------------------\n");
-    printf("playlist yang dimiliki: \n");
-    DisplayAD(PLAYLISTS);
+    // printf("lagu yg sedang dimainkan: \n");
+    // DisplayInfo(CURRSONG);
+    // printf("-------------------------\n");
+    // printf("lagu-lagu yg telah dimainkan - paling atas lagu terakhir: \n");
+    // DisplayStack(HISTORY);
+    // printf("-------------------------\n");
+    // printf("lagu-lagu dalam queue: \n");
+    // displayQueue(SONGQUEUE);
+    // printf("-------------------------\n");
+    // printf("playlist yang dimiliki: \n");
+    // DisplayAD(PLAYLISTS);
 
 
     // LOAD lagu yg sedang dimainin
@@ -126,5 +126,12 @@ int main() {
     //     }
     //     DisplayPlaylist(PlayList);
     // }
+
+    // test list default
+    // LISTDEFAULT(Data, Penyanyi);
+
+    // test listplaylist
+    LISTPLAYLIST(PLAYLISTS);
+
     return 0;
 }

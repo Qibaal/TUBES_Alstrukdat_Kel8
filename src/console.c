@@ -96,16 +96,100 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
 
 void LISTDEFAULT(Map D, Set P)
 {
+    Word Y; Y.Length = 1; Y.TabWord[0] = 'Y';
+
     printf("Daftar Penyanyi :\n");
     for (int i=0; i<P.Count_Lagu; i++)
     {
+        printf("%d. ", i+1);
         PRINTWORD(P.Elements[i]);
     }
     printf("Ingin melihat album yang ada?(Y/N): ");
-    // pilih nama penyanyi
+    /*pilih ingin melihat atau tidak*/
     STARTINPUT();
     CopyWord();
-    // if ()
+    if (isSame(currentWord, Y))
+    {
+        printf("Pilih penyanyi untuk melihat album mereka: ");
+        /*pilih nama penyanyi*/
+        STARTINPUT();
+        CopyWord();
+        /*Pemrosesan jika ada penyanyi yang sesuai di Set*/
+        if (IsMemberSet(P, currentWord))
+        {
+            /*Print nama album dengan penyanyi yang dipilih*/
+            for (int i=0; i<D.Count_Album; i++)
+            {
+                if (isSame(D.Elements[i].Nama_Penyanyi, currentWord))
+                {
+                    printf("%d. ", i+1);
+                    PRINTWORD(D.Elements[i].Nama_Album);
+                }
+            }
+            /*pilih nama Album*/
+            printf("Ingin melihat lagu yang ada?(Y/N): ");
+            STARTINPUT();
+            CopyWord();
+            if (isSame(currentWord, Y))
+            {
+                printf("Pilih album untuk melihat lagu yang ada di album : ");
+                /*pilih nama Album*/
+                STARTINPUT();
+                CopyWord();
+                boolean found = false; int idx = 0;
+                while (idx < D.Count_Album && !found)
+                {
+                    if (isSame(D.Elements[idx].Nama_Album, currentWord))
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        idx++;
+                    }
+                }
+                if (found)
+                {
+                    for (int i=0; i<D.Elements[idx].Info_Lagu.Count_Lagu; i++)
+                    {
+                        printf("%d. ", i+1);
+                        PRINTWORD(D.Elements[idx].Info_Lagu.Elements[i]);
+                    }
+                }
+                else
+                {
+                    printf("Album tidak ditemukan.\n");
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+        /*Pemrosesan ketika tidak ada atau input salah*/
+        else
+        {
+            printf("Tidak ada penyanyi tersebut.\n");
+            return;
+        }
+    }
+    /*Tidak mau melihat album*/
+    /*Prosedur langsung dihentikan*/
+    else
+    {
+        return;
+    }
+}
+
+void LISTPLAYLIST(ArrayDin PL)
+{
+    printf("Daftar playlist yang kamu miliki:\n");
+    for (int i=0; i<PL.Neff; i++)
+    {
+        printf("    %d. ", i+1);
+        PRINTWORD(PL.A[i].Nama);
+    }
 }
 
 // void PLAYSONG() {

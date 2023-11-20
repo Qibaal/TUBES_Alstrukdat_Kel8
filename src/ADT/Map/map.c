@@ -29,15 +29,14 @@ void InsertAlbum(Map *M, keytype nama_penyanyi, valuetype nama_album)
     InsertWord(&(*M).Elements[M->Count_Album].Nama_Album, nama_album);
 }
 
-boolean IsMemberMap(Map M, keytype nama_penyanyi, valuetype nama_album)
+boolean IsMemberMap(Map M, valuetype nama_album)
 /* Mengembalikan true jika penyanyi dan album adalah member dari M */
 {
     boolean found = false;
     int i = 0;
     while (i < M.Count_Album && !found)
     {
-        if (isSame(M.Elements[i].Nama_Penyanyi, nama_penyanyi) && 
-            isSame(M.Elements[i].Nama_Album, nama_album))
+        if (isSame(M.Elements[i].Nama_Album, nama_album))
         {
             found = true;
         }
