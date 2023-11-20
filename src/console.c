@@ -97,6 +97,12 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
 void LISTDEFAULT(Map D, Set P)
 {
     Word Y; Y.Length = 1; Y.TabWord[0] = 'Y';
+    /*Handling kalau gagal start-load*/
+    if (IsEmptyMap(D))
+    {
+        printf("Gagal load untuk file konfigurasi.\n");
+        return;
+    }
 
     printf("Daftar Penyanyi :\n");
     for (int i=0; i<P.Count_Lagu; i++)
@@ -108,7 +114,7 @@ void LISTDEFAULT(Map D, Set P)
     /*pilih ingin melihat atau tidak*/
     STARTINPUT();
     CopyWord();
-    if (isSame(currentWord, Y))
+    if (WordCompare(Y, currentWord))
     {
         printf("Pilih penyanyi untuk melihat album mereka: ");
         /*pilih nama penyanyi*/
@@ -120,7 +126,7 @@ void LISTDEFAULT(Map D, Set P)
             /*Print nama album dengan penyanyi yang dipilih*/
             for (int i=0; i<D.Count_Album; i++)
             {
-                if (isSame(D.Elements[i].Nama_Penyanyi, currentWord))
+                if (WordCompare(D.Elements[i].Nama_Penyanyi, currentWord))
                 {
                     printf("%d. ", i+1);
                     PRINTWORD(D.Elements[i].Nama_Album);
@@ -130,7 +136,7 @@ void LISTDEFAULT(Map D, Set P)
             printf("Ingin melihat lagu yang ada?(Y/N): ");
             STARTINPUT();
             CopyWord();
-            if (isSame(currentWord, Y))
+            if (WordCompare(Y, currentWord))
             {
                 printf("Pilih album untuk melihat lagu yang ada di album : ");
                 /*pilih nama Album*/
@@ -139,7 +145,7 @@ void LISTDEFAULT(Map D, Set P)
                 boolean found = false; int idx = 0;
                 while (idx < D.Count_Album && !found)
                 {
-                    if (isSame(D.Elements[idx].Nama_Album, currentWord))
+                    if (WordCompare(D.Elements[idx].Nama_Album, currentWord))
                     {
                         found = true;
                     }
@@ -185,14 +191,20 @@ void LISTDEFAULT(Map D, Set P)
 void LISTPLAYLIST(ArrayDin PL)
 {
     printf("Daftar playlist yang kamu miliki:\n");
+    if (IsEmptyAD(PL))
+    {
+        printf("Kamu tidak memiliki playlist.\n");
+        return;
+    }
     for (int i=0; i<PL.Neff; i++)
     {
         printf("    %d. ", i+1);
         PRINTWORD(PL.A[i].Nama);
-    }
+    }    
 }
 
-// void PLAYSONG() {
+// void PLAYSONG() 
+// {
 //     // KAMUS LOKAL
 //     Queue queue;
 //     List Artist, Album, Songs;

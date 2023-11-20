@@ -78,7 +78,7 @@ boolean IsMemberSet(Set S, Word Elmt)
     int idx = 0;
     while (idx < S.Count_Lagu)
     {
-        if (isSame(S.Elements[idx], Elmt))
+        if (WordCompare(S.Elements[idx], Elmt))
         {
             return true;
         }

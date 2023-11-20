@@ -32,7 +32,7 @@ void STARTCONSOLE(Map* D, Set* A, char* file);
 void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS);
 void LISTDEFAULT(Map D, Set P);
 void LISTPLAYLIST(ArrayDin PL);
-void PLAYSONG();
+void PLAYSONG(Info *CURR, Set A, Map D, Queue *QS);
 void PLAYPLAYLIST();
 void QUEUESONG();
 void QUEUEPLAYLIST();

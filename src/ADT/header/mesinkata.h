@@ -65,7 +65,7 @@ void PRINTWORD(Word w);
 
 void ConcatString(char* res, char* a, char* b);
 
-boolean WordCompare(Word currentWord, Word inputWord);
+boolean WordCompare(Word w, Word input);
 /* Menerima dua input berupa tipe Word dan mengembalikan sebuah boolean yang menyatakan apakah kedua Word tersebut sama atau tidak */
 
 #endif

@@ -179,23 +179,41 @@ void ConcatString(char* res, char* a, char* b)
     res[i] = '\0';
 }
 
-boolean WordCompare(Word currentWord, Word newWord)
+boolean WordCompare(Word w, Word input)
 /* Menerima dua input berupa tipe Word dan mengembalikan sebuah boolean yang menyatakan apakah kedua Word tersebut sama atau tidak */
 {
     // KAMUS LOKAL
-    boolean found = false;
     int i = 0;
-
     // ALGORITMA
-    if (currentWord.Length != newWord.Length) {
-        return found;
-    } else {
-        while (!found && i < currentWord.Length) {
-            if (currentWord.TabWord[i] != newWord.TabWord[i]) {
-                return found;
-            }
+    while (i<w.Length)
+    {
+        if (w.TabWord[i] == input.TabWord[i] || w.TabWord[i] == input.TabWord[i] + 32 || w.TabWord[i] == input.TabWord[i] - 32)
+        {
             i++;
         }
-        return !found;
+        else return false;
     }
+    return true;
 }
+
+// int main()
+// {
+//     Word w1, w2;
+//     w1.Length = 5; w2.Length = 5;
+//     w1.TabWord[0] = 'z';
+//     w1.TabWord[1] = 'q';
+//     w1.TabWord[2] = 'b';
+//     w1.TabWord[3] = 'a';
+//     w1.TabWord[4] = 'l';
+
+//     w2.TabWord[0] = 'Z';
+//     w2.TabWord[1] = 'Q';
+//     w2.TabWord[2] = 'B';
+//     w2.TabWord[3] = 'A';
+//     w2.TabWord[4] = 'L';
+
+//     if (WordCompare(w1,w2)) printf("sama\n");
+//     else printf("ngga\n");
+
+//     return 0;
+// }

@@ -1,0 +1,1 @@
+gcc .\test.c .\console.c .\ADT\ListDin\arrayDin.c .\ADT\MesinKarakter\mesinkar.c .\ADT\MesinKata\mesinkata.c .\ADT\ListLinier\listsirkuler.c .\ADT\Map\map.c .\ADT\Set\set.c .\ADT\Queue\queue.c .\ADT\Stack\stack.c .\ADT\Info\info.c -o a

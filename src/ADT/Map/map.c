@@ -36,7 +36,7 @@ boolean IsMemberMap(Map M, valuetype nama_album)
     int i = 0;
     while (i < M.Count_Album && !found)
     {
-        if (isSame(M.Elements[i].Nama_Album, nama_album))
+        if (WordCompare(M.Elements[i].Nama_Album, nama_album))
         {
             found = true;
         }
