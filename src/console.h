@@ -6,6 +6,7 @@
 #include <time.h>
 #include <math.h>
 
+#include "boolean.h"
 #include "ADT\header\arrayDin.h"
 #include "ADT\header\mesinkar.h"
 #include "ADT\header\mesinkata.h"

@@ -1,9 +1,5 @@
-// #include <stdio.h>
-// #include "boolean.h"
-// #include "ADT\header\mesinkar.h"
-// #include "ADT\header\mesinkata.h"
-// #include "ADT\header\map.h"
-// #include "ADT\header\listsirkuler.h"
+#include <stdio.h>
+#include "console.h"
 
 #include "console.h"
 
@@ -14,9 +10,14 @@ int main() {
     // LOAD ke ADT
     Map Data;
     Set Penyanyi;
+    ArrayDin PLAYLISTS = MakeAD();
+    Stack HISTORY;
+    Queue SONGQUEUE;
     int jumlah_penyanyi, jumlah_album, jumlah_lagu;
     List PlayList;
     Word p, a, l;
+    Info CURRSONG;
+
     Info temp;
 
     // create empty untuk setiap ADT
@@ -61,11 +62,26 @@ int main() {
     //         Data.Count_Album++;
     //     }
     // }
+    // test start
     STARTCONSOLE(&Data, &Penyanyi, s);
-    // PrintMap(Data);
-    // PRINTWORD(Data.Elements[3].Nama_Penyanyi);
-    // PRINTWORD(Data.Elements[3].Nama_Album);
-    // PrintSet(Data.Elements[3].Info_Lagu);
+    // PRINTWORD(Data.Elements[4].Nama_Penyanyi);
+    // PRINTWORD(Data.Elements[4].Nama_Album);
+    // PrintSet(Data.Elements[4].Info_Lagu);
+
+    //test load
+    LOAD(&PLAYLISTS, &CURRSONG, &HISTORY, &SONGQUEUE);
+    printf("lagu yg sedang dimainkan: \n");
+    DisplayInfo(CURRSONG);
+    printf("-------------------------\n");
+    printf("lagu-lagu yg telah dimainkan - paling atas lagu terakhir: \n");
+    DisplayStack(HISTORY);
+    printf("-------------------------\n");
+    printf("lagu-lagu dalam queue: \n");
+    displayQueue(SONGQUEUE);
+    printf("-------------------------\n");
+    printf("playlist yang dimiliki: \n");
+    DisplayAD(PLAYLISTS);
+
 
     // LOAD lagu yg sedang dimainin
     // ParsePlaylist(&p, &a, &l);

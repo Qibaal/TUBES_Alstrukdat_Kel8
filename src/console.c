@@ -55,6 +55,9 @@ void STARTCONSOLE(Map* D, Set* A, char* file)
 void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
 {
     Info tmp; List tmpL;
+    // Inisialisasi tiap ADT
+    CreateEmptyStack(hist);
+    CreateQueue(QS);
     // LOAD lagu yg sedang dimainin
     ParsePlaylist(&(*curr).Penyanyi, &(*curr).Album, &(*curr).Lagu);
     //LOAD ke queue
@@ -80,6 +83,7 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
     {
         ADVNEXT(true);
         jumlah_lagu = val;
+        CreateEmptyList(&tmpL);
         InsertWord(&tmpL.Nama, currentWord);
         for (int j=0; j<jumlah_lagu; j++)
         {
@@ -88,6 +92,20 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
         }
         InsertAD(LOP, tmpL);
     }
+}
+
+void LISTDEFAULT(Map D, Set P)
+{
+    printf("Daftar Penyanyi :\n");
+    for (int i=0; i<P.Count_Lagu; i++)
+    {
+        PRINTWORD(P.Elements[i]);
+    }
+    printf("Ingin melihat album yang ada?(Y/N): ");
+    // pilih nama penyanyi
+    STARTINPUT();
+    CopyWord();
+    // if ()
 }
 
 // void PLAYSONG() {
