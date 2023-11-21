@@ -144,5 +144,6 @@ int main() {
     GetInput();
     if (CHECKCOMMAND(currentWord, true)) printf("sesuai\n");
     else printf("ga sesuai\n");
+    
     return 0;
 }

@@ -289,7 +289,7 @@ boolean CHECKCOMMAND(Word W, boolean inSesh)
     int i=0; boolean found = false;
     while (i < 23 && !found)
     {
-        if (WordCompare(W, strToWord(l[i])))
+        if (WordCompare(strToWord(l[i]), W))
             found = true;
         else 
             i++;
