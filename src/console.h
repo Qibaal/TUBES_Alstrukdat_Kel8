@@ -42,7 +42,7 @@ void SONGNEXT(Info *CURR, Queue *QS, Stack *hist);
 void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist);
 void CREATEPLAYLIST(ArrayDin *LP);
 void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D);
-void PLAYLISTADDALBUM();
+void ADDALBUMPLAYLIST(ArrayDin *LP, Set *A, Map *D);
 void PLAYLISTSWAP();
 void PLAYLISTREMOVE();
 void PLAYLISTDELETE();

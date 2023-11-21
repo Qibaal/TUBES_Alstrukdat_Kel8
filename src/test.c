@@ -106,15 +106,18 @@ int main() {
     // test song previous
     DisplayStack(HISTORY);
     printf("-------- history --------\n");
-    // SONGPREVIOUS(&CURRSONG, &SONGQUEUE, &HISTORY);
-    // DisplayStack(HISTORY);
-    // printf("-------- history --------\n");
+    SONGPREVIOUS(&CURRSONG, &SONGQUEUE, &HISTORY);
+    DisplayStack(HISTORY);
+    printf("-------- history --------\n");
 
     // test create playlist
     CREATEPLAYLIST(&PLAYLISTS);
 
     // test add song playlist
     ADDSONGPLAYLIST(&PLAYLISTS, &Penyanyi, &Data);
+
+    // test add album playlist
+    ADDALBUMPLAYLIST(&PLAYLISTS, &Penyanyi, &Data);
 
     // for (int i=0; i<Data.Count_Album; i++)
     // {

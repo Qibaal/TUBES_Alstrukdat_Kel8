@@ -556,7 +556,6 @@ void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D)
     GetInput();
     CompressInput();  
     int i_pl = WordToInt(currentWord);
-    printf("%d\n", i_pl);
 
     CreateInfo(&temp, D->Elements[i-1].Nama_Penyanyi, D->Elements[i-1].Nama_Album, D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
     InsVLast(&(*LP).A[i_pl-1], temp);
@@ -570,7 +569,60 @@ void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D)
     PRINTWORD(D->Elements[i-1].Nama_Penyanyi);
     printf("berhasil ditambahkan ke dalam playlist ");
     PRINTWORD(LP->A[i_pl-1].Nama);
+}
 
+void ADDALBUMPLAYLIST(ArrayDin *LP, Set *A, Map *D)
+{
+    Info temp;
+
+    printf("Daftar Penyanyi :\n");
+    for (int i=0; i<A->Count_Lagu; i++)
+    {
+        printf("    %d. ", i+1);
+        PRINTWORD(A->Elements[i]);
+    }
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    GetInput();
+    CompressInput();
+    printf("Daftar Album oleh ");
+    PRINTWORD(currentWord);
+
+    int c = 1;
+    for (int i=0; i<D->Count_Album; i++)
+    {
+        if (WordCompare(D->Elements[i].Nama_Penyanyi, currentWord))
+        {
+            printf("    %d. ", c);
+            PRINTWORD(D->Elements[i].Nama_Album);
+            c++;
+        }
+    }
+
+    printf("Masukkan Nama Album yang dipilih : ");
+    GetInput();
+    CompressInput();
+
+    int i = 0;
+    boolean found_album = false;
+    while (i < D->Count_Album && !found_album)
+    {
+        if (WordCompare(D->Elements[i].Nama_Album, currentWord))
+            found_album = true;
+        i++;
+    }
+    printf("Daftar Playlist Pengguna : \n");
+    
+    LISTPLAYLIST(*LP);
+    printf("Masukkan ID Playlist yang dipilih :");
+    GetInput();
+    CompressInput();  
+    int i_pl = WordToInt(currentWord);
+
+    for (int k=0; k<D->Elements[i-1].Info_Lagu.Count_Lagu; k++)
+    {
+        CreateInfo(&temp, D->Elements[i-1].Nama_Penyanyi, D->Elements[i-1].Nama_Album, D->Elements[i-1].Info_Lagu.Elements[k]);
+        InsVLast(&(*LP).A[i_pl-1], temp);
+    }
     DisplayPlaylist(LP->A[i_pl-1]);
 }
 
