@@ -429,6 +429,23 @@ void QUEUECLEAR(Queue *QS)
         printf("Queue TIDAK berhasil dikosongkan.\n");
 }
 
+void SONGNEXT(Info *CURR, Queue *QS, Stack *hist)
+{
+    if (isEmptyQ(*QS))
+    {
+        printf("Queue kosong, memutar kembali lagu\n");
+    }
+    else
+    {
+        printf("Memutar lagu selanjutnya\n");
+        Push(hist, *CURR);
+        dequeue(QS, CURR);
+    }
+    PRINTWORD(CURR->Lagu);
+    printf(" oleh ");
+    PRINTWORD(CURR->Penyanyi);
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");
