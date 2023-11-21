@@ -371,6 +371,31 @@ void QUEUESONG(Set *A, Map *D, Queue *QS)
     enqueue(QS, temp);
 }
 
+void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
+{
+    Info temp;
+
+    /*Display Playlist yang dimiliki*/
+    LISTPLAYLIST(*LP);
+    printf("Masukkan ID Playlist: ");
+    /*Ambil ID playlist*/
+    GetInput();
+    CompressInput();
+    int i_pl = WordToInt(currentWord);
+
+    printf("Berhasil menambahkan playlist “");
+    PRINTWORD(LP->A[i_pl-1].Nama);
+    printf("” ke queue.\n");
+
+    address P = LP->A[i_pl-1].First;
+    while (P != Nil)
+    {
+        CreateInfo(&temp, InfoPlaylist(P).Penyanyi, InfoPlaylist(P).Album, InfoPlaylist(P).Lagu);
+        enqueue(QS, temp);
+        P = Next(P);
+    }
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");

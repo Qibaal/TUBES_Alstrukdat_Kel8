@@ -34,7 +34,7 @@ void LISTPLAYLIST(ArrayDin PL);
 void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist);
 void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP);
 void QUEUESONG(Set *A, Map *D, Queue *QS);
-void QUEUEPLAYLIST();
+void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP);
 void QUEUESWAP();
 void QUEUEREMOVE();
 void QUEUECLEAR();

@@ -60,6 +60,13 @@ int main() {
     displayQueue(SONGQUEUE);
     printf("-------- Queue --------\n");
 
+    // test queue playlist
+    QUEUEPLAYLIST(&Penyanyi, &Data, &SONGQUEUE, &PLAYLISTS);
+
+    displayQueue(SONGQUEUE);
+    printf("-------- Queue --------\n");
+
+
     // for (int i=0; i<Data.Count_Album; i++)
     // {
     //     printf("%d\n", Data.Elements[i].Nama_Album.Length);
