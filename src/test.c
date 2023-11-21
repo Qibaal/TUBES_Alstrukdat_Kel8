@@ -30,11 +30,30 @@ int main() {
     LOAD(&PLAYLISTS, &CURRSONG, &HISTORY, &SONGQUEUE);
 
     // test list default
-    LISTDEFAULT(&Data, &Penyanyi);
+    // LISTDEFAULT(&Data, &Penyanyi);
 
     // test listplaylist
     // LISTPLAYLIST(PLAYLISTS);
-    // PLAYSONG(&CURRSONG, Penyanyi, Data, &SONGQUEUE, &HISTORY);
+
+    //test playsong
+    PLAYSONG(&CURRSONG, &Penyanyi, &Data, &SONGQUEUE, &HISTORY);
+    DisplayInfo(CURRSONG);
+
+    // for (int i=0; i<Data.Count_Album; i++)
+    // {
+    //     printf("%d\n", Data.Elements[i].Nama_Album.Length);
+    //     for (int j=0; j<Data.Elements[i].Nama_Album.Length; j++)
+    //     {
+    //         printf("%c-", Data.Elements[i].Nama_Album.TabWord[j]);
+    //     }
+    //     printf("\n");
+    // }
+    // GetInput();
+    // if (WordCompare(Data.Elements[0].Nama_Album, currentWord))
+    //     printf("sama blok;");
+    // else 
+    //     printf("beda");
+    // printf("%d\n", currentWord.Length);
 
     // test help
     // Word h; h.Length = 4;

@@ -125,6 +125,15 @@ int stringToInt(char* str) {
     return res;
 }
 
+int WordToInt(Word w)
+{
+    int res = 0;
+    for (int i = 0; i < w.Length; ++i){
+        res = res * 10 + (w.TabWord[i] - '0');
+    }
+    return res;
+}
+
 Word strToWord(char* str)
 {
     Word t; t.Length = 0;

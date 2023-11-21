@@ -10,6 +10,7 @@
 #define NMax 100
 #define BLANK ' '
 #define Newline '\n'
+#define NLF '\r'
 #define EOI ';'
 
 typedef struct
@@ -63,6 +64,8 @@ void GetInput();
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu);
 
 int stringToInt(char *str);
+
+int WordToInt(Word w);
 
 Word strToWord(char* str);
 

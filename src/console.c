@@ -204,51 +204,63 @@ void LISTPLAYLIST(ArrayDin PL)
     }    
 }
 
-void PLAYSONG(Info *CURR, Set A, Map D, Queue *QS, Stack *hist)
+void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
 {
     // masukin currentsong ke dalam history
     Push(hist, *CURR);
     /*pemilihan Lagu*/
     printf("Daftar Penyanyi :\n");
-    for (int i=0; i<A.Count_Lagu; i++)
+    for (int i=0; i<A->Count_Lagu; i++)
     {
         printf("    %d. ", i+1);
-        PRINTWORD(A.Elements[i]);
+        PRINTWORD(A->Elements[i]);
     }
     printf("Masukkan Nama Penyanyi yang dipilih : ");
     GetInput();
-    printf("Daftar Album oleh %s:\n", currentWord.TabWord);
-    for (int i=0; i<D.Count_Album; i++)
+    printf("Daftar Album oleh ");
+    PRINTWORD(currentWord);
+    int c = 1;
+    for (int i=0; i<D->Count_Album; i++)
     {
-        if (WordCompare(D.Elements[i].Nama_Penyanyi, currentWord))
+        if (WordCompare(D->Elements[i].Nama_Penyanyi, currentWord))
         {
-            printf("    %d. ", i+1);
-            PRINTWORD(D.Elements[i].Nama_Album);
+            printf("    %d. ", c);
+            PRINTWORD(D->Elements[i].Nama_Album);
+            c++;
         }
     }
     /*Ambil nama album*/
     printf("Masukkan Nama Album yang dipilih : ");
     GetInput();
+    CompressInput();
+
     int i = 0;
-    for (i=0; i<D.Count_Album; i++)
+    boolean found_album = false;
+    while (i < D->Count_Album && !found_album)
     {
-        if (WordCompare(D.Elements[i].Nama_Album, currentWord))
-            break;
+        if (WordCompare(D->Elements[i].Nama_Album, currentWord))
+            found_album = true;
+        i++;
     }
-    printf("Daftar Lagu Album %s oleh %s :\n", D.Elements[i].Nama_Album, D.Elements[i].Nama_Penyanyi);
-    for (int j=0; j<D.Elements[i].Info_Lagu.Count_Lagu; j++)
+    printf("Daftar Lagu Album %s oleh %s :\n", D->Elements[i-1].Nama_Album.TabWord, D->Elements[i-1].Nama_Penyanyi.TabWord);
+    for (int j=0; j<D->Elements[i-1].Info_Lagu.Count_Lagu; j++)
     {
         printf("    %d. ", j+1);
-        PRINTWORD(D.Elements[i].Info_Lagu.Elements[j]);
+        PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[j]);
     }
     /*Ambil lagu untuk dimasukin*/
-    printf("Masukkan ID Lagu yang dipilih :\n");
+    printf("Masukkan ID Lagu yang dipilih : ");
     GetInput();
-    printf("Memutar lagu “%s” oleh “%s”.", D.Elements[i].Info_Lagu.Elements[stringToInt(currentWord.TabWord)-1],
-            D.Elements[i].Nama_Penyanyi);
+    CompressInput();  
+    int i_lagu = WordToInt(currentWord);
+
+    printf("Memutar lagu: ");
+    PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
+    printf("oleh: ");
+    PRINTWORD(D->Elements[i-1].Nama_Penyanyi);
     
     /*Update ke currentsong*/
-    CreateInfo(CURR,  D.Elements[i].Nama_Penyanyi,  D.Elements[i].Nama_Album, D.Elements[i].Info_Lagu.Elements[stringToInt(currentWord.TabWord)-1]);
+    CreateInfo(CURR, D->Elements[i-1].Nama_Penyanyi, D->Elements[i-1].Nama_Album, D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
 
     /*pengosongan queue dan stack riwayat lagu*/
     ClearQueue(QS); 
