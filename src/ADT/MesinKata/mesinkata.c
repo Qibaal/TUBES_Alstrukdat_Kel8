@@ -124,6 +124,17 @@ int stringToInt(char* str) {
     return res;
 }
 
+Word strToWord(char* str)
+{
+    Word t; t.Length = 0;
+    for (int i=0; str[i] != '\0'; ++i)
+    {
+        t.TabWord[i] = str[i];
+        t.Length++;
+    }
+    return t;
+}
+
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu)
 {
     ADVNEXT(false);

@@ -9,6 +9,8 @@ Set Artists;
 Info CurrSong;
 int jumlah_penyanyi, jumlah_album, jumlah_lagu;
 
+Word WSTART, WLOAD, WLISTD, WLISTP, WPLAYS, WPLAYP, WQSONG, WQPL, WQSWAP, WQREMOVE, WQC, WSNEXT, WSPREV, WPCREATE, WPADDS, WPADDA, WPSWAP, WPREMOVE, WPDELETE, WSTATUS, WSAVE, WQUIT, WHELP;    
+
 void STARTCONSOLE(Map* D, Set* A, char* file)
 {
     CreateEmptyMap(D);
@@ -259,19 +261,55 @@ void HELP(boolean inSesh)
     printf("=====[ Menu Help WayangWave ]=====\n");
     if (!inSesh)
     {
-        printf("1. LIST -> Untuk menampilkandaftar lagu, playlist, daftar penyanyi, album, dan daftar lagu yang ada di album.\n");
-        printf("2. PLAY -> Untuk memutar lagu atau playlist yang dipilih.\n");
-        printf("3. QUEUE -> Untuk memanipulasi queue lagu.\n");
-        printf("4. SONG -> Untuk navigasi lagu yang ada pada queue lagu saat ini.\n");
-        printf("5. PLAYLIST -> Untuk melakukan basic command untuk playlist yaitu CREATE, ADD, SWAP, REMOVE, dan DELETE.\n");
-        printf("6. STATUS -> Untuk menampilkan lagu yang sedang dimainkan beserta Queue song yang ada dan dari playlist mana lagu itu diputar.\n");
-        printf("7. SAVE -> Untuk menyimpan state aplikasi terbaru ke dalam suatu file.\n");
-        printf("8. QUIT -> Untuk keluar dari sesi aplikasi WayangWave.\n");
-        printf("9. HELP -> Untuk menampilkan daftar command yang ingin dieksekusi beserta deskripsinya.\n");
+        printf("    1. LIST -> Untuk menampilkandaftar lagu, playlist, daftar penyanyi, album, dan daftar lagu yang ada di album.\n");
+        printf("    2. PLAY -> Untuk memutar lagu atau playlist yang dipilih.\n");
+        printf("    3. QUEUE -> Untuk memanipulasi queue lagu.\n");
+        printf("    4. SONG -> Untuk navigasi lagu yang ada pada queue lagu saat ini.\n");
+        printf("    5. PLAYLIST -> Untuk melakukan basic command untuk playlist yaitu CREATE, ADD, SWAP, REMOVE, dan DELETE.\n");
+        printf("    6. STATUS -> Untuk menampilkan lagu yang sedang dimainkan beserta Queue song yang ada dan dari playlist mana lagu itu diputar.\n");
+        printf("    7. SAVE -> Untuk menyimpan state aplikasi terbaru ke dalam suatu file.\n");
+        printf("    8. QUIT -> Untuk keluar dari sesi aplikasi WayangWave.\n");
+        printf("    9. HELP -> Untuk menampilkan daftar command yang ingin dieksekusi beserta deskripsinya.\n");
     }
     else
     {
         printf("1. START -> Untuk masuk sesi baru\n");
         printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi\n");
+    }
+}
+
+boolean CHECKCOMMAND(Word W, boolean inSesh)
+{
+    char l[MaxEl][MaxEl] = {"START", "LOAD", "LIST DEFAULT", "LIST PLAYLIST", 
+                            "PLAY SONG", "PLAY PLAYLIST", "QUEUE SONG", "QUEUE PLAYLIST",
+                            "QUEUE SWAP", "QUEUE REMOVE", "QUEUE CLEAR",  "SONG NEXT",
+                            "SONG PREVIOUS", "PLAYLIST CREATE", "PLAYLIST ADD SONG",
+                            "PLAYLIST ADD ALBUM", "PLAYLIST SWAP", "PLAYLIST REMOVE",
+                            "PLAYLIST DELETE", "STATUS", "SAVE", "QUIT", "HELP"};
+    int i=0; boolean found = false;
+    while (i < 23 && !found)
+    {
+        if (WordCompare(W, strToWord(l[i])))
+            found = true;
+        else 
+            i++;
+    }
+    printf("%d\n", i);
+    if (found)
+    {
+        /*Jika belum masuk session dan memilih command selain start & load*/
+        /* ATAU Memilih start / load ketika sudah masuk session*/
+        if ((!inSesh && (i>1) || (inSesh && (i<2))))
+        {
+            printf("Command tidak bisa dieksekusi!\n");
+            return false;
+        }
+        else
+            return true;
+    }
+    else
+    {
+        printf("Command tidak diketahui!\n");
+        return false;
     }
 }

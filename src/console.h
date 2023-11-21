@@ -50,7 +50,7 @@ void STATUS();
 void SAVE();
 void QUIT();
 void HELP(boolean inSesh);
-void INVALIDCOMMAND();
+boolean CHECKCOMMAND(Word W, boolean inSesh);
 void DISPLAY();
 
 #endif
