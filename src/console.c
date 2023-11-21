@@ -701,6 +701,27 @@ void PLAYLISTREMOVE(ArrayDin *LP)
     }
 }
 
+void PLAYLISTDELETE(ArrayDin *LP)
+{
+    LISTPLAYLIST(*LP);
+
+    printf("Masukkan ID Playlist yang ingin dihapus: ");
+    GetInput();
+    CompressInput();
+    int id = WordToInt(currentWord);
+
+    if (id < LP->Neff)
+    {
+        DeleteAt(LP, id-1);
+    }
+    else
+    {
+        CreateEmptyList(&(*LP).A[id-1]);
+        LP->Neff--;
+    }
+    LISTPLAYLIST(*LP);
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");

@@ -45,7 +45,7 @@ void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D);
 void ADDALBUMPLAYLIST(ArrayDin *LP, Set *A, Map *D);
 void PLAYLISTSWAP(ArrayDin *LP);
 void PLAYLISTREMOVE(ArrayDin *LP);
-void PLAYLISTDELETE();
+void PLAYLISTDELETE(ArrayDin *LP);
 void STATUS();
 void SAVE();
 void QUIT();
