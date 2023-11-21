@@ -217,8 +217,10 @@ void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
     }
     printf("Masukkan Nama Penyanyi yang dipilih : ");
     GetInput();
+    CompressInput();
     printf("Daftar Album oleh ");
     PRINTWORD(currentWord);
+
     int c = 1;
     for (int i=0; i<D->Count_Album; i++)
     {

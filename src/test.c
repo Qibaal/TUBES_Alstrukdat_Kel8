@@ -30,14 +30,18 @@ int main() {
     LOAD(&PLAYLISTS, &CURRSONG, &HISTORY, &SONGQUEUE);
 
     // test list default
-    // LISTDEFAULT(&Data, &Penyanyi);
+    LISTDEFAULT(&Data, &Penyanyi);
+    printf("----------------\n");
 
     // test listplaylist
-    // LISTPLAYLIST(PLAYLISTS);
+    LISTPLAYLIST(PLAYLISTS);
+    printf("----------------\n");
 
     //test playsong
     PLAYSONG(&CURRSONG, &Penyanyi, &Data, &SONGQUEUE, &HISTORY);
+    printf("----------------\n");
     DisplayInfo(CURRSONG);
+    printf("----------------\n");
 
     // for (int i=0; i<Data.Count_Album; i++)
     // {
