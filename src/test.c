@@ -102,7 +102,17 @@ int main() {
     SONGNEXT(&CURRSONG, &SONGQUEUE, &HISTORY);
     displayQueue(SONGQUEUE);
     printf("-------- Queue --------\n");
-    
+
+    // test song previous
+    DisplayStack(HISTORY);
+    printf("-------- history --------\n");
+    // SONGPREVIOUS(&CURRSONG, &SONGQUEUE, &HISTORY);
+    // DisplayStack(HISTORY);
+    // printf("-------- history --------\n");
+
+    // test create playlist
+    CREATEPLAYLIST(&PLAYLISTS);
+
     // for (int i=0; i<Data.Count_Album; i++)
     // {
     //     printf("%d\n", Data.Elements[i].Nama_Album.Length);

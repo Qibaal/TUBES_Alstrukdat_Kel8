@@ -446,6 +446,59 @@ void SONGNEXT(Info *CURR, Queue *QS, Stack *hist)
     PRINTWORD(CURR->Penyanyi);
 }
 
+void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist)
+{
+    Queue temp;
+    Info iTemp;
+    if (IsEmptyStack(*hist))
+    {
+        printf("Riwayat lagu kosong, memutar kembali lagu\n");
+    }
+    else
+    {
+        /*Masukin sementara ke dalam temp*/
+        while (!isEmptyQ(*QS))
+        {
+            dequeue(QS, &iTemp);
+            enqueue(&temp, iTemp);
+        }
+        /*Ngambil lagu terakhir dari stack*/
+        Pop(hist, &iTemp);
+
+        /*Masukin lagi ke queue main dengan first el adalah curr song terakhir*/
+        enqueue(QS, *CURR);
+        while (!isEmptyQ(temp))
+        {
+            dequeue(&temp, &iTemp);
+            enqueue(QS, iTemp);
+        }
+
+        /*Curr song adalah lagu terakhir dari stack*/
+        CreateInfo(CURR, iTemp.Penyanyi, iTemp.Album, iTemp.Lagu);
+        printf("Memutar lagu sebelumnya\n");
+    }
+    PRINTWORD(CURR->Lagu);
+    printf("oleh ");
+    PRINTWORD(CURR->Penyanyi);
+}
+
+void CREATEPLAYLIST(ArrayDin *LP)
+{
+    printf("Masukkan nama playlist yang ingin dibuat : ");
+    GetInput();
+    CompressInput();
+    
+    InsertWord(&(*LP).A[LP->Neff].Nama, currentWord);
+    LP->Neff++;
+
+    printf("Playlist ");
+    PRINTWORD(currentWord);
+    printf("berhasil dibuat!\n");
+    printf("Silakan masukkan lagu - lagu artis terkini kesayangan Anda!\n");
+
+    LISTPLAYLIST(*LP);
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");
