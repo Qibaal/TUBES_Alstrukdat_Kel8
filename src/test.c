@@ -82,6 +82,17 @@ int main() {
     displayQueue(SONGQUEUE);
     printf("-------- Queue --------\n");
 
+    // test queue remove
+    printf("Masukkan x: ");
+    GetInput(); CompressInput();
+    X = WordToInt(currentWord);
+    printf("%d\n", X);
+
+    QUEUEREMOVE(&SONGQUEUE, X);
+
+    displayQueue(SONGQUEUE);
+    printf("-------- Queue --------\n");
+
 
     // for (int i=0; i<Data.Count_Album; i++)
     // {

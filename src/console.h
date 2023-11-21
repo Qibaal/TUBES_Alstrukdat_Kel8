@@ -36,7 +36,7 @@ void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *
 void QUEUESONG(Set *A, Map *D, Queue *QS);
 void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP);
 void QUEUESWAP(Queue *QS, int x, int y);
-void QUEUEREMOVE();
+void QUEUEREMOVE(Queue *QS, int x);
 void QUEUECLEAR();
 void SONGNEXT();
 void SONGPREVIOUS();

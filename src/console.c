@@ -402,10 +402,25 @@ void QUEUESWAP(Queue *QS, int x, int y)
     PRINTWORD(QS->buffer[x].Lagu);
     printf("berhasil ditukar dengan ");
     PRINTWORD(QS->buffer[y].Lagu);
-    printf("");
+    printf("\n");
     /*Swap lagu dengan swap queue*/
     SwapQueue(QS, x, y);
 }
+
+void QUEUEREMOVE(Queue *QS, int x)
+{
+    Info temp;
+
+    printf("Lagu ");
+    PRINTWORD(QS->buffer[x].Lagu);
+    printf(" oleh ");
+    PRINTWORD(QS->buffer[x].Penyanyi);
+    printf("telah dihapus dari queue!\n");
+
+    RemoveQueue(QS, &temp, x);
+}
+
+// Lagu “Kokoro wo Komete” oleh “Aoi Teshima” telah dihapus dari queue!
 
 void HELP(boolean inSesh)
 {
