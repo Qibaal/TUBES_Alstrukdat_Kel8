@@ -273,6 +273,43 @@ void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
     }
 }
 
+void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP)
+{
+    Info temp;
+
+    /*Display Playlist yang dimiliki*/
+    LISTPLAYLIST(*LP);
+    printf("Masukkan ID Playlist: ");
+    /*Ambil ID playlist*/
+    GetInput();
+    CompressInput();
+    int i_pl = WordToInt(currentWord);
+
+    printf("memainkan playlist: ");
+    PRINTWORD(LP->A[i_pl-1].Nama);
+
+    /*Current song adalah lagu pertama playlist*/
+    address P = LP->A[i_pl-1].First;
+    CreateInfo(CURR, InfoPlaylist(P).Penyanyi, InfoPlaylist(P).Album, InfoPlaylist(P).Lagu);
+    
+    /*Masukin ke queue tanpa lagu pertama*/
+    ClearQueue(QS);
+    while (P != Nil)
+    {
+        enqueue(QS, InfoPlaylist(P));
+        P = Next(P);
+    }
+    dequeue(QS, &temp);
+
+    /*Masukin ke stack*/
+    P = LP->A[i_pl-1].First->next;
+    while (P != Nil)
+    {
+        Push(hist, InfoPlaylist(P));
+        P = Next(P);
+    }
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");

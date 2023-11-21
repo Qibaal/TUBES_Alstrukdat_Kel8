@@ -32,7 +32,7 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS);
 void LISTDEFAULT(Map *D, Set *P);
 void LISTPLAYLIST(ArrayDin PL);
 void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist);
-void PLAYPLAYLIST();
+void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP);
 void QUEUESONG();
 void QUEUEPLAYLIST();
 void QUEUESWAP();

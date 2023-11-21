@@ -172,7 +172,7 @@ void ClearQueue(Queue *q)
 /* *** Display Queue *** */
 void displayQueue(Queue q)
 {
-    if (isEmptyQ(q)) printf("kosong\n");
+    if (isEmptyQ(q)) printf("Queue kosong\n");
     else
     {
         int i = IDX_HEAD(q);

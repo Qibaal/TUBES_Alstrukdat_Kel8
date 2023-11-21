@@ -34,14 +34,25 @@ int main() {
     printf("----------------\n");
 
     // test listplaylist
-    LISTPLAYLIST(PLAYLISTS);
-    printf("----------------\n");
+    // LISTPLAYLIST(PLAYLISTS);
+    // printf("----------------\n");
 
     //test playsong
     PLAYSONG(&CURRSONG, &Penyanyi, &Data, &SONGQUEUE, &HISTORY);
     printf("----------------\n");
     DisplayInfo(CURRSONG);
     printf("----------------\n");
+
+    // test play playlist
+    PLAYPLAYLIST(&CURRSONG, &Penyanyi, &Data, &SONGQUEUE, &HISTORY, &PLAYLISTS);
+    DisplayInfo(CURRSONG);
+    printf("----------------\n");
+    
+    DisplayStack(HISTORY);
+    printf("-------- History --------\n");
+
+    displayQueue(SONGQUEUE);
+    printf("-------- Queue --------\n");
 
     // for (int i=0; i<Data.Count_Album; i++)
     // {
