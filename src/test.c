@@ -47,9 +47,15 @@ int main() {
     PLAYPLAYLIST(&CURRSONG, &Penyanyi, &Data, &SONGQUEUE, &HISTORY, &PLAYLISTS);
     DisplayInfo(CURRSONG);
     printf("----------------\n");
-    
+
     DisplayStack(HISTORY);
     printf("-------- History --------\n");
+
+    displayQueue(SONGQUEUE);
+    printf("-------- Queue --------\n");
+
+    // test Queue song
+    QUEUESONG(&Penyanyi, &Data, &SONGQUEUE);
 
     displayQueue(SONGQUEUE);
     printf("-------- Queue --------\n");

@@ -310,6 +310,67 @@ void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *
     }
 }
 
+void QUEUESONG(Set *A, Map *D, Queue *QS)
+{
+    Info temp;
+
+    printf("Daftar Penyanyi :\n");
+    for (int i=0; i<A->Count_Lagu; i++)
+    {
+        printf("    %d. ", i+1);
+        PRINTWORD(A->Elements[i]);
+    }
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    GetInput();
+    CompressInput();
+    printf("Daftar Album oleh ");
+    PRINTWORD(currentWord);
+
+    int c = 1;
+    for (int i=0; i<D->Count_Album; i++)
+    {
+        if (WordCompare(D->Elements[i].Nama_Penyanyi, currentWord))
+        {
+            printf("    %d. ", c);
+            PRINTWORD(D->Elements[i].Nama_Album);
+            c++;
+        }
+    }
+
+    printf("Masukkan Nama Album yang dipilih : ");
+    GetInput();
+    CompressInput();
+
+    int i = 0;
+    boolean found_album = false;
+    while (i < D->Count_Album && !found_album)
+    {
+        if (WordCompare(D->Elements[i].Nama_Album, currentWord))
+            found_album = true;
+        i++;
+    }
+    printf("Daftar Lagu Album %s oleh %s :\n", D->Elements[i-1].Nama_Album.TabWord, D->Elements[i-1].Nama_Penyanyi.TabWord);
+    for (int j=0; j<D->Elements[i-1].Info_Lagu.Count_Lagu; j++)
+    {
+        printf("    %d. ", j+1);
+        PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[j]);
+    }
+    /*Ambil lagu untuk dimasukin*/
+    printf("Masukkan ID Lagu yang dipilih : ");
+    GetInput();
+    CompressInput();  
+    int i_lagu = WordToInt(currentWord);
+
+    printf("Berhasil menambahkan lagu: ");
+    PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
+    printf("oleh: ");
+    PRINTWORD(D->Elements[i-1].Nama_Penyanyi);
+
+    /*Enqueue song*/
+    CreateInfo(&temp, D->Elements[i-1].Nama_Penyanyi, D->Elements[i-1].Nama_Album, D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
+    enqueue(QS, temp);
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");
