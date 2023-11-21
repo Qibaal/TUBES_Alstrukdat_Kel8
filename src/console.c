@@ -273,7 +273,7 @@ void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
     }
 }
 
-void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP)
+void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP)
 {
     Info temp;
 
@@ -287,6 +287,7 @@ void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *
 
     printf("memainkan playlist: ");
     PRINTWORD(LP->A[i_pl-1].Nama);
+    InsertWord(CURRPL, LP->A[i_pl-1].Nama);
 
     /*Current song adalah lagu pertama playlist*/
     address P = LP->A[i_pl-1].First;
@@ -720,6 +721,53 @@ void PLAYLISTDELETE(ArrayDin *LP)
         LP->Neff--;
     }
     LISTPLAYLIST(*LP);
+}
+
+void STATUS(Info *CURR, Queue QS, Word *CURRPL)
+{
+    Info temp;
+
+    if (CURRPL->Length != 0)
+    {
+        printf("Current Playlist: ");
+        PRINTWORD(*CURRPL);
+    }
+    printf("\n");
+    printf("Now Playing:\n");
+    if (!IsEmptyD(*CURR))
+    {
+        PRINTWORD2(CURR->Penyanyi);
+        printf("- ");
+        PRINTWORD2(CURR->Lagu);
+        printf("- ");
+        PRINTWORD2(CURR->Album);
+    }
+    else
+    {
+        printf("No songs have been played yet. Please search for a song to begin playback.\n");
+    }
+    printf("\n");
+    printf("Queue:\n");
+    if (!isEmptyQ(QS))
+    {
+        int i = 1;
+        while (!isEmptyQ(QS))
+        {
+            dequeue(&QS, &temp);
+            printf("%d. ", i);
+            PRINTWORD2(CURR->Penyanyi);
+            printf("- ");
+            PRINTWORD2(CURR->Lagu);
+            printf("- ");
+            PRINTWORD2(CURR->Album);
+            printf("\n");
+            i++;
+        }
+    }
+    else
+    {
+        printf("Your queue is empty.\n");
+    }
 }
 
 void HELP(boolean inSesh)

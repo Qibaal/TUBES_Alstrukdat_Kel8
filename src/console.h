@@ -32,7 +32,7 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS);
 void LISTDEFAULT(Map *D, Set *P);
 void LISTPLAYLIST(ArrayDin PL);
 void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist);
-void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP);
+void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP);
 void QUEUESONG(Set *A, Map *D, Queue *QS);
 void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP);
 void QUEUESWAP(Queue *QS, int x, int y);
@@ -46,11 +46,10 @@ void ADDALBUMPLAYLIST(ArrayDin *LP, Set *A, Map *D);
 void PLAYLISTSWAP(ArrayDin *LP);
 void PLAYLISTREMOVE(ArrayDin *LP);
 void PLAYLISTDELETE(ArrayDin *LP);
-void STATUS();
+void STATUS(Info *CURR, Queue QS, Word *CURRPL);
 void SAVE();
 void QUIT();
 void HELP(boolean inSesh);
 boolean CHECKCOMMAND(Word W, boolean inSesh);
-void DISPLAY();
 
 #endif

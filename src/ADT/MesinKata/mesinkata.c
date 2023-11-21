@@ -197,6 +197,15 @@ void PRINTWORD(Word w)
     printf("\n");
 }
 
+void PRINTWORD2(Word w)
+{
+    for (int i=0; i<w.Length; i++)
+    {
+        printf("%c", w.TabWord[i]);
+    }
+    printf(" ");
+}
+
 void ConcatString(char* res, char* a, char* b)
 {
     int i;

@@ -73,6 +73,8 @@ void InsertWord(Word *t, Word w);
 
 void PRINTWORD(Word w);
 
+void PRINTWORD2(Word w);
+
 void ConcatString(char* res, char* a, char* b);
 
 boolean WordCompare(Word w, Word input);
