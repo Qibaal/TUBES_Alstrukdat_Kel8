@@ -420,7 +420,14 @@ void QUEUEREMOVE(Queue *QS, int x)
     RemoveQueue(QS, &temp, x);
 }
 
-// Lagu “Kokoro wo Komete” oleh “Aoi Teshima” telah dihapus dari queue!
+void QUEUECLEAR(Queue *QS)
+{
+    ClearQueue(QS);
+    if (isEmptyQ(*QS))
+        printf("Queue berhasil dikosongkan.\n");
+    else
+        printf("Queue TIDAK berhasil dikosongkan.\n");
+}
 
 void HELP(boolean inSesh)
 {

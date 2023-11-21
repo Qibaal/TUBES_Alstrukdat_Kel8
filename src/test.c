@@ -93,6 +93,11 @@ int main() {
     displayQueue(SONGQUEUE);
     printf("-------- Queue --------\n");
 
+    // test queue clear
+    QUEUECLEAR(&SONGQUEUE);
+    displayQueue(SONGQUEUE);
+    printf("-------- Queue --------\n");
+
 
     // for (int i=0; i<Data.Count_Album; i++)
     // {
