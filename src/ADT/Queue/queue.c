@@ -115,53 +115,53 @@ void RemoveQueue(Queue *q, Info *del, int idx)
     }
 }
 
-void SwapQueue(Queue *q, int x, int y)
-{
-    Queue temp; CreateQueue(&temp);
-    Info iTemp, xTemp, yTemp;
-    int ctr;
-    if (x > y)
-    {
-        int temp = x;
-        x = y;
-        y = temp;
-    }
-    if (x <= 0 || x > length(*q))
-    {
-        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
-        return;
-    }
-    else if (y <= 0 || y > length(*q))
-    {
-        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
-        return;
-    }
-    RemoveQueue(q, &xTemp, x);
-    RemoveQueue(q, &yTemp, y-1);
-    // masukin balik lagi
-    ctr = 0;
-    if (!isEmptyQ(*q)) printf("gagal\n");
-    else
-    {
-        while (!isEmptyQ(temp))
-        {
-            if (ctr + 1 == x)
-            {
-                enqueue(q, yTemp);
-            }
-            else if (ctr + 1 == y)
-            {
-                enqueue(q, xTemp);
-            }
-            else
-            {
-                dequeue(&temp, &iTemp);
-                enqueue(q, iTemp);
-            }
-            ctr++;
-        }
-    }
-}
+// void SwapQueue(Queue *q, int x, int y)
+// {
+//     Queue temp; CreateQueue(&temp);
+//     Info iTemp, xTemp, yTemp;
+//     int ctr;
+//     if (x > y)
+//     {
+//         int temp = x;
+//         x = y;
+//         y = temp;
+//     }
+//     if (x <= 0 || x > length(*q))
+//     {
+//         printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
+//         return;
+//     }
+//     else if (y <= 0 || y > length(*q))
+//     {
+//         printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+//         return;
+//     }
+//     RemoveQueue(q, &xTemp, x);
+//     RemoveQueue(q, &yTemp, y-1);
+//     // masukin balik lagi
+//     ctr = 0;
+//     if (!isEmptyQ(*q)) printf("gagal\n");
+//     else
+//     {
+//         while (!isEmptyQ(temp))
+//         {
+//             if (ctr + 1 == x)
+//             {
+//                 enqueue(q, yTemp);
+//             }
+//             else if (ctr + 1 == y)
+//             {
+//                 enqueue(q, xTemp);
+//             }
+//             else
+//             {
+//                 dequeue(&temp, &iTemp);
+//                 enqueue(q, iTemp);
+//             }
+//             ctr++;
+//         }
+//     }
+// }
 
 void ClearQueue(Queue *q)
 {
@@ -180,6 +180,41 @@ void displayQueue(Queue q)
         {
             DisplayInfo(q.buffer[i]);
             i = (i+1) % (IDX_MAX);
+        }
+    }
+}
+
+void SwapQueue(Queue *q, int x, int y)
+{
+    Info temp; int iTemp;
+    if (x > y)
+    {
+        int temp = x;
+        x = y;
+        y = temp;
+    }
+    /*Out of range handling*/
+    if (x <= 0 || x > length(*q))
+    {
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
+        return;
+    }
+    else if (y <= 0 || y > length(*q))
+    {
+        printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
+        return;
+    }
+    for (int i=0; i<IDX_MAX+1; i++)
+    {
+        if (i == x + IDX_HEAD(*q) - 1)
+        {
+            iTemp = i;
+            CreateInfo(&temp, q->buffer[i].Penyanyi, q->buffer[i].Album, q->buffer[i].Lagu);
+        }
+        else if (i == y + IDX_HEAD(*q) - 1)
+        {
+            CreateInfo(&(*q).buffer[iTemp], q->buffer[i].Penyanyi, q->buffer[i].Album, q->buffer[i].Lagu);
+            CreateInfo(&(*q).buffer[i], temp.Penyanyi, temp.Album, temp.Lagu);
         }
     }
 }
@@ -228,8 +263,8 @@ void displayQueue(Queue q)
 
 //     enqueue(&Q, I); enqueue(&Q, I2); enqueue(&Q, I3);
 //     displayQueue(Q);
-//     SwapQueue(&Q, 1, 2);
-//     printf("--------------------\n");
+//     printf("---------------------\n");
+//     SwapQueue(&Q, 3, 2);
 //     displayQueue(Q);
 //     return 0;
 // }

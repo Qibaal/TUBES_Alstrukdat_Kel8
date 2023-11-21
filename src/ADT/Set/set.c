@@ -33,6 +33,7 @@ void InsertSet(Set *S, Word Elmt)
 {
     if (!IsMemberSet(*S, Elmt))
     {
+        // S->Elements[S->Count_Lagu].Length = 0;
         for (int i=0; i<Elmt.Length; i++)
         {
             S->Elements[S->Count_Lagu].TabWord[i] = Elmt.TabWord[i];
@@ -78,7 +79,7 @@ boolean IsMemberSet(Set S, Word Elmt)
     int idx = 0;
     while (idx < S.Count_Lagu)
     {
-        if (WordCompare(S.Elements[idx], Elmt))
+        if (WordCompare(Elmt, S.Elements[idx]))
         {
             return true;
         }

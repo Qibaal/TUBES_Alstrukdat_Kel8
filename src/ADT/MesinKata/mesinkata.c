@@ -111,7 +111,8 @@ void GetInput()
     currentInput = getc(stdin);
     while (currentInput != EOI)
     {
-        currentWord.TabWord[currentWord.Length++] = currentInput;
+        currentWord.TabWord[currentWord.Length] = currentInput;
+        currentWord.Length++;
         currentInput = getc(stdin);
     }
 }
@@ -217,6 +218,15 @@ boolean WordCompare(Word w, Word input)
         else return false;
     }
     return true;
+}
+
+void CompressInput()
+{
+   for (int i=0; i<currentWord.Length+1; i++)
+   {
+      currentWord.TabWord[i] = currentWord.TabWord[i+1];
+   }
+   currentWord.Length--;
 }
 
 // int main()

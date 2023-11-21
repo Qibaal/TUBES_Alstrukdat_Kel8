@@ -42,11 +42,6 @@ boolean isFull(Queue q);
 int length(Queue q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
 
-void SwapQueue(Queue *q, int x, int y);
-/* Proses: Menukar 2 Info pada q dengan aturan FIFO */
-/* I.S. q tidak mungkin kosong, x dan y valid (tidak kurang dari 0 dan tidak lebih sama dengan capacity) */
-/* F.S. Info x menjadi y dan sebaliknya */
-
 /* *** Primitif Add/Delete *** */
 void enqueue(Queue *q, Info val);
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
@@ -70,6 +65,12 @@ void ClearQueue(Queue *q);
 /* I.S. q tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
         q mungkin kosong */
+
+void SwapQueue(Queue *q, int x, int y);
+/* Proses: Menukar 2 elemen pada queue */
+/* I.S. q tidak mungkin kosong */
+/* F.S. elemen pada idx x ditukar dengan elemen
+        pada idx y */
 
 /* *** Display Queue *** */
 void displayQueue(Queue q);

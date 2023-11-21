@@ -1,12 +1,12 @@
 #include "console.h"
 
-ArrayDin LOPlaylist;
-List PlayList;
-Map DATA;
-Queue QOSongs;
-Stack SongHistory;
-Set Artists;
-Info CurrSong;
+// ArrayDin LOPlaylist;
+// List PlayList;
+// Map DATA;
+// Queue QOSongs;
+// Stack SongHistory;
+// Set Artists;
+// Info CurrSong;
 int jumlah_penyanyi, jumlah_album, jumlah_lagu;
 
 Word WSTART, WLOAD, WLISTD, WLISTP, WPLAYS, WPLAYP, WQSONG, WQPL, WQSWAP, WQREMOVE, WQC, WSNEXT, WSPREV, WPCREATE, WPADDS, WPADDA, WPSWAP, WPREMOVE, WPDELETE, WSTATUS, WSAVE, WQUIT, WHELP;    
@@ -96,54 +96,57 @@ void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
     }
 }
 
-void LISTDEFAULT(Map D, Set P)
+void LISTDEFAULT(Map *D, Set *P)
 {
     Word Y; Y.Length = 1; Y.TabWord[0] = 'Y';
-    /*Handling kalau gagal start-load*/
-    if (IsEmptyMap(D))
-    {
-        printf("Gagal load untuk file konfigurasi.\n");
-        return;
-    }
 
     printf("Daftar Penyanyi :\n");
-    for (int i=0; i<P.Count_Lagu; i++)
+    for (int i=0; i<P->Count_Lagu; i++)
     {
         printf("    %d. ", i+1);
-        PRINTWORD(P.Elements[i]);
+        PRINTWORD(P->Elements[i]);
     }
+
     printf("Ingin melihat album yang ada?(Y/N): ");
     /*pilih ingin melihat atau tidak*/
     GetInput();
+
     if (WordCompare(Y, currentWord))
     {
         printf("Pilih penyanyi untuk melihat album mereka: ");
         /*pilih nama penyanyi*/
         GetInput();
+        CompressInput();
+
         /*Pemrosesan jika ada penyanyi yang sesuai di Set*/
-        if (IsMemberSet(P, currentWord))
+        if (IsMemberSet(*P, currentWord))
         {
             /*Print nama album dengan penyanyi yang dipilih*/
-            for (int i=0; i<D.Count_Album; i++)
+            int k = 1;
+            for (int i=0; i<D->Count_Album; i++)
             {
-                if (WordCompare(D.Elements[i].Nama_Penyanyi, currentWord))
+                if (WordCompare(D->Elements[i].Nama_Penyanyi, currentWord))
                 {
-                    printf("%d. ", i+1);
-                    PRINTWORD(D.Elements[i].Nama_Album);
+                    printf("%d. ", k);
+                    PRINTWORD(D->Elements[i].Nama_Album);
+                    k++;
                 }
             }
             /*pilih nama Album*/
             printf("Ingin melihat lagu yang ada?(Y/N): ");
             GetInput();
+            CompressInput();
+
             if (WordCompare(Y, currentWord))
             {
                 printf("Pilih album untuk melihat lagu yang ada di album : ");
                 /*pilih nama Album*/
                 GetInput();
+                CompressInput();
                 boolean found = false; int idx = 0;
-                while (idx < D.Count_Album && !found)
+                while (idx < D->Count_Album && !found)
                 {
-                    if (WordCompare(D.Elements[idx].Nama_Album, currentWord))
+                    if (WordCompare(D->Elements[idx].Nama_Album, currentWord))
                     {
                         found = true;
                     }
@@ -154,10 +157,10 @@ void LISTDEFAULT(Map D, Set P)
                 }
                 if (found)
                 {
-                    for (int i=0; i<D.Elements[idx].Info_Lagu.Count_Lagu; i++)
+                    for (int i=0; i<D->Elements[idx].Info_Lagu.Count_Lagu; i++)
                     {
                         printf("%d. ", i+1);
-                        PRINTWORD(D.Elements[idx].Info_Lagu.Elements[i]);
+                        PRINTWORD(D->Elements[idx].Info_Lagu.Elements[i]);
                     }
                 }
                 else
