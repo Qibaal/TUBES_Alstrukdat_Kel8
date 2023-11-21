@@ -383,9 +383,9 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
     CompressInput();
     int i_pl = WordToInt(currentWord);
 
-    printf("Berhasil menambahkan playlist “");
+    printf("Berhasil menambahkan playlist ");
     PRINTWORD(LP->A[i_pl-1].Nama);
-    printf("” ke queue.\n");
+    printf(" ke queue.\n");
 
     address P = LP->A[i_pl-1].First;
     while (P != Nil)
@@ -394,6 +394,17 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
         enqueue(QS, temp);
         P = Next(P);
     }
+}
+
+void QUEUESWAP(Queue *QS, int x, int y)
+{
+    printf("Lagu ");
+    PRINTWORD(QS->buffer[x].Lagu);
+    printf("berhasil ditukar dengan ");
+    PRINTWORD(QS->buffer[y].Lagu);
+    printf("");
+    /*Swap lagu dengan swap queue*/
+    SwapQueue(QS, x, y);
 }
 
 void HELP(boolean inSesh)
@@ -417,6 +428,7 @@ void HELP(boolean inSesh)
         printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi\n");
     }
 }
+
 
 boolean CHECKCOMMAND(Word W, boolean inSesh)
 {

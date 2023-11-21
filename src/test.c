@@ -66,6 +66,22 @@ int main() {
     displayQueue(SONGQUEUE);
     printf("-------- Queue --------\n");
 
+    // test queue swap
+    printf("Masukkan x: ");
+    GetInput(); CompressInput();
+    int X = WordToInt(currentWord);
+    printf("%d\n", X);
+
+    printf("Masukkan y: ");
+    GetInput(); CompressInput();
+    int Y = WordToInt(currentWord);
+    printf("%d\n", Y);
+
+    QUEUESWAP(&SONGQUEUE, X, Y);
+
+    displayQueue(SONGQUEUE);
+    printf("-------- Queue --------\n");
+
 
     // for (int i=0; i<Data.Count_Album; i++)
     // {
