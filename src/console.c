@@ -448,7 +448,7 @@ void SONGNEXT(Info *CURR, Queue *QS, Stack *hist)
 
 void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist)
 {
-    Queue temp;
+    Queue temp; CreateQueue(&temp);
     Info iTemp;
     if (IsEmptyStack(*hist))
     {
@@ -489,6 +489,7 @@ void CREATEPLAYLIST(ArrayDin *LP)
     CompressInput();
     
     InsertWord(&(*LP).A[LP->Neff].Nama, currentWord);
+    CreateEmptyList(&(*LP).A[LP->Neff]);
     LP->Neff++;
 
     printf("Playlist ");
@@ -497,6 +498,80 @@ void CREATEPLAYLIST(ArrayDin *LP)
     printf("Silakan masukkan lagu - lagu artis terkini kesayangan Anda!\n");
 
     LISTPLAYLIST(*LP);
+}
+
+void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D)
+{
+    Info temp;
+
+    printf("Daftar Penyanyi :\n");
+    for (int i=0; i<A->Count_Lagu; i++)
+    {
+        printf("    %d. ", i+1);
+        PRINTWORD(A->Elements[i]);
+    }
+    printf("Masukkan Nama Penyanyi yang dipilih : ");
+    GetInput();
+    CompressInput();
+    printf("Daftar Album oleh ");
+    PRINTWORD(currentWord);
+
+    int c = 1;
+    for (int i=0; i<D->Count_Album; i++)
+    {
+        if (WordCompare(D->Elements[i].Nama_Penyanyi, currentWord))
+        {
+            printf("    %d. ", c);
+            PRINTWORD(D->Elements[i].Nama_Album);
+            c++;
+        }
+    }
+    /*Ambil nama album*/
+    printf("Masukkan Nama Album yang dipilih : ");
+    GetInput();
+    CompressInput();
+
+    int i = 0;
+    boolean found_album = false;
+    while (i < D->Count_Album && !found_album)
+    {
+        if (WordCompare(D->Elements[i].Nama_Album, currentWord))
+            found_album = true;
+        i++;
+    }
+    printf("Daftar Lagu Album %s oleh %s :\n", D->Elements[i-1].Nama_Album.TabWord, D->Elements[i-1].Nama_Penyanyi.TabWord);
+    for (int j=0; j<D->Elements[i-1].Info_Lagu.Count_Lagu; j++)
+    {
+        printf("    %d. ", j+1);
+        PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[j]);
+    }
+
+    printf("Masukkan ID Lagu yang dipilih : ");
+    GetInput();
+    CompressInput();  
+    int i_lagu = WordToInt(currentWord);
+
+    LISTPLAYLIST(*LP);
+    printf("Masukkan ID Playlist yang dipilih :");
+    GetInput();
+    CompressInput();  
+    int i_pl = WordToInt(currentWord);
+    printf("%d\n", i_pl);
+
+    CreateInfo(&temp, D->Elements[i-1].Nama_Penyanyi, D->Elements[i-1].Nama_Album, D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
+    InsVLast(&(*LP).A[i_pl-1], temp);
+    
+    /*Print info penambahan pada playlist*/
+    printf("Lagu dengan judul ");
+    PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
+    printf("pada album ");
+    PRINTWORD(D->Elements[i-1].Nama_Album);
+    printf("oleh penyanyi ");
+    PRINTWORD(D->Elements[i-1].Nama_Penyanyi);
+    printf("berhasil ditambahkan ke dalam playlist ");
+    PRINTWORD(LP->A[i_pl-1].Nama);
+
+    DisplayPlaylist(LP->A[i_pl-1]);
 }
 
 void HELP(boolean inSesh)

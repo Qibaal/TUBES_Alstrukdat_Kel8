@@ -41,7 +41,7 @@ void QUEUECLEAR(Queue *QS);
 void SONGNEXT(Info *CURR, Queue *QS, Stack *hist);
 void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist);
 void CREATEPLAYLIST(ArrayDin *LP);
-void PLAYLISTADDSONG();
+void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D);
 void PLAYLISTADDALBUM();
 void PLAYLISTSWAP();
 void PLAYLISTREMOVE();

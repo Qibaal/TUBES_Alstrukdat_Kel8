@@ -113,6 +113,9 @@ int main() {
     // test create playlist
     CREATEPLAYLIST(&PLAYLISTS);
 
+    // test add song playlist
+    ADDSONGPLAYLIST(&PLAYLISTS, &Penyanyi, &Data);
+
     // for (int i=0; i<Data.Count_Album; i++)
     // {
     //     printf("%d\n", Data.Elements[i].Nama_Album.Length);
