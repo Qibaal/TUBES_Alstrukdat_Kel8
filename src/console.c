@@ -626,6 +626,81 @@ void ADDALBUMPLAYLIST(ArrayDin *LP, Set *A, Map *D)
     DisplayPlaylist(LP->A[i_pl-1]);
 }
 
+void PLAYLISTSWAP(ArrayDin *LP)
+{
+    printf("Daftar Playlist Pengguna : \n");
+    LISTPLAYLIST(*LP);
+
+    printf("Masukkan ID Playlist: ");
+    GetInput();
+    CompressInput();
+    int id = WordToInt(currentWord);
+
+    printf("Masukkan ID lagu pertama: ");
+    GetInput();
+    CompressInput();
+    int X = WordToInt(currentWord);
+
+    printf("Masukkan ID lagu kedua: ");
+    GetInput();
+    CompressInput();
+    int Y = WordToInt(currentWord);
+
+    printf("%d, %d, %d\n", id, X, Y);
+}
+
+void PLAYLISTREMOVE(ArrayDin *LP)
+{
+    LISTPLAYLIST(*LP);
+
+    printf("Masukkan ID Playlist: ");
+    GetInput();
+    CompressInput();
+    int id = WordToInt(currentWord);
+
+    printf("Masukkan ID lagu pertama: ");
+    GetInput();
+    CompressInput();
+    int X = WordToInt(currentWord);
+
+    int i = 1;
+    address Prev = Nil;
+    address P = LP->A[id-1].First;
+    if (X == 1)
+    {
+        printf("Lagu ");
+        PRINTWORD(InfoPlaylist(P).Lagu);
+        printf("oleh ");
+        PRINTWORD(InfoPlaylist(P).Penyanyi);
+        printf("telah dihapus dari playlist ");
+        PRINTWORD(LP->A[id-1].Nama);
+        DelFirst(&(*LP).A[id-1], &P);
+    }
+    else
+    {
+        while (P != Nil)
+        {
+            if (i == X - 1)
+            {
+                printf("Lagu ");
+                PRINTWORD(InfoPlaylist(Next(P)).Lagu);
+                printf("oleh ");
+                PRINTWORD(InfoPlaylist(Next(P)).Penyanyi);
+                printf("telah dihapus dari playlist ");
+                PRINTWORD(LP->A[id-1].Nama);
+                break;
+            }
+            else
+            {
+                Prev = P;
+                P = Next(P);
+                i++;
+            }
+        }
+        DelAfter(&(*LP).A[id-1], &Prev, P);
+    }
+}
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");

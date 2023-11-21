@@ -119,6 +119,12 @@ int main() {
     // test add album playlist
     ADDALBUMPLAYLIST(&PLAYLISTS, &Penyanyi, &Data);
 
+    // test playlist swap
+    PLAYLISTSWAP(&PLAYLISTS);
+
+    // test playlist remove
+    PLAYLISTREMOVE(&PLAYLISTS);
+
     // for (int i=0; i<Data.Count_Album; i++)
     // {
     //     printf("%d\n", Data.Elements[i].Nama_Album.Length);
