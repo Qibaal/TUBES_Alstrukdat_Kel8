@@ -304,11 +304,16 @@ void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hi
     /* out of range handling */
     if (i_pl <= 0 || i_pl > LP->Neff)
     {
-        printf("tidak ada playlist dengan id %d!\n", i_pl);
+        printf("Tidak ada playlist dengan id %d!\n", i_pl);
         return;
     }
-
-    printf("memainkan playlist: ");
+    /*Handle jika playlist kosong*/
+    if (NbElmt(LP->A[i_pl-1]) == 0)
+    {
+        printf("Playlist kosong!\n");
+        return;
+    }
+    printf("Memainkan playlist: ");
     PRINTWORD(LP->A[i_pl-1].Nama);
     InsertWord(CURRPL, LP->A[i_pl-1].Nama);
 
@@ -386,7 +391,7 @@ void QUEUESONG(Set *A, Map *D, Queue *QS)
         printf("Tidak ada album dengan nama tersebut!.\n");
         return;
     }
-    
+
     printf("Daftar Lagu Album %s oleh %s :\n", D->Elements[i-1].Nama_Album.TabWord, D->Elements[i-1].Nama_Penyanyi.TabWord);
     for (int j=0; j<D->Elements[i-1].Info_Lagu.Count_Lagu; j++)
     {

@@ -14,10 +14,7 @@
 #define InitialSize 20
 
 typedef int IdxType;
-<<<<<<< Updated upstream
-=======
-typedef char ElType;`
->>>>>>> Stashed changes
+
 typedef struct {
     List *A;
     int Capacity;

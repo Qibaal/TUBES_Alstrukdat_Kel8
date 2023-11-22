@@ -79,7 +79,7 @@ boolean IsMemberSet(Set S, Word Elmt)
     int idx = 0;
     while (idx < S.Count_Lagu)
     {
-        if (WordCompare(Elmt, S.Elements[idx]))
+        if (WordCompare(S.Elements[idx], Elmt))
         {
             return true;
         }
