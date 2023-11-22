@@ -196,7 +196,7 @@ void LISTPLAYLIST(ArrayDin PL)
     }    
 }
 
-void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
+void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist)
 {
     // masukin currentsong ke dalam history
     Push(hist, *CURR);
@@ -248,6 +248,12 @@ void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
     CompressInput();  
     int i_lagu = WordToInt(currentWord);
 
+    if (i_lagu <= 0 || i_lagu > D->Elements[i].Info_Lagu.Count_Lagu)
+    {
+        printf("tidak ada lagu dengan id %d!\n", i_lagu);
+        return;
+    }
+
     printf("Memutar lagu: ");
     PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
     printf("oleh: ");
@@ -263,6 +269,9 @@ void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist)
         Info temp;
         Pop(hist, &temp);
     }
+    
+    /*Set Current playlist jadi kosong*/
+    CURRPL->Length = 0;
 }
 
 void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP)
@@ -276,6 +285,13 @@ void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hi
     GetInput();
     CompressInput();
     int i_pl = WordToInt(currentWord);
+
+    /* out of range handling */
+    if (i_pl <= 0 || i_pl > LP->Neff)
+    {
+        printf("tidak ada playlist dengan id %d!\n", i_pl);
+        return;
+    }
 
     printf("memainkan playlist: ");
     PRINTWORD(LP->A[i_pl-1].Nama);
@@ -354,6 +370,12 @@ void QUEUESONG(Set *A, Map *D, Queue *QS)
     CompressInput();  
     int i_lagu = WordToInt(currentWord);
 
+    if (i_lagu <= 0 || i_lagu > D->Elements[i].Info_Lagu.Count_Lagu)
+    {
+        printf("tidak ada lagu dengan id %d!\n", i_lagu);
+        return;
+    }
+
     printf("Berhasil menambahkan lagu: ");
     PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
     printf("oleh: ");
@@ -376,6 +398,12 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
     CompressInput();
     int i_pl = WordToInt(currentWord);
 
+    if (i_pl <= 0 || i_pl > LP->Neff)
+    {
+        printf("tidak ada playlist dengan id %d!\n", i_pl);
+        return;
+    }
+
     printf("Berhasil menambahkan playlist ");
     PRINTWORD2(LP->A[i_pl-1].Nama);
     printf(" ke queue.\n");
@@ -396,10 +424,22 @@ void QUEUESWAP(Queue *QS)
     int X = WordToInt(currentWord);
     printf("%d\n", X);
 
+    if (X <= 0 || X > length(*QS))
+    {
+        printf("Tidak ada queue dengan ID %d!\n", X);
+        return;
+    }
+
     printf("Masukkan y: ");
     GetInput(); CompressInput();
     int Y = WordToInt(currentWord);
     printf("%d\n", Y);
+
+    if (Y <= 0 || Y > length(*QS))
+    {
+        printf("Tidak ada queue dengan ID %d!\n", Y);
+        return;
+    }
 
     printf("Lagu ");
     PRINTWORD2(QS->buffer[X-1].Lagu);
@@ -654,11 +694,23 @@ void PLAYLISTSWAP(ArrayDin *LP)
     int id = WordToInt(currentWord);
     printf("%d\n", id);
 
+    if (id <= 0 || id > LP->Neff)
+    {
+        printf("Tidak ada playlist dengan id %d!\n", id);
+        return;
+    }
+
     printf("Masukkan ID lagu pertama: ");
     GetInput();
     CompressInput();
     int X = WordToInt(currentWord);
     printf("%d\n", X);
+
+    if (X <= 0 || X > NbElmt(LP->A[id-1]))
+    {
+        printf("Tidak ada lagu dengan Id %d!\n", X);
+        return;
+    }
 
     printf("Masukkan ID lagu kedua: ");
     GetInput();
@@ -666,7 +718,11 @@ void PLAYLISTSWAP(ArrayDin *LP)
     int Y = WordToInt(currentWord);
     printf("%d\n", Y);
 
-    
+    if (Y <= 0 || Y > NbElmt(LP->A[id-1]))
+    {
+        printf("Tidak ada lagu dengan Id %d!\n", Y);
+        return;
+    }
 }
 
 void PLAYLISTREMOVE(ArrayDin *LP)
@@ -678,10 +734,22 @@ void PLAYLISTREMOVE(ArrayDin *LP)
     CompressInput();
     int id = WordToInt(currentWord);
 
+    if (id <= 0 || id > LP->Neff)
+    {
+        printf("Tidak ada playlist dengan id %d!\n", id);
+        return;
+    }
+
     printf("Masukkan ID lagu pertama: ");
     GetInput();
     CompressInput();
     int X = WordToInt(currentWord);
+
+    if (X <= 0 || X > NbElmt(LP->A[id-1]))
+    {
+        printf("Tidak ada lagu dengan Id %d!\n", X);
+        return;
+    }
 
     int i = 1;
     address Prev = Nil;
@@ -729,6 +797,12 @@ void PLAYLISTDELETE(ArrayDin *LP)
     GetInput();
     CompressInput();
     int id = WordToInt(currentWord);
+
+    if (id <= 0 || id > LP->Neff)
+    {
+        printf("Tidak ada playlist dengan id %d!\n", id);
+        return;
+    }
 
     if (id < LP->Neff)
     {

@@ -23,7 +23,7 @@ void STARTCONSOLE(Map* D, Set* A, Queue *QS, char* file); // done
 void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS); // done
 void LISTDEFAULT(Map *D, Set *P); // done
 void LISTPLAYLIST(ArrayDin PL); // done
-void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist); // done
+void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist); // done
 void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP); // done
 void QUEUESONG(Set *A, Map *D, Queue *QS); // done
 void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP); // done

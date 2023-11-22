@@ -49,7 +49,7 @@ int main()
             }
             else if (WordCompare(strToWord("PLAY SONG"), currentWord))
             {
-                PLAYSONG(&CURRSONG, &Penyanyi, &Data, &SONGQUEUE, &HISTORY);
+                PLAYSONG(&CURRSONG, &CURRPLAYLIST, &Penyanyi, &Data, &SONGQUEUE, &HISTORY);
             }
             else if (WordCompare(strToWord("PLAY PLAYLIST"), currentWord))
             {
