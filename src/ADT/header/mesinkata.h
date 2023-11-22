@@ -69,9 +69,13 @@ int WordToInt(Word w);
 
 Word strToWord(char* str);
 
+void WordToStr(Word w, char* input);
+
 void InsertWord(Word *t, Word w);
 
 void PRINTWORD(Word w);
+
+void PRINTWORD2(Word w);
 
 void ConcatString(char* res, char* a, char* b);
 

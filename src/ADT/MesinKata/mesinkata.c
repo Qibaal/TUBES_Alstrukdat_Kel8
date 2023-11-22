@@ -129,7 +129,8 @@ int WordToInt(Word w)
 {
     int res = 0;
     for (int i = 0; i < w.Length; ++i){
-        res = res * 10 + (w.TabWord[i] - '0');
+        if (w.TabWord[i] != ' ' || w.TabWord[i]  != '\n')
+            res = res * 10 + (w.TabWord[i] - '0');
     }
     return res;
 }
@@ -143,6 +144,14 @@ Word strToWord(char* str)
         t.Length++;
     }
     return t;
+}
+
+void WordToStr(Word w, char* input)
+{
+    int i;
+    for (i=0; i<w.Length; i++)
+        input[i] = w.TabWord[i];
+    input[i+1] = '\0';
 }
 
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu)
@@ -197,6 +206,15 @@ void PRINTWORD(Word w)
     printf("\n");
 }
 
+void PRINTWORD2(Word w)
+{
+    for (int i=0; i<w.Length; i++)
+    {
+        printf("%c", w.TabWord[i]);
+    }
+    printf(" ");
+}
+
 void ConcatString(char* res, char* a, char* b)
 {
     int i;
@@ -231,9 +249,12 @@ boolean WordCompare(Word w, Word input)
 
 void CompressInput()
 {
-   for (int i=0; i<currentWord.Length+1; i++)
+   if (currentWord.TabWord[0] == '\n' || currentWord.TabWord[0] == ' ')
    {
-      currentWord.TabWord[i] = currentWord.TabWord[i+1];
+        for (int i=1; i<currentWord.Length; i++)
+        {
+            currentWord.TabWord[i-1] = currentWord.TabWord[i];
+        }
    }
    currentWord.Length--;
 }

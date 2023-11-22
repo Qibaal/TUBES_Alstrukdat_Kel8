@@ -160,7 +160,7 @@ void DisplayAD(ArrayDin arr)
 
 //     DeleteAt(&a, 0);
 
-//     DisplayAD(a);
+//     DisplayAD(a); 
 
 //     printf("%d", LengthAD(a));
 

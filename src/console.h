@@ -17,40 +17,31 @@
 #include "ADT\header\stack.h"
 #include "ADT\header\info.h"
 
-// extern ArrayDin LOPlaylist; // list of playlists
-// extern List PlayList;
-// extern Map DATA;
-// extern Queue QOSongs; // queue of songs
-// extern Stack SongHistory; // history of played songs
-// extern Set Artists;
-// extern Info CurrSong;
 extern int jumlah_penyanyi, jumlah_album, jumlah_lagu; 
 
-
-void STARTCONSOLE(Map* D, Set* A, char* file);
-void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS);
-void LISTDEFAULT(Map *D, Set *P);
-void LISTPLAYLIST(ArrayDin PL);
-void PLAYSONG(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist);
-void PLAYPLAYLIST(Info *CURR, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP);
-void QUEUESONG(Set *A, Map *D, Queue *QS);
-void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP);
-void QUEUESWAP(Queue *QS, int x, int y);
-void QUEUEREMOVE(Queue *QS, int x);
-void QUEUECLEAR(Queue *QS);
-void SONGNEXT(Info *CURR, Queue *QS, Stack *hist);
-void SONGPREVIOUS();
-void PLAYLISTCREATE();
-void PLAYLISTADDSONG();
-void PLAYLISTADDALBUM();
-void PLAYLISTSWAP();
-void PLAYLISTREMOVE();
-void PLAYLISTDELETE();
-void STATUS();
-void SAVE();
-void QUIT();
-void HELP(boolean inSesh);
-boolean CHECKCOMMAND(Word W, boolean inSesh);
-void DISPLAY();
+void STARTCONSOLE(Map* D, Set* A, Queue *QS, char* file); // done
+void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS); // done
+void LISTDEFAULT(Map *D, Set *P); // done
+void LISTPLAYLIST(ArrayDin PL); // done
+void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist); // done
+void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP); // done
+void QUEUESONG(Set *A, Map *D, Queue *QS); // done
+void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP); // done
+void QUEUESWAP(Queue *QS); // done
+void QUEUEREMOVE(Queue *QS); // done
+void QUEUECLEAR(Queue *QS); // done
+void SONGNEXT(Info *CURR, Queue *QS, Stack *hist); // done
+void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist); // done
+void CREATEPLAYLIST(ArrayDin *LP); // done
+void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D); // done
+void ADDALBUMPLAYLIST(ArrayDin *LP, Set *A, Map *D); // done
+void PLAYLISTSWAP(ArrayDin *LP);
+void PLAYLISTREMOVE(ArrayDin *LP); // done
+void PLAYLISTDELETE(ArrayDin *LP); // done
+void STATUS(Info *CURR, Queue QS, Word *CURRPL); // done
+void SAVE(); 
+void QUIT(); // done (perlu di combine sm save)
+void HELP(boolean inSesh); // done
+boolean CHECKCOMMAND(Word W, boolean inSesh); // done
 
 #endif
