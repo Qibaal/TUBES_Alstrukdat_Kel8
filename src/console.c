@@ -732,7 +732,6 @@ void PLAYLISTSWAP(ArrayDin *LP)
     GetInput();
     CompressInput();
     int id = WordToInt(currentWord);
-    printf("%d\n", id);
 
     if (id <= 0 || id > LP->Neff)
     {
@@ -745,12 +744,24 @@ void PLAYLISTSWAP(ArrayDin *LP)
         printf("Playlist kosong!\n");
         return;
     }
+    /*Display lagu yang dimiliki pada album*/
+    printf("Lagu pada album ");
+    PRINTWORD(LP->A[id-1].Nama);
+    address PD = LP->A[id-1].First;
+    int carry = 1;
+    while (PD != Nil)
+    {
+        printf("    %d. ", carry);
+        PRINTWORD(InfoPlaylist(PD).Lagu);
+        PD = Next(PD);
+        carry++;
+    }
+    printf("\n");
 
     printf("Masukkan ID lagu pertama: ");
     GetInput();
     CompressInput();
     int X = WordToInt(currentWord);
-    printf("%d\n", X);
 
     if (X <= 0 || X > NbElmt(LP->A[id-1]))
     {
@@ -762,13 +773,63 @@ void PLAYLISTSWAP(ArrayDin *LP)
     GetInput();
     CompressInput();
     int Y = WordToInt(currentWord);
-    printf("%d\n", Y);
 
     if (Y <= 0 || Y > NbElmt(LP->A[id-1]))
     {
         printf("Tidak ada lagu dengan Id %d!\n", Y);
         return;
     }
+    /*Jika indeks penukaran sama maka langsung di return*/
+    if (X == Y)
+    {
+        printf("Tidak bisa menukar dengan elemen sendiri!\n");
+        return;
+    }
+    /*Traverse untuk dapatkan Info dari index ke-X*/
+    Info tempY;
+    address P = LP->A[id-1].First;
+    int i = 0;
+    while (P != Nil)
+    {
+        if (i == Y - 1)
+        {
+            CreateInfo(&tempY, InfoPlaylist(P).Penyanyi, InfoPlaylist(P).Album, InfoPlaylist(P).Lagu);
+            break;
+        }
+        else
+        {
+            i++;
+            P = Next(P);
+        }
+    }
+
+    /*Traverse untuk penukaran info*/
+    Info tempX;
+    P = LP->A[id-1].First;
+    i = 0;
+    while (P != Nil)
+    {
+        if (i == X - 1)
+        {
+            /*Storing ke tempx dan pengupdatean node ke-X*/
+            CreateInfo(&tempX, InfoPlaylist(P).Penyanyi, InfoPlaylist(P).Album, InfoPlaylist(P).Lagu);
+            CreateInfo(&InfoPlaylist(P), tempY.Penyanyi, tempY.Album, tempY.Lagu);
+        }
+        else if (i == Y - 1)
+        {
+            /*Pengupdatean node ke-Y*/
+            CreateInfo(&InfoPlaylist(P), tempX.Penyanyi, tempX.Album, tempX.Lagu);
+        }
+        i++;
+        P = Next(P);
+    }
+    // Berhasil menukar lagu dengan nama “Blue Bird” dengan “Silhouette” di playlist “Naruto Vibes 🥷”
+    printf("Berhasil menukar lagu dengan nama ");
+    PRINTWORD2(tempX.Lagu);
+    printf("dengan ");
+    PRINTWORD2(tempY.Lagu);
+    printf("di playlist ");
+    PRINTWORD(LP->A[id-1].Nama);
 }
 
 void PLAYLISTREMOVE(ArrayDin *LP)
@@ -809,9 +870,9 @@ void PLAYLISTREMOVE(ArrayDin *LP)
     if (X == 1)
     {
         printf("Lagu ");
-        PRINTWORD(InfoPlaylist(P).Lagu);
+        PRINTWORD2(InfoPlaylist(P).Lagu);
         printf("oleh ");
-        PRINTWORD(InfoPlaylist(P).Penyanyi);
+        PRINTWORD2(InfoPlaylist(P).Penyanyi);
         printf("telah dihapus dari playlist ");
         PRINTWORD(LP->A[id-1].Nama);
         DelFirst(&(*LP).A[id-1], &P);
