@@ -129,7 +129,8 @@ int WordToInt(Word w)
 {
     int res = 0;
     for (int i = 0; i < w.Length; ++i){
-        res = res * 10 + (w.TabWord[i] - '0');
+        if (w.TabWord[i] != ' ' || w.TabWord[i]  != '\n')
+            res = res * 10 + (w.TabWord[i] - '0');
     }
     return res;
 }

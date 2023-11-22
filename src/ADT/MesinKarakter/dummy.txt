@@ -35,7 +35,7 @@ Arctic Monkeys;AM;Arabella
 2
 Arctic Monkeys;Favourite Worst Nightmare;505
 BLACKPINK;BORN PINK;Pink Venom
-2
+3
 3 BLACKPINK My Top Three
 BLACKPINK;THE ALBUM;How You Like That
 BLACKPINK;BORN PINK;Typa Girl
@@ -46,3 +46,4 @@ Arctic Monkeys;AM;Do I Wanna Know?
 Arctic Monkeys;AM;Arabella
 Arctic Monkeys;Favourite Worst Nightmare;505
 Arctic Monkeys;Humbug;Pretty Visitors
+0 Mixed Playlist

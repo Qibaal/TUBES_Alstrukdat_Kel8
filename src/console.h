@@ -17,15 +17,7 @@
 #include "ADT\header\stack.h"
 #include "ADT\header\info.h"
 
-// extern ArrayDin LOPlaylist; // list of playlists
-// extern List PlayList;
-// extern Map DATA;
-// extern Queue QOSongs; // queue of songs
-// extern Stack SongHistory; // history of played songs
-// extern Set Artists;
-// extern Info CurrSong;
 extern int jumlah_penyanyi, jumlah_album, jumlah_lagu; 
-
 
 void STARTCONSOLE(Map* D, Set* A, Queue *QS, char* file); // done
 void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS); // done
