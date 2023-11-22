@@ -210,6 +210,13 @@ void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist)
     printf("Masukkan Nama Penyanyi yang dipilih : ");
     GetInput();
     CompressInput();
+    /* Cek apakah penyanyi ada atau tidak */
+    if (!IsMemberSet(*A, currentWord))
+    {
+        printf("Tidak ada penyanyi tersebut!\n");
+        return;
+    }
+
     printf("Daftar Album oleh ");
     PRINTWORD(currentWord);
 
@@ -223,6 +230,7 @@ void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist)
             c++;
         }
     }
+
     /*Ambil nama album*/
     printf("Masukkan Nama Album yang dipilih : ");
     GetInput();
@@ -236,6 +244,13 @@ void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist)
             found_album = true;
         i++;
     }
+    /*Handle album tidak ada*/
+    if (!found_album)
+    {
+        printf("Tidak ada album dengan nama tersebut!.\n");
+        return;
+    }
+
     printf("Daftar Lagu Album %s oleh %s :\n", D->Elements[i-1].Nama_Album.TabWord, D->Elements[i-1].Nama_Penyanyi.TabWord);
     for (int j=0; j<D->Elements[i-1].Info_Lagu.Count_Lagu; j++)
     {
@@ -332,6 +347,13 @@ void QUEUESONG(Set *A, Map *D, Queue *QS)
     printf("Masukkan Nama Penyanyi yang dipilih : ");
     GetInput();
     CompressInput();
+    /* Cek apakah penyanyi ada atau tidak */
+    if (!IsMemberSet(*A, currentWord))
+    {
+        printf("Tidak ada penyanyi tersebut!\n");
+        return;
+    }
+
     printf("Daftar Album oleh ");
     PRINTWORD(currentWord);
 
@@ -358,6 +380,13 @@ void QUEUESONG(Set *A, Map *D, Queue *QS)
             found_album = true;
         i++;
     }
+    /*Handle album tidak ada*/
+    if (!found_album)
+    {
+        printf("Tidak ada album dengan nama tersebut!.\n");
+        return;
+    }
+    
     printf("Daftar Lagu Album %s oleh %s :\n", D->Elements[i-1].Nama_Album.TabWord, D->Elements[i-1].Nama_Penyanyi.TabWord);
     for (int j=0; j<D->Elements[i-1].Info_Lagu.Count_Lagu; j++)
     {
