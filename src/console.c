@@ -437,6 +437,12 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
         printf("tidak ada playlist dengan id %d!\n", i_pl);
         return;
     }
+    /*Handle jika playlist kosong*/
+    if (NbElmt(LP->A[i_pl-1]) == 0)
+    {
+        printf("Playlist kosong!\n");
+        return;
+    }
 
     printf("Berhasil menambahkan playlist ");
     PRINTWORD2(LP->A[i_pl-1].Nama);
@@ -733,6 +739,12 @@ void PLAYLISTSWAP(ArrayDin *LP)
         printf("Tidak ada playlist dengan id %d!\n", id);
         return;
     }
+    /*Handle jika playlist kosong*/
+    if (NbElmt(LP->A[id-1]) == 0)
+    {
+        printf("Playlist kosong!\n");
+        return;
+    }
 
     printf("Masukkan ID lagu pertama: ");
     GetInput();
@@ -771,6 +783,12 @@ void PLAYLISTREMOVE(ArrayDin *LP)
     if (id <= 0 || id > LP->Neff)
     {
         printf("Tidak ada playlist dengan id %d!\n", id);
+        return;
+    }
+    /*Handle jika playlist kosong*/
+    if (NbElmt(LP->A[id-1]) == 0)
+    {
+        printf("Playlist kosong!\n");
         return;
     }
 
