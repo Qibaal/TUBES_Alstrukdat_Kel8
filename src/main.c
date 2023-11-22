@@ -18,20 +18,23 @@ int main()
     
     while (true)
     {
-        printf(">> "); GetInput(); CompressInput();
+        printf("\n>> "); GetInput(); CompressInput();
         /* Setiap memasukan input (every loop di check validitas) */
         if (CHECKCOMMAND(currentWord, Session))
         {
             /*Matching dengan command yang ada*/
             if (WordCompare(strToWord("START"), currentWord))
             {
-                printf("Masukkan nama file config: ");
-                GetInput(); CompressInput();
-                WordToStr(currentWord, file);
-                STARTCONSOLE(&Data, &Penyanyi, file);
+                STARTCONSOLE(&Data, &Penyanyi, &SONGQUEUE, "konfigurasi.txt");
+                printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
+                Session = true;
             }
             else if (WordCompare(strToWord("LOAD"), currentWord))
             {
+                printf("Masukkan nama file untuk di Load: ");
+                GetInput(); CompressInput();
+                WordToStr(currentWord, file);
+                STARTCONSOLE(&Data, &Penyanyi, &SONGQUEUE, file);
                 LOAD(&PLAYLISTS, &CURRSONG, &HISTORY, &SONGQUEUE);
                 printf("Load Berhasil!\n");
                 Session = true;

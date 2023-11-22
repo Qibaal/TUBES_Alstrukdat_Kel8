@@ -1,13 +1,12 @@
 #include "console.h"
 
-int jumlah_penyanyi, jumlah_album, jumlah_lagu;
+int jumlah_penyanyi, jumlah_album, jumlah_lagu;   
 
-Word WSTART, WLOAD, WLISTD, WLISTP, WPLAYS, WPLAYP, WQSONG, WQPL, WQSWAP, WQREMOVE, WQC, WSNEXT, WSPREV, WPCREATE, WPADDS, WPADDA, WPSWAP, WPREMOVE, WPDELETE, WSTATUS, WSAVE, WQUIT, WHELP;    
-
-void STARTCONSOLE(Map* D, Set* A, char* file)
+void STARTCONSOLE(Map* D, Set* A, Queue *QS, char* file)
 {
     CreateEmptyMap(D);
     CreateEmptySet(A);
+    CreateQueue(QS);
     /*Pembentukan path file untuk di read*/
     char pth[] = "ADT/MesinKarakter/", dest[MaxEl];
     ConcatString(dest, pth, file);
@@ -44,7 +43,6 @@ void STARTCONSOLE(Map* D, Set* A, char* file)
             D->Count_Album++;
         }
     }
-    printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
 }
 
 void LOAD(ArrayDin *LOP, Info *curr, Stack *hist, Queue *QS)
@@ -379,7 +377,7 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
     int i_pl = WordToInt(currentWord);
 
     printf("Berhasil menambahkan playlist ");
-    PRINTWORD(LP->A[i_pl-1].Nama);
+    PRINTWORD2(LP->A[i_pl-1].Nama);
     printf(" ke queue.\n");
 
     address P = LP->A[i_pl-1].First;
@@ -396,15 +394,17 @@ void QUEUESWAP(Queue *QS)
     printf("Masukkan x: ");
     GetInput(); CompressInput();
     int X = WordToInt(currentWord);
+    printf("%d\n", X);
 
     printf("Masukkan y: ");
     GetInput(); CompressInput();
     int Y = WordToInt(currentWord);
+    printf("%d\n", Y);
 
     printf("Lagu ");
-    PRINTWORD(QS->buffer[X].Lagu);
+    PRINTWORD2(QS->buffer[X-1].Lagu);
     printf("berhasil ditukar dengan ");
-    PRINTWORD(QS->buffer[Y].Lagu);
+    PRINTWORD(QS->buffer[Y-1].Lagu);
     printf("\n");
     /*Swap lagu dengan swap queue*/
     SwapQueue(QS, X, Y);
@@ -418,13 +418,21 @@ void QUEUEREMOVE(Queue *QS)
     GetInput(); CompressInput();
     int X = WordToInt(currentWord);
 
-    printf("Lagu ");
-    PRINTWORD(QS->buffer[X].Lagu);
-    printf(" oleh ");
-    PRINTWORD(QS->buffer[X].Penyanyi);
-    printf("telah dihapus dari queue!\n");
+    if (X > length(*QS))
+    {
+        /*Bakal throw error*/
+        printf("Lagu dengan ID %d Tidak ada!\n", X);
+    }
+    else
+    {
+        printf("Lagu ");
+        PRINTWORD2(QS->buffer[X-1].Lagu);
+        printf("oleh ");
+        PRINTWORD2(QS->buffer[X-1].Penyanyi);
+        printf("telah dihapus dari queue!\n");
 
-    RemoveQueue(QS, &temp, X);
+        RemoveQueue(QS, &temp, X);
+    }
 }
 
 void QUEUECLEAR(Queue *QS)
@@ -448,9 +456,9 @@ void SONGNEXT(Info *CURR, Queue *QS, Stack *hist)
         Push(hist, *CURR);
         dequeue(QS, CURR);
     }
-    PRINTWORD(CURR->Lagu);
-    printf(" oleh ");
-    PRINTWORD(CURR->Penyanyi);
+    PRINTWORD2(CURR->Lagu);
+    printf("oleh ");
+    PRINTWORD2(CURR->Penyanyi);
 }
 
 void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist)
@@ -484,7 +492,7 @@ void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist)
 
         /*Curr song adalah lagu terakhir dari stack*/
         CreateInfo(CURR, iTemp.Penyanyi, iTemp.Album, iTemp.Lagu);
-        printf("Memutar lagu sebelumnya\n");
+        printf("Memutar lagu sebelumnya: ");
     }
     PRINTWORD(CURR->Lagu);
     printf("oleh ");
@@ -571,11 +579,11 @@ void ADDSONGPLAYLIST(ArrayDin *LP, Set *A, Map *D)
     
     /*Print info penambahan pada playlist*/
     printf("Lagu dengan judul ");
-    PRINTWORD(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
+    PRINTWORD2(D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
     printf("pada album ");
-    PRINTWORD(D->Elements[i-1].Nama_Album);
+    PRINTWORD2(D->Elements[i-1].Nama_Album);
     printf("oleh penyanyi ");
-    PRINTWORD(D->Elements[i-1].Nama_Penyanyi);
+    PRINTWORD2(D->Elements[i-1].Nama_Penyanyi);
     printf("berhasil ditambahkan ke dalam playlist ");
     PRINTWORD(LP->A[i_pl-1].Nama);
 }
@@ -695,9 +703,9 @@ void PLAYLISTREMOVE(ArrayDin *LP)
             if (i == X - 1)
             {
                 printf("Lagu ");
-                PRINTWORD(InfoPlaylist(Next(P)).Lagu);
+                PRINTWORD2(InfoPlaylist(Next(P)).Lagu);
                 printf("oleh ");
-                PRINTWORD(InfoPlaylist(Next(P)).Penyanyi);
+                PRINTWORD2(InfoPlaylist(Next(P)).Penyanyi);
                 printf("telah dihapus dari playlist ");
                 PRINTWORD(LP->A[id-1].Nama);
                 break;
@@ -784,7 +792,7 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");
-    if (!inSesh)
+    if (inSesh)
     {
         printf("    1. LIST -> Untuk menampilkandaftar lagu, playlist, daftar penyanyi, album, dan daftar lagu yang ada di album.\n");
         printf("    2. PLAY -> Untuk memutar lagu atau playlist yang dipilih.\n");
@@ -823,6 +831,8 @@ boolean CHECKCOMMAND(Word W, boolean inSesh)
     {
         /*Jika belum masuk session dan memilih command selain start & load*/
         /* ATAU Memilih start / load ketika sudah masuk session*/
+        /* untuk help */
+        if (i == 22) return true;
         if ((!inSesh && (i>1) || (inSesh && (i<2))))
         {
             printf("Command tidak bisa dieksekusi!\n");
