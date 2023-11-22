@@ -145,6 +145,14 @@ Word strToWord(char* str)
     return t;
 }
 
+void WordToStr(Word w, char* input)
+{
+    int i;
+    for (i=0; i<w.Length; i++)
+        input[i] = w.TabWord[i];
+    input[i+1] = '\0';
+}
+
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu)
 {
     ADVNEXT(false);
@@ -240,9 +248,12 @@ boolean WordCompare(Word w, Word input)
 
 void CompressInput()
 {
-   for (int i=0; i<currentWord.Length+1; i++)
+   if (currentWord.TabWord[0] == '\n' || currentWord.TabWord[0] == ' ')
    {
-      currentWord.TabWord[i] = currentWord.TabWord[i+1];
+        for (int i=1; i<currentWord.Length; i++)
+        {
+            currentWord.TabWord[i-1] = currentWord.TabWord[i];
+        }
    }
    currentWord.Length--;
 }

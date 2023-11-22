@@ -1,12 +1,5 @@
 #include "console.h"
 
-// ArrayDin LOPlaylist;
-// List PlayList;
-// Map DATA;
-// Queue QOSongs;
-// Stack SongHistory;
-// Set Artists;
-// Info CurrSong;
 int jumlah_penyanyi, jumlah_album, jumlah_lagu;
 
 Word WSTART, WLOAD, WLISTD, WLISTP, WPLAYS, WPLAYP, WQSONG, WQPL, WQSWAP, WQREMOVE, WQC, WSNEXT, WSPREV, WPCREATE, WPADDS, WPADDA, WPSWAP, WPREMOVE, WPDELETE, WSTATUS, WSAVE, WQUIT, WHELP;    
@@ -110,6 +103,7 @@ void LISTDEFAULT(Map *D, Set *P)
     printf("Ingin melihat album yang ada?(Y/N): ");
     /*pilih ingin melihat atau tidak*/
     GetInput();
+    CompressInput();
 
     if (WordCompare(Y, currentWord))
     {
@@ -397,28 +391,40 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
     }
 }
 
-void QUEUESWAP(Queue *QS, int x, int y)
+void QUEUESWAP(Queue *QS)
 {
+    printf("Masukkan x: ");
+    GetInput(); CompressInput();
+    int X = WordToInt(currentWord);
+
+    printf("Masukkan y: ");
+    GetInput(); CompressInput();
+    int Y = WordToInt(currentWord);
+
     printf("Lagu ");
-    PRINTWORD(QS->buffer[x].Lagu);
+    PRINTWORD(QS->buffer[X].Lagu);
     printf("berhasil ditukar dengan ");
-    PRINTWORD(QS->buffer[y].Lagu);
+    PRINTWORD(QS->buffer[Y].Lagu);
     printf("\n");
     /*Swap lagu dengan swap queue*/
-    SwapQueue(QS, x, y);
+    SwapQueue(QS, X, Y);
 }
 
-void QUEUEREMOVE(Queue *QS, int x)
+void QUEUEREMOVE(Queue *QS)
 {
     Info temp;
 
+    printf("Masukkan x: ");
+    GetInput(); CompressInput();
+    int X = WordToInt(currentWord);
+
     printf("Lagu ");
-    PRINTWORD(QS->buffer[x].Lagu);
+    PRINTWORD(QS->buffer[X].Lagu);
     printf(" oleh ");
-    PRINTWORD(QS->buffer[x].Penyanyi);
+    PRINTWORD(QS->buffer[X].Penyanyi);
     printf("telah dihapus dari queue!\n");
 
-    RemoveQueue(QS, &temp, x);
+    RemoveQueue(QS, &temp, X);
 }
 
 void QUEUECLEAR(Queue *QS)
@@ -463,8 +469,6 @@ void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist)
             dequeue(QS, &iTemp);
             enqueue(&temp, iTemp);
         }
-        /*Ngambil lagu terakhir dari stack*/
-        Pop(hist, &iTemp);
 
         /*Masukin lagi ke queue main dengan first el adalah curr song terakhir*/
         enqueue(QS, *CURR);
@@ -473,6 +477,10 @@ void SONGPREVIOUS(Info *CURR, Queue *QS, Stack *hist)
             dequeue(&temp, &iTemp);
             enqueue(QS, iTemp);
         }
+
+        /*Ngambil lagu terakhir dari stack*/
+        Pop(hist, &iTemp);
+
 
         /*Curr song adalah lagu terakhir dari stack*/
         CreateInfo(CURR, iTemp.Penyanyi, iTemp.Album, iTemp.Lagu);
@@ -497,7 +505,7 @@ void CREATEPLAYLIST(ArrayDin *LP)
     PRINTWORD(currentWord);
     printf("berhasil dibuat!\n");
     printf("Silakan masukkan lagu - lagu artis terkini kesayangan Anda!\n");
-
+    printf("\n");
     LISTPLAYLIST(*LP);
 }
 
@@ -636,18 +644,21 @@ void PLAYLISTSWAP(ArrayDin *LP)
     GetInput();
     CompressInput();
     int id = WordToInt(currentWord);
+    printf("%d\n", id);
 
     printf("Masukkan ID lagu pertama: ");
     GetInput();
     CompressInput();
     int X = WordToInt(currentWord);
+    printf("%d\n", X);
 
     printf("Masukkan ID lagu kedua: ");
     GetInput();
     CompressInput();
     int Y = WordToInt(currentWord);
+    printf("%d\n", Y);
 
-    printf("%d, %d, %d\n", id, X, Y);
+    
 }
 
 void PLAYLISTREMOVE(ArrayDin *LP)
@@ -729,7 +740,7 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
 
     if (CURRPL->Length != 0)
     {
-        printf("Current Playlist: ");
+        printf("\nCurrent Playlist: ");
         PRINTWORD(*CURRPL);
     }
     printf("\n");
@@ -746,7 +757,7 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
     {
         printf("No songs have been played yet. Please search for a song to begin playback.\n");
     }
-    printf("\n");
+    printf("\n\n");
     printf("Queue:\n");
     if (!isEmptyQ(QS))
     {
@@ -755,11 +766,11 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
         {
             dequeue(&QS, &temp);
             printf("%d. ", i);
-            PRINTWORD2(CURR->Penyanyi);
+            PRINTWORD2(temp.Penyanyi);
             printf("- ");
-            PRINTWORD2(CURR->Lagu);
+            PRINTWORD2(temp.Lagu);
             printf("- ");
-            PRINTWORD2(CURR->Album);
+            PRINTWORD2(temp.Album);
             printf("\n");
             i++;
         }
@@ -792,7 +803,6 @@ void HELP(boolean inSesh)
     }
 }
 
-
 boolean CHECKCOMMAND(Word W, boolean inSesh)
 {
     char l[MaxEl][MaxEl] = {"START", "LOAD", "LIST DEFAULT", "LIST PLAYLIST", 
@@ -809,7 +819,6 @@ boolean CHECKCOMMAND(Word W, boolean inSesh)
         else 
             i++;
     }
-    printf("%d\n", i);
     if (found)
     {
         /*Jika belum masuk session dan memilih command selain start & load*/

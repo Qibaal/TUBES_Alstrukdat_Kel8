@@ -69,6 +69,8 @@ int WordToInt(Word w);
 
 Word strToWord(char* str);
 
+void WordToStr(Word w, char* input);
+
 void InsertWord(Word *t, Word w);
 
 void PRINTWORD(Word w);
