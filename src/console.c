@@ -8,7 +8,7 @@ void STARTCONSOLE(Map* D, Set* A, Queue *QS, char* file)
     CreateEmptySet(A);
     CreateQueue(QS);
     /*Pembentukan path file untuk di read*/
-    char pth[] = "../save/", dest[MaxEl];
+    char pth[] = "save/", dest[MaxEl];
     ConcatString(dest, pth, file);
     /*start pembacaan untuk file*/
     STARTWORD(dest);
@@ -976,12 +976,25 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
     }
 }
 
-// void SAVE()
-// {
-//     FILE *fs;
-//     fs = fopen();
-//     printf("Save dengan file %s berhasil!\n");
-// }
+void SAVE()
+{
+    FILE *fs;
+    char sfile[NMax];
+
+    printf("Masukkan nama file untuk di save: ");
+    GetInput(); CompressInput();
+
+    WordToStr(currentWord, sfile);
+    char pth[] = "save/", dest[MaxEl];
+    ConcatString(dest, pth, sfile);
+
+    fs = fopen(sfile, "w");
+
+    fprintf(fs, "%s %s %d\n", "halo", "berhasil", 22);
+
+    fclose(fs);
+    printf("Save dengan file %s berhasil!\n", sfile);
+}
 
 void HELP(boolean inSesh)
 {

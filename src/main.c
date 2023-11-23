@@ -121,6 +121,13 @@ int main()
             }
             else if(WordCompare(strToWord("QUIT"), currentWord))
             {
+                printf("ingin save? (Y/N): ");
+                GetInput(); CompressInput();
+
+                if (WordCompare(strToWord("Y"), currentWord))
+                {
+                    SAVE();
+                }
                 printf("Selamat tinggal");
                 Session = false;
                 exit(0);
@@ -128,11 +135,6 @@ int main()
             else
             {
                 printf("Input Tidak Valid! Silahkan masukkan command lagi: \n");
-                // printf(">> "); GetInput(); CompressInput();
-                // while (!CHECKCOMMAND(currentWord, Session))
-                // {
-
-                // }
             }
         }
     }
