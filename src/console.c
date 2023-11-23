@@ -8,7 +8,7 @@ void STARTCONSOLE(Map* D, Set* A, Queue *QS, char* file)
     CreateEmptySet(A);
     CreateQueue(QS);
     /*Pembentukan path file untuk di read*/
-    char pth[] = "ADT/MesinKarakter/", dest[MaxEl];
+    char pth[] = "../save/", dest[MaxEl];
     ConcatString(dest, pth, file);
     /*start pembacaan untuk file*/
     STARTWORD(dest);
@@ -976,6 +976,13 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
     }
 }
 
+// void SAVE()
+// {
+//     FILE *fs;
+//     fs = fopen();
+//     printf("Save dengan file %s berhasil!\n");
+// }
+
 void HELP(boolean inSesh)
 {
     printf("=====[ Menu Help WayangWave ]=====\n");
@@ -1033,4 +1040,20 @@ boolean CHECKCOMMAND(Word W, boolean inSesh)
         printf("Command tidak diketahui!\n");
         return false;
     }
+}
+
+void DISPLAYBANNER()
+{
+    printf("__       __                                                          __       __\n");                               
+    printf("|  \\  _  |  \\                                                        |  \\  _  |  \\ \n");                              
+    printf("| $$ / \\ | $$  ______   __    __   ______   _______    ______        | $$ / \\ | $$  ______  __     __   ______\n");  
+    printf("| $$/  $\\| $$ |      \\ |  \\  |  \\ |      \\ |       \\  /      \\       | $$/  $\\| $$ |      \\|  \\   /  \\ /      \\ \n"); 
+    printf("| $$  $$$\\ $$  \\$$$$$$\\| $$  | $$  \\$$$$$$\\| $$$$$$$\\|  $$$$$$\\      | $$  $$$\\ $$  \\$$$$$$\\$$\\ /  $$|  $$$$$$\\\n");
+    printf("| $$ $$\\$$\\$$ /      $$| $$  | $$ /      $$| $$  | $$| $$  | $$      | $$ $$\\$$\\$$ /      $$ \\$$\\  $$ | $$    $$\\\n");
+    printf("| $$$$  \\$$$$|  $$$$$$$| $$__/ $$|  $$$$$$$| $$  | $$| $$__| $$      | $$$$  \\$$$$|  $$$$$$$  \\$$ $$  | $$$$$$$$\n");
+    printf("| $$$    \\$$$ \\$$    $$ \\$$    $$ \\$$    $$| $$  | $$ \\$$    $$      | $$$    \\$$$ \\$$    $$   \\$$$    \\$$     \\\n");
+    printf(" \\$$      \\$$  \\$$$$$$$ _\\$$$$$$$  \\$$$$$$$ \\$$   \\$$ _\\$$$$$$$       \\$$      \\$$  \\$$$$$$$    \\$      \\$$$$$$$\n");
+    printf("                       |  \\__| $$                    |  \\__| $$\n");                                                 
+    printf("                        \\$$    $$                     \\$$    $$\n");                                                 
+    printf("                         \\$$$$$$                       \\$$$$$$$\n");                                                 
 }

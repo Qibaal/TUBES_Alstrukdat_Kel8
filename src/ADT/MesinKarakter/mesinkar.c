@@ -10,6 +10,7 @@ boolean EOL;
 
 static FILE *pita;
 int retval = 1;
+
 /*path ke dummy txt tergantung dari cd co: ini karena run di src*/
 // char s[] = "ADT/MesinKarakter/dummy.txt";
 

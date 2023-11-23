@@ -16,6 +16,8 @@ int main()
     boolean Session = false;
     char file[NMax];
     
+    /*Inisiasi Program*/
+    DISPLAYBANNER();
     while (true)
     {
         printf("\n>> "); GetInput(); CompressInput();
