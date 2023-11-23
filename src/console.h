@@ -25,7 +25,7 @@ void LISTDEFAULT(Map *D, Set *P); // done
 void LISTPLAYLIST(ArrayDin PL); // done
 void PLAYSONG(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist); // done
 void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hist, ArrayDin *LP); // done
-void QUEUESONG(Set *A, Map *D, Queue *QS); // done
+void QUEUESONG(Set *A, Map *D, Queue *QS, Word *CURRPL); // done
 void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP); // done
 void QUEUESWAP(Queue *QS); // done
 void QUEUEREMOVE(Queue *QS); // done
@@ -39,8 +39,8 @@ void PLAYLISTSWAP(ArrayDin *LP);
 void PLAYLISTREMOVE(ArrayDin *LP); // done
 void PLAYLISTDELETE(ArrayDin *LP); // done
 void STATUS(Info *CURR, Queue QS, Word *CURRPL); // done
-void SAVE(); 
 void QUIT(); // done (perlu di combine sm save)
+void SAVE(Map *D, Set *A, Info *CURR,  Queue QS, Stack hist, ArrayDin *LP);
 void HELP(boolean inSesh); // done
 boolean CHECKCOMMAND(Word W, boolean inSesh); // done
 void DISPLAYBANNER(); // done

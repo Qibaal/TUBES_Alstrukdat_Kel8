@@ -339,7 +339,7 @@ void PLAYPLAYLIST(Info *CURR, Word *CURRPL, Set *A, Map *D, Queue *QS, Stack *hi
     }
 }
 
-void QUEUESONG(Set *A, Map *D, Queue *QS)
+void QUEUESONG(Set *A, Map *D, Queue *QS, Word *CURRPL)
 {
     Info temp;
 
@@ -418,6 +418,9 @@ void QUEUESONG(Set *A, Map *D, Queue *QS)
     /*Enqueue song*/
     CreateInfo(&temp, D->Elements[i-1].Nama_Penyanyi, D->Elements[i-1].Nama_Album, D->Elements[i-1].Info_Lagu.Elements[i_lagu-1]);
     enqueue(QS, temp);
+
+    /*Penghapusan status current playlist*/
+    CURRPL->Length = 0;
 }
 
 void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
@@ -455,6 +458,7 @@ void QUEUEPLAYLIST(Set *A, Map *D, Queue *QS, ArrayDin *LP)
         enqueue(QS, temp);
         P = Next(P);
     }
+
 }
 
 void QUEUESWAP(Queue *QS)
@@ -976,22 +980,88 @@ void STATUS(Info *CURR, Queue QS, Word *CURRPL)
     }
 }
 
-void SAVE()
+void SAVE(Map *D, Set *A, Info *CURR,  Queue QS, Stack hist, ArrayDin *LP)
 {
     FILE *fs;
+    char temp[NMax];
     char sfile[NMax];
+    int c_album = 0;
 
     printf("Masukkan nama file untuk di save: ");
     GetInput(); CompressInput();
 
     WordToStr(currentWord, sfile);
-    char pth[] = "save/", dest[MaxEl];
+    char pth[] = "/save/", dest[MaxEl];
     ConcatString(dest, pth, sfile);
 
     fs = fopen(sfile, "w");
+    /*Tulis jumlah penyanyi*/
+    fprintf(fs, "%d\n", A->Count_Lagu);
+    /*Tulis info untuk penyanyi*/
+    for (int i=0; i<A->Count_Lagu; i++)
+    {
+        for (int j=0; j<D->Count_Album; j++)
+        {
+            if (WordCompare(A->Elements[i], D->Elements[j].Nama_Penyanyi))
+            {
+                c_album++;
+            }
+        }
+        /*Print jumlah album yang dimiliki oleh penyanyi dan nama penyanyi*/
+        fprintf(fs, "%d %s\n", c_album, WordToStr2(A->Elements[i]));
+        for (int j=0; j<D->Count_Album; j++)
+        {
+            if (WordCompare(A->Elements[i], D->Elements[j].Nama_Penyanyi))
+            {
+                /*Tulis jumlah lagu dalam album dan nama album*/
+                fprintf(fs, "%d %s\n", D->Elements[j].Info_Lagu.Count_Lagu);
+                for (int k=0; k<D->Elements[j].Info_Lagu.Count_Lagu; k++)
+                {
+                    /*Tulis nama-nama lagu*/
+                    fprintf(fs, "%s\n", WordToStr2(D->Elements[j].Info_Lagu.Elements[k]));
+                }
+            }
+        }
+        /*Reset ke 0 untuk penghitungan artis berikutnya*/
+        c_album = 0;
+    }
 
-    fprintf(fs, "%s %s %d\n", "halo", "berhasil", 22);
-
+    /*Tulis Current song*/
+    fprintf(fs, "%s;%s;%s\n", WordToStr2(CURR->Penyanyi), WordToStr2(CURR->Album), WordToStr2(CURR->Lagu));
+    /*Tulis jumlah dan isi queue*/
+    Info ITEMP;
+    if (length(QS) != 0)
+    {
+        fprintf(fs, "%d\n", length(QS));
+    }
+    for (int i=0; i<length(QS); i++)
+    {
+        dequeue(&QS, &ITEMP);
+        fprintf(fs, "%s;%s;%s\n", WordToStr2(ITEMP.Penyanyi), WordToStr2(ITEMP.Album), WordToStr2(ITEMP.Lagu));
+    }
+    /*Tulis jumlah isi history*/
+    if (LengthStack(hist) != 0)
+    {
+        fprintf(fs, "%d\n", LengthStack(hist));
+    }
+    for (int i=0; i<LengthStack(hist); i++)
+    {
+        Pop(&hist, &ITEMP);
+        fprintf(fs, "%s;%s;%s\n", WordToStr2(ITEMP.Penyanyi), WordToStr2(ITEMP.Album), WordToStr2(ITEMP.Lagu));
+    }
+    /*Print isi playlist*/
+    fprintf(fs, "%d\n", LP->Neff);
+    for (int i=0; i<LP->Neff; i++)
+    {
+        fprintf(fs, "%d %s\n", NbElmt(LP->A[i]), WordToStr2(LP->A[i].Nama));
+        /*Print info lagu dari playlist*/
+        address P = LP->A[i].First;
+        for (int j=0; j<NbElmt(LP->A[i]); j++)
+        {
+            fprintf(fs, "%s;%s;%s\n", WordToStr2(InfoPlaylist(P).Penyanyi), WordToStr2(InfoPlaylist(P).Album), WordToStr2(InfoPlaylist(P).Lagu));
+            P = Next(P);
+        }
+    }
     fclose(fs);
     printf("Save dengan file %s berhasil!\n", sfile);
 }

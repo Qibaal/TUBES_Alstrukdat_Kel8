@@ -59,7 +59,7 @@ int main()
             }
             else if (WordCompare(strToWord("QUEUE SONG"), currentWord))
             {
-                QUEUESONG(&Penyanyi, &Data, &SONGQUEUE);
+                QUEUESONG(&Penyanyi, &Data, &SONGQUEUE, &CURRPLAYLIST);
             }
             else if (WordCompare(strToWord("QUEUE PLAYLIST"), currentWord))
             {
@@ -126,7 +126,7 @@ int main()
 
                 if (WordCompare(strToWord("Y"), currentWord))
                 {
-                    SAVE();
+                    SAVE(&Data, &Penyanyi, &CURRSONG, SONGQUEUE, HISTORY, &PLAYLISTS);
                 }
                 printf("Selamat tinggal");
                 Session = false;
