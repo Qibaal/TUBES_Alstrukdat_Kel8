@@ -19,7 +19,7 @@
 <h2>📂Folder Structure</h2>
   <p>Berikut merupakan rangkaian struktur dari tugas besar kami.</p>
   <ul type = "circle">
-    <li> folder `bin` berisikan `..` dan `makefile` untuk melakukan kompilasi terhadap program utama.</li>
+    <li> folder <mark>bin</mark> berisikan `..` dan `makefile` untuk melakukan kompilasi terhadap program utama.</li>
     <li> folder `src` berisikan : 
         <ul type = "square">
           <li> folder `ADT` yang berisikan header yang kami butuhkan untuk program.</li>
