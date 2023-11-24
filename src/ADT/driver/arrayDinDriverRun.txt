@@ -1,0 +1,2 @@
+gcc .\arrayDinDriver.c ..\ListDin\arrayDin.c ..\ListLinier\listsirkuler.c ..\Info\info.c ..\Set\set.c ..\MesinKarakter\mesinkar.c ..\MesinKata\mesinkata.c -o a
+.\a

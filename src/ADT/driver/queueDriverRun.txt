@@ -1,0 +1,2 @@
+gcc .\queueDriver.c ..\Queue\queue.c ..\Info\info.c ..\MesinKarakter\mesinkar.c ..\MesinKata\mesinkata.c -o a
+.\a

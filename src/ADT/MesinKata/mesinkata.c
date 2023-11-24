@@ -151,7 +151,7 @@ void WordToStr(Word w, char* input)
     int i;
     for (i=0; i<w.Length; i++)
         input[i] = w.TabWord[i];
-    input[i+1] = '\0';
+    input[i] = '\0';
 }
 
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu)

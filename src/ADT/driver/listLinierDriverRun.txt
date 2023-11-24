@@ -1,0 +1,2 @@
+ gcc .\listLinierDriver.c ..\ListLinier\listsirkuler.c ..\Info\info.c ..\Set\set.c ..\MesinKata\mesinkata.c ..\MesinKarakter\mesinkar.c -o a
+ .\a
