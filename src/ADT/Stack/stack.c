@@ -13,8 +13,13 @@ boolean IsEmptyStack(Stack S)
 
 int LengthStack(Stack S) 
 {
-    if (IsEmptyStack(S)) return 0;
-    else return Top(S) + 1;
+    int res = 0; Info temp;
+    while (!IsEmptyStack(S))
+    {
+        Pop(&S, &temp);
+        res++;
+    }
+    return res;
 }
 
 boolean IsFullStack(Stack S) 

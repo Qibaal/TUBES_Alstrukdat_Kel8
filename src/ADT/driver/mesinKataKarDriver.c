@@ -19,6 +19,8 @@ int main()
 
     if (WordCompare(w1,w2)) printf("sama\n");
     else printf("ngga\n");
+    PRINTWORD(w1);
+    PRINTWORD(w2);
 
     return 0;
 }

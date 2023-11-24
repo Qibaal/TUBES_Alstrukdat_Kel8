@@ -125,7 +125,7 @@ int main()
                 GetInput(); CompressInput();
                 if (WordCompare(strToWord("Y"), currentWord))
                 {
-                //     SAVE(&Data, &Penyanyi, &CURRSONG, SONGQUEUE, HISTORY, &PLAYLISTS);
+                    SAVE(&Data, &Penyanyi, &CURRSONG, SONGQUEUE, HISTORY, PLAYLISTS);
                 }
                 printf("Selamat tinggal");
                 Session = false;

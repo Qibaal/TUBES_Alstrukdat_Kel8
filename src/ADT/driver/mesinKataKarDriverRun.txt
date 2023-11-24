@@ -1,0 +1,2 @@
+ gcc .\mesinKataDriver.c ..\MesinKata\mesinkata.c ..\MesinKarakter\mesinkar.c -o a
+ .\a

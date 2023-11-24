@@ -61,25 +61,3 @@ void PrintMap(Map M)
         printf("///////////////////\n");
     }
 }
-// int main() {
-//     Map m; CreateEmpty(&m);
-//     InsertAlbum(&m, "Adli", "Apres");
-//     InsertAlbum(&m, "Iqbal", "gokil");
-//     // InsertAlbum(&m, "Radya", "Daffa");
-//     // InsertAlbum(&m, "Farras", "Razin");
-//     // InsertAlbum(&m, "Raihan", "Razin");
-//     printf("%d\n", m.Count_Album);
-//     // int n = m.Elements[m.Count_Album-1].Info_Lagu.Count_Lagu;
-//     // CreateEmptySet(&m.Elements[m.Count_Album].Info_Lagu);
-//     // InsertSet(&m.Elements[m.Count_Album-1].Info_Lagu, "lagu keren");
-//     // InsertSet(&m.Elements[m.Count_Album-1].Info_Lagu, "lagu keren2");
-//     // for (int i=0; i<3; i++)
-//     // {
-//     //     InsertLagu(&m, "lagu1", n);
-//     //     InsertLagu(&m, "lagu2", n);
-//     //     InsertLagu(&m, "lagu3", n);
-//     // }
-//     PrintMap(m);
-
-//     return 0;
-// }
