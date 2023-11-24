@@ -40,7 +40,7 @@ void PLAYLISTREMOVE(ArrayDin *LP); // done
 void PLAYLISTDELETE(ArrayDin *LP); // done
 void STATUS(Info *CURR, Queue QS, Word *CURRPL); // done
 void QUIT(); // done (perlu di combine sm save)
-void SAVE(Map *D, Set *A, Info *CURR,  Queue QS, Stack hist, ArrayDin *LP);
+// void SAVE(Map *D, Set *A, Info *CURR,  Queue QS, Stack hist, ArrayDin *LP);
 void HELP(boolean inSesh); // done
 boolean CHECKCOMMAND(Word W, boolean inSesh); // done
 void DISPLAYBANNER(); // done

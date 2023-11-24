@@ -71,8 +71,6 @@ Word strToWord(char* str);
 
 void WordToStr(Word w, char* input);
 
-char* WordToStr2(Word w);
-
 void InsertWord(Word *t, Word w);
 
 void PRINTWORD(Word w);

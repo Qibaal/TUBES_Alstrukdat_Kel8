@@ -154,17 +154,6 @@ void WordToStr(Word w, char* input)
     input[i+1] = '\0';
 }
 
-char* WordToStr2(Word w)
-{
-    char s[NMax];
-    int i;
-    for (i=0; i<w.Length; i++)
-    {
-        s[i] = w.TabWord[i];
-    }
-    s[i+1] = '\0';
-}
-
 void ParsePlaylist(Word *penyanyi, Word *album, Word *lagu)
 {
     ADVNEXT(false);
