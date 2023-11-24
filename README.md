@@ -1,3 +1,3 @@
-WayangWave
+Wayang Wave
 
-IF2111 - Algoritma dan Struktur Data
+IF2111 - Algoritma dan Struktur Data STI
