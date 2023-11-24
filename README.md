@@ -15,7 +15,7 @@
 <h2>Folder Structure</h2>
   <p>Berikut merupakan rangkaian struktur dari tugas besar kami.</p>
   <ul type = "circle">
-    <li> folder <button>bin</button> </li>
+    <li> folder `bin` </li>
   </ul>
 </body>
 
