@@ -18,7 +18,7 @@
   <p>Berikut merupakan rangkaian struktur dari tugas besar kami.</p>
   <ul type = "circle">
     <li> folder <mark>bin</mark> berisikan `..` dan `makefile` untuk melakukan kompilasi terhadap program utama.</li>
-    <li> folder `src` berisikan: 
+    <li> folder `src` berisikan : 
         <ul type = "square">
           <li> folder `ADT` yang berisikan header yang kami butuhkan untuk program.</li>
           <li> folder `save` berisikan `dummy.txt` yang dapat kami gunakan sebagai informasi penyanyi, lagu, dan album.</li>
@@ -29,6 +29,8 @@
         </ul>
         </li>
   </ul>
+  <h2>Contributors👨‍💻</h2>
+  <p>Program ini dibuat secara bersama-sama oleh <b>K02-Kelompok 8 (<i>8antai ASD</i>)</b> yang beranggotakan :</p>
 </body>
 
 
