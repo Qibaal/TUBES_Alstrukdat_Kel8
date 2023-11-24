@@ -1,8 +1,9 @@
 <head>
-  <h1>WayangWave</h1>
+  <h1>WayangWave 🎶🎧</h1>
 </head>
 <body>
   <h2>IF2111 Algoritma dan Struktur Data STI</h2>
+  <h3>Proyek ini dibuat sebagai pemenuhan Tugas Besar Mata Kuliah Algoritma dan Struktur Data STI</h3>
   <p><b>WayangWave</b> merupakan aplikasi yang bisa mensimulasikan service pemutaran musik yang diakses melalui CLI (<i>command-line interface</i>). Secara umum, program ini memiliki <strong>5 Main Features</strong>, yakni.</p>
   <ol>
     <li>Memutar lagu</li>
