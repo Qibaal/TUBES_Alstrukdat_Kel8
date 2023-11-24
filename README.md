@@ -1,5 +1,8 @@
-<head> 
-  <title> WayangWave </title>
+<head>
+  <h1>WayangWave</h1>
+  <h2>IF2111 Algoritma dan Struktur Data STI</h2>
 </head>
-<h1> IF2111 - Algoritma dan Struktur Data STI </h1>
+<body>
+  <p></p>
+</body>
 
