@@ -30,6 +30,7 @@
           <li> file `main.c` berisikan program utama kami.</li>
         </ul>
         </li>
+    <li> folder `docs` berisikan dokumen pengerjaan laporan.</li>
   </ul>
   <h2>Contributors👨‍💻</h2>
   <p>Program ini dibuat secara bersama-sama oleh <b>K02-Kelompok 8 (<i>8antai ASD</i>)</b> yang beranggotakan :</p>
