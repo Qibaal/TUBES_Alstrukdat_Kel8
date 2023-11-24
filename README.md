@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
   <h1>WayangWave 🎶🎧</h1>
   <small><i><b>by 8antai ASD</b></i> 🧑🏻‍🤝‍🧑🧑🏻‍🤝‍🧑</small>
@@ -17,7 +19,7 @@
 <h2>📂Folder Structure</h2>
   <p>Berikut merupakan rangkaian struktur dari tugas besar kami.</p>
   <ul type = "circle">
-    <li> folder <mark>bin</mark> berisikan `..` dan `makefile` untuk melakukan kompilasi terhadap program utama.</li>
+    <li> folder `bin` berisikan `..` dan `makefile` untuk melakukan kompilasi terhadap program utama.</li>
     <li> folder `src` berisikan : 
         <ul type = "square">
           <li> folder `ADT` yang berisikan header yang kami butuhkan untuk program.</li>
@@ -31,6 +33,15 @@
   </ul>
   <h2>Contributors👨‍💻</h2>
   <p>Program ini dibuat secara bersama-sama oleh <b>K02-Kelompok 8 (<i>8antai ASD</i>)</b> yang beranggotakan :</p>
+  <ul type = "disc">
+    <li><b>Muhammad Farrel</b> NIM 10023225</li>
+    <li><b>Risma Rif'atissania</b> NIM 18222010</li>
+    <li><b>Vini Putiasa</b> NIM 18222030</li>
+    <li><b>Mattheuw Suciadi Wijaya</b> NIM 18222048</li>
+    <li><b>Raizan Iqbal Resi</b> NIM 18222068</li>
+    <li><b>Monica Angela Hartono</b> NIM 18222078</li>
+  </ul>
 </body>
+</html>
 
 
