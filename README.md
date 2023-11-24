@@ -1,5 +1,6 @@
 <head>
   <h1>WayangWave 🎶🎧</h1>
+  <small>by 8antai ASD</small>
 </head>
 <body>
   <h2>IF2111 - Algoritma dan Struktur Data STI</h2>
