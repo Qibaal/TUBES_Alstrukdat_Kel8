@@ -15,7 +15,17 @@
 <h2>Folder Structure</h2>
   <p>Berikut merupakan rangkaian struktur dari tugas besar kami.</p>
   <ul type = "circle">
-    <li> folder 'bin' </li>
+    <li> folder `bin` berisikan `..` dan `makefile` untuk melakukan kompilasi terhadap program utama.</li>
+    <li> folder `src` berisikan: 
+        <ul type = "square">
+          <li> folder `ADT` yang berisikan header yang kami butuhkan untuk program.</li>
+          <li> folder `save` berisikan `dummy.txt` yang dapat kami gunakan sebagai informasi penyanyi, lagu, dan album.</li>
+          <li> file `boolean.h` berisikan header tipe boolean.</li>
+          <li> file `console.h` berisikan header dari berbagai fungsi dan prosedur yang kami gunakan untuk membuat program tersebut.</li>
+          <li> file `console.c` berisikan hasil implementasi dari `console.h`</li>
+          <li> file `main.c` berisikan program utama kami.</li>
+        </ul>
+        </li>
   </ul>
 </body>
 
